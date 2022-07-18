@@ -194,6 +194,10 @@ class AwsClient implements AwsClientInterface
         if (!isset($args['exception_class'])) {
             $args['exception_class'] = $exceptionClass;
         }
+        if (!isset($args['version'])) {
+            $args['version'] = 'latest';
+        }
+
         $this->handlerList = new HandlerList();
         $resolver = new ClientResolver(static::getArguments());
         $config = $resolver->resolve($args, $this->handlerList);
