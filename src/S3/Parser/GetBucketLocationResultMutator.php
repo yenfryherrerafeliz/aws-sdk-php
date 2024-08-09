@@ -18,7 +18,11 @@ final class GetBucketLocationResultMutator implements S3ResultMutator
     /**
      * @inheritDoc
      */
-    public function __invoke(ResultInterface $result, CommandInterface $command, ResponseInterface $response): ResultInterface
+    public function __invoke(
+        ResultInterface $result,
+        CommandInterface $command,
+        ResponseInterface $response
+    ): ResultInterface
     {
         if ($command->getName() !== 'GetBucketLocation') {
             return $result;

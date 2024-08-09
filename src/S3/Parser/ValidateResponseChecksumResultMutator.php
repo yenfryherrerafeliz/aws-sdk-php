@@ -98,7 +98,10 @@ final class ValidateResponseChecksumResultMutator implements S3ResultMutator
      *
      * @return array
      */
-    public function validateChecksum($checksumPriority, ResponseInterface $response): array
+    public function validateChecksum(
+        $checksumPriority,
+        ResponseInterface $response
+    ): array
     {
         $checksumToValidate = $this->chooseChecksumHeaderToValidate(
             $checksumPriority,
@@ -137,7 +140,8 @@ final class ValidateResponseChecksumResultMutator implements S3ResultMutator
     public function chooseChecksumHeaderToValidate(
         $checksumPriority,
         ResponseInterface $response
-    ):? string {
+    ):? string
+    {
         foreach ($checksumPriority as $checksum) {
             $checksumHeader = 'x-amz-checksum-' . $checksum;
             if ($response->hasHeader($checksumHeader)) {

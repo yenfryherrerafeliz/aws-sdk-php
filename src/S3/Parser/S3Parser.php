@@ -55,11 +55,14 @@ final class S3Parser extends AbstractParser
      * Parses a S3 response.
      *
      * @param CommandInterface $command The command that originated the request.
-     * @param ResponseInterface $response The response gotten from the service.
+     * @param ResponseInterface $response The response received from the service.
      *
      * @return ResultInterface|null
      */
-    public function __invoke(CommandInterface $command, ResponseInterface $response):? ResultInterface
+    public function __invoke(
+        CommandInterface $command,
+        ResponseInterface $response
+    ):? ResultInterface
     {
         // Check first if the response is an error
         $this->parse200Error($command, $response);
@@ -91,11 +94,15 @@ final class S3Parser extends AbstractParser
      *
      * @return void
      */
-    private function parse200Error(CommandInterface $command, ResponseInterface $response)
+    private function parse200Error(
+        CommandInterface $command,
+        ResponseInterface $response
+    ): void
     {
         // This error parsing should be just for 200 error responses and operations where its output shape
         // does not have a streaming member.
-        if (200 !== $response->getStatusCode() || !$this->shouldBeConsidered200Error($command->getName())) {
+        if (200 !== $response->getStatusCode()
+            || !$this->shouldBeConsidered200Error($command->getName())) {
             return;
         }
 
@@ -163,7 +170,7 @@ final class S3Parser extends AbstractParser
      */
     private function isFirstRootElementError(StreamInterface $responseBody): bool
     {
-        $pattern = '/<\?xml version="1\.0" encoding="UTF-8"\?>\s*<Error>/';
+        static $pattern = '/<\?xml version="1\.0" encoding="UTF-8"\?>\s*<Error>/';
         // To avoid performance overhead in large streams
         $reducedBodyContent = $responseBody->read(64);
         $foundErrorElement = preg_match($pattern, $reducedBodyContent);
