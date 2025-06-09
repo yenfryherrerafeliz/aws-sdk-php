@@ -1,9 +1,12 @@
 <?php
 
+
 namespace Aws\S3\S3Transfer;
 
 use Aws\Arn\ArnParser;
+use Aws\Arn\S3\AccessPointArn;
 use Aws\Exception\AwsException;
+use Aws\S3\Exception\S3Exception;
 use Aws\S3\S3Client;
 use Aws\S3\S3ClientInterface;
 use Aws\S3\S3Transfer\Exceptions\S3TransferException;
@@ -25,7 +28,7 @@ use function Aws\filter;
 use function Aws\map;
 
 
-class S3TransferManager
+class S3TransferManagerAbstract
 {
     private static array $defaultConfig = [
         'target_part_size_bytes' => 8 * 1024 * 1024,
@@ -1054,19 +1057,6 @@ class S3TransferManager
     {
         return self::$defaultConfig;
     }
-    private function doesBucketExist(string $bucketName): bool
-    {
-        try {
-            $this->s3Client->headBucket(['Bucket' => $bucketName]);
-            return true;
-        } catch (AwsException $e) {
-            if ($e->getStatusCode() === 403 || $e->getStatusCode() === 404) {
-                return false;
-            }
-            // Re-throw unexpected exceptions
-            throw $e;
-        }
-    }
 
     /**
      * @param array $source The object to copy, specified as an array with a 'Bucket' and 'Key' keys.
@@ -1106,10 +1096,10 @@ class S3TransferManager
 
         $mupThreshold = $config['multipart_copy_threshold_bytes']
             ?? $this->config['multipart_copy_threshold_bytes'];
-        if ($mupThreshold < MultipartCopier::PART_MIN_SIZE) {
+        if ($mupThreshold < MultipartCopierAbstract::PART_MIN_SIZE) {
             throw new InvalidArgumentException(
                 message: "The provided config `multipart_copy_threshold_bytes` "
-                . "must be greater than or equal to " . MultipartCopier::PART_MIN_SIZE
+                . "must be greater than or equal to " . MultipartCopierAbstract::PART_MIN_SIZE
             );
         }
 
@@ -1134,16 +1124,16 @@ class S3TransferManager
         // Determine if multipart copy is required
         if ($this->requiresMultipartCopy(source: $source, mupThreshold: $mupThreshold)) {
             return $this->tryMultipartCopy(
-                source: $source,
-                requestArgs: $requestArgs,
-                config:
-                [
-                    'part_size' => $config['part_size'] ?? $this->config['target_part_size_bytes'],
-                    'concurrency' => $this->config['concurrency'],
-                ],
-                listenerNotifier: $listenerNotifier
-            );
-        }
+                    source: $source,
+                    requestArgs: $requestArgs,
+                    config:
+                    [
+                        'part_size' => $config['part_size'] ?? $this->config['target_part_size_bytes'],
+                        'concurrency' => $this->config['concurrency'],
+                    ],
+                    listenerNotifier: $listenerNotifier
+                );
+            }
 
         return $this->trySingleCopy(
             source: $source,
@@ -1151,7 +1141,7 @@ class S3TransferManager
             listenerNotifier: $listenerNotifier
         );
 
-    }
+        }
 
     /**
      * @param array $source
@@ -1175,7 +1165,7 @@ class S3TransferManager
             $createMultipartArgs['ChecksumAlgorithm'] = strtoupper($this->config['checksum_algorithm']);
         }
 
-        $copier = new MultipartCopier(
+        $copier = new MultipartCopierAbstract(
             s3Client: $this->s3Client,
             createMultipartArgs: $createMultipartArgs,
             config: $config,
@@ -1186,13 +1176,13 @@ class S3TransferManager
         return $copier->copy();
     }
 
-    /**
-     * @param array $source
-     * @param array $requestArgs
-     * @param ?TransferListenerNotifier $listenerNotifier
-     * @return PromiseInterface
-     * @throws S3TransferException
-     */
+        /**
+         * @param array $source
+         * @param array $requestArgs
+         * @param ?TransferListenerNotifier $listenerNotifier
+         * @return PromiseInterface
+         * @throws S3TransferException
+         */
     private function trySingleCopy(
         array $source,
         array $requestArgs,
@@ -1323,6 +1313,5 @@ class S3TransferManager
     }
 
 }
-
 
 
