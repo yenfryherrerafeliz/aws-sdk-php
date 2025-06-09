@@ -1,4 +1,5 @@
 <?php
+
 namespace Aws\S3\S3Transfer;
 
 use Aws\CommandInterface;
@@ -22,7 +23,7 @@ abstract class AbstractMultipartUploader implements PromisorInterface
     public const PART_MAX_SIZE = 5 * 1024 * 1024 * 1024; // 5 GiB
     public const PART_MAX_NUM = 10000;
 
-    /** @var S3ClientInterface  */
+    /** @var S3ClientInterface */
     protected readonly S3ClientInterface $s3Client;
 
     /** @var array @ */
@@ -42,14 +43,14 @@ abstract class AbstractMultipartUploader implements PromisorInterface
     /** @var int */
     protected int $calculatedObjectSize;
 
-    /** @var array  */
+    /** @var array */
     private array $deferFns = [];
 
-    /** @var TransferListenerNotifier|null  */
+    /** @var TransferListenerNotifier|null */
     protected ?TransferListenerNotifier $listenerNotifier;
 
     /** Tracking Members */
-    /** @var TransferProgressSnapshot|null  */
+    /** @var TransferProgressSnapshot|null */
     protected ?TransferProgressSnapshot $currentSnapshot;
 
     /**
@@ -62,14 +63,15 @@ abstract class AbstractMultipartUploader implements PromisorInterface
      * @param TransferListenerNotifier|null $listenerNotifier
      */
     public function __construct(
-        S3ClientInterface $s3Client,
-        array $createMultipartArgs,
-        array $config,
-        ?string $uploadId = null,
-        array $parts = [],
+        S3ClientInterface         $s3Client,
+        array                     $createMultipartArgs,
+        array                     $config,
+        ?string                   $uploadId = null,
+        array                     $parts = [],
         ?TransferProgressSnapshot $currentSnapshot = null,
         ?TransferListenerNotifier $listenerNotifier = null,
-    ) {
+    )
+    {
         $this->s3Client = $s3Client;
         $this->createMultipartArgs = $createMultipartArgs;
         $this->validateConfig($config);
@@ -224,7 +226,6 @@ abstract class AbstractMultipartUploader implements PromisorInterface
     }
 
 
-
     /**
      * @return PromiseInterface
      */
@@ -240,10 +241,10 @@ abstract class AbstractMultipartUploader implements PromisorInterface
 
     /**
      * @return void
- */
+     */
     protected function sortParts(): void
     {
-        usort($this->parts, function($partOne, $partTwo) {
+        usort($this->parts, function ($partOne, $partTwo) {
             return $partOne['PartNumber'] <=> $partTwo['PartNumber'];
         });
     }
@@ -409,6 +410,7 @@ abstract class AbstractMultipartUploader implements PromisorInterface
         return false;
     }
     // Abstract methods that must be implemented by concrete classes
+
     /**
      * @return PromiseInterface
      */
