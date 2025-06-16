@@ -984,6 +984,21 @@
         {"shape":"TooManyRequestsException"}
       ]
     },
+    "PutConfigurationSetArchivingOptions":{
+      "name":"PutConfigurationSetArchivingOptions",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/v2/email/configuration-sets/{ConfigurationSetName}/archiving-options"
+      },
+      "input":{"shape":"PutConfigurationSetArchivingOptionsRequest"},
+      "output":{"shape":"PutConfigurationSetArchivingOptionsResponse"},
+      "errors":[
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"}
+      ],
+      "idempotent":true
+    },
     "PutConfigurationSetDeliveryOptions":{
       "name":"PutConfigurationSetDeliveryOptions",
       "http":{
@@ -1440,6 +1455,71 @@
       "exception":true
     },
     "AmazonResourceName":{"type":"string"},
+    "ArchiveArn":{
+      "type":"string",
+      "max":1011,
+      "min":20,
+      "pattern":"arn:(aws|aws-[a-z-]+):ses:[a-z]{2}-[a-z-]+-[0-9]:[0-9]{1,20}:mailmanager-archive/a-[a-z0-9]{24,62}"
+    },
+    "ArchivingOptions":{
+      "type":"structure",
+      "members":{
+        "ArchiveArn":{"shape":"ArchiveArn"}
+      }
+    },
+    "Attachment":{
+      "type":"structure",
+      "required":[
+        "RawContent",
+        "FileName"
+      ],
+      "members":{
+        "RawContent":{"shape":"RawAttachmentData"},
+        "ContentDisposition":{"shape":"AttachmentContentDisposition"},
+        "FileName":{"shape":"AttachmentFileName"},
+        "ContentDescription":{"shape":"AttachmentContentDescription"},
+        "ContentId":{"shape":"AttachmentContentId"},
+        "ContentTransferEncoding":{"shape":"AttachmentContentTransferEncoding"},
+        "ContentType":{"shape":"AttachmentContentType"}
+      }
+    },
+    "AttachmentContentDescription":{
+      "type":"string",
+      "max":1000
+    },
+    "AttachmentContentDisposition":{
+      "type":"string",
+      "enum":[
+        "ATTACHMENT",
+        "INLINE"
+      ]
+    },
+    "AttachmentContentId":{
+      "type":"string",
+      "max":78,
+      "min":1
+    },
+    "AttachmentContentTransferEncoding":{
+      "type":"string",
+      "enum":[
+        "BASE64",
+        "QUOTED_PRINTABLE",
+        "SEVEN_BIT"
+      ]
+    },
+    "AttachmentContentType":{
+      "type":"string",
+      "max":78,
+      "min":1
+    },
+    "AttachmentFileName":{
+      "type":"string",
+      "max":255
+    },
+    "AttachmentList":{
+      "type":"list",
+      "member":{"shape":"Attachment"}
+    },
     "AttributesData":{"type":"string"},
     "BadRequestException":{
       "type":"structure",
@@ -1748,7 +1828,8 @@
         "SendingOptions":{"shape":"SendingOptions"},
         "Tags":{"shape":"TagList"},
         "SuppressionOptions":{"shape":"SuppressionOptions"},
-        "VdmOptions":{"shape":"VdmOptions"}
+        "VdmOptions":{"shape":"VdmOptions"},
+        "ArchivingOptions":{"shape":"ArchivingOptions"}
       }
     },
     "CreateConfigurationSetResponse":{
@@ -2775,7 +2856,8 @@
         "SendingOptions":{"shape":"SendingOptions"},
         "Tags":{"shape":"TagList"},
         "SuppressionOptions":{"shape":"SuppressionOptions"},
-        "VdmOptions":{"shape":"VdmOptions"}
+        "VdmOptions":{"shape":"VdmOptions"},
+        "ArchivingOptions":{"shape":"ArchivingOptions"}
       }
     },
     "GetContactListRequest":{
@@ -3827,7 +3909,8 @@
       "members":{
         "Subject":{"shape":"Content"},
         "Body":{"shape":"Body"},
-        "Headers":{"shape":"MessageHeaderList"}
+        "Headers":{"shape":"MessageHeaderList"},
+        "Attachments":{"shape":"AttachmentList"}
       }
     },
     "MessageContent":{"type":"string"},
@@ -4145,6 +4228,23 @@
       "members":{
       }
     },
+    "PutConfigurationSetArchivingOptionsRequest":{
+      "type":"structure",
+      "required":["ConfigurationSetName"],
+      "members":{
+        "ConfigurationSetName":{
+          "shape":"ConfigurationSetName",
+          "location":"uri",
+          "locationName":"ConfigurationSetName"
+        },
+        "ArchiveArn":{"shape":"ArchiveArn"}
+      }
+    },
+    "PutConfigurationSetArchivingOptionsResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "PutConfigurationSetDeliveryOptionsRequest":{
       "type":"structure",
       "required":["ConfigurationSetName"],
@@ -4444,6 +4544,7 @@
       "max":255,
       "min":1
     },
+    "RawAttachmentData":{"type":"blob"},
     "RawMessage":{
       "type":"structure",
       "required":["Data"],
@@ -4825,7 +4926,8 @@
         "TemplateArn":{"shape":"AmazonResourceName"},
         "TemplateContent":{"shape":"EmailTemplateContent"},
         "TemplateData":{"shape":"EmailTemplateData"},
-        "Headers":{"shape":"MessageHeaderList"}
+        "Headers":{"shape":"MessageHeaderList"},
+        "Attachments":{"shape":"AttachmentList"}
       }
     },
     "TemplateContent":{"type":"string"},

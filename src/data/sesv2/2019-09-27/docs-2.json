@@ -51,7 +51,7 @@
     "GetMultiRegionEndpoint": "<p>Displays the multi-region endpoint (global-endpoint) configuration.</p> <p>Only multi-region endpoints (global-endpoints) whose primary region is the AWS-Region where operation is executed can be displayed.</p>",
     "GetSuppressedDestination": "<p>Retrieves information about a specific email address that's on the suppression list for your account.</p>",
     "ListConfigurationSets": "<p>List all of the configuration sets associated with your account in the current region.</p> <p> <i>Configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>",
-    "ListContactLists": "<p>Lists all of the contact lists available.</p>",
+    "ListContactLists": "<p>Lists all of the contact lists available.</p> <p>If your output includes a \"NextToken\" field with a string value, this indicates there may be additional contacts on the filtered list - regardless of the number of contacts returned.</p>",
     "ListContacts": "<p>Lists the contacts present in a specific contact list.</p>",
     "ListCustomVerificationEmailTemplates": "<p>Lists the existing custom verification email templates for your account in the current Amazon Web Services Region.</p> <p>For more information about custom verification email templates, see <a href=\"https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom\">Using custom verification email templates</a> in the <i>Amazon SES Developer Guide</i>.</p> <p>You can execute this operation no more than once per second.</p>",
     "ListDedicatedIpPools": "<p>List all of the dedicated IP pools that exist in your Amazon Web Services account in the current Region.</p>",
@@ -70,6 +70,7 @@
     "PutAccountSendingAttributes": "<p>Enable or disable the ability of your account to send email.</p>",
     "PutAccountSuppressionAttributes": "<p>Change the settings for the account-level suppression list.</p>",
     "PutAccountVdmAttributes": "<p>Update your Amazon SES account VDM attributes.</p> <p>You can execute this operation no more than once per second.</p>",
+    "PutConfigurationSetArchivingOptions": "<p>Associate the configuration set with a MailManager archive. When you send email using the <code>SendEmail</code> or <code>SendBulkEmail</code> operations the message as it will be given to the receiving SMTP server will be archived, along with the recipient information.</p>",
     "PutConfigurationSetDeliveryOptions": "<p>Associate a configuration set with a dedicated IP pool. You can use dedicated IP pools to create groups of dedicated IP addresses for sending specific types of email.</p>",
     "PutConfigurationSetReputationOptions": "<p>Enable or disable collection of reputation metrics for emails that you send using a particular configuration set in a specific Amazon Web Services Region.</p>",
     "PutConfigurationSetSendingOptions": "<p>Enable or disable email sending for messages that use a particular configuration set in a specific Amazon Web Services Region.</p>",
@@ -152,6 +153,69 @@
         "TagResourceRequest$ResourceArn": "<p>The Amazon Resource Name (ARN) of the resource that you want to add one or more tags to.</p>",
         "Template$TemplateArn": "<p>The Amazon Resource Name (ARN) of the template.</p>",
         "UntagResourceRequest$ResourceArn": "<p>The Amazon Resource Name (ARN) of the resource that you want to remove one or more tags from.</p>"
+      }
+    },
+    "ArchiveArn": {
+      "base": null,
+      "refs": {
+        "ArchivingOptions$ArchiveArn": "<p>The Amazon Resource Name (ARN) of the MailManager archive where the Amazon SES API v2 will archive sent emails.</p>",
+        "PutConfigurationSetArchivingOptionsRequest$ArchiveArn": "<p>The Amazon Resource Name (ARN) of the MailManager archive that the Amazon SES API v2 sends email to.</p>"
+      }
+    },
+    "ArchivingOptions": {
+      "base": "<p>Used to associate a configuration set with a MailManager archive.</p>",
+      "refs": {
+        "CreateConfigurationSetRequest$ArchivingOptions": "<p>An object that defines the MailManager archiving options for emails that you send using the configuration set.</p>",
+        "GetConfigurationSetResponse$ArchivingOptions": "<p>An object that defines the MailManager archive where sent emails are archived that you send using the configuration set.</p>"
+      }
+    },
+    "Attachment": {
+      "base": "<p> Contains metadata and attachment raw content.</p>",
+      "refs": {
+        "AttachmentList$member": null
+      }
+    },
+    "AttachmentContentDescription": {
+      "base": null,
+      "refs": {
+        "Attachment$ContentDescription": "<p> A brief description of the attachment content.</p>"
+      }
+    },
+    "AttachmentContentDisposition": {
+      "base": null,
+      "refs": {
+        "Attachment$ContentDisposition": "<p> A standard descriptor indicating how the attachment should be rendered in the email. Supported values: <code>ATTACHMENT</code> or <code>INLINE</code>.</p>"
+      }
+    },
+    "AttachmentContentId": {
+      "base": null,
+      "refs": {
+        "Attachment$ContentId": "<p> Unique identifier for the attachment, used for referencing attachments with INLINE disposition in HTML content.</p>"
+      }
+    },
+    "AttachmentContentTransferEncoding": {
+      "base": null,
+      "refs": {
+        "Attachment$ContentTransferEncoding": "<p> Specifies how the attachment is encoded. Supported values: <code>BASE64</code>, <code>QUOTED_PRINTABLE</code>, <code>SEVEN_BIT</code>.</p>"
+      }
+    },
+    "AttachmentContentType": {
+      "base": null,
+      "refs": {
+        "Attachment$ContentType": "<p> The MIME type of the attachment.</p> <note> <p>Example: <code>application/pdf</code>, <code>image/jpeg</code> </p> </note>"
+      }
+    },
+    "AttachmentFileName": {
+      "base": null,
+      "refs": {
+        "Attachment$FileName": "<p>The file name for the attachment as it will appear in the email. Amazon SES restricts certain file extensions. To ensure attachments are accepted, check the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/mime-types.html\">Unsupported attachment types</a> in the Amazon SES Developer Guide.</p>"
+      }
+    },
+    "AttachmentList": {
+      "base": null,
+      "refs": {
+        "Message$Attachments": "<p> The List of attachments to include in your email. All recipients will receive the same attachments.</p>",
+        "Template$Attachments": "<p> The List of attachments to include in your email. All recipients will receive the same attachments.</p>"
       }
     },
     "AttributesData": {
@@ -377,6 +441,7 @@
         "GetConfigurationSetRequest$ConfigurationSetName": "<p>The name of the configuration set.</p>",
         "GetConfigurationSetResponse$ConfigurationSetName": "<p>The name of the configuration set.</p>",
         "GetEmailIdentityResponse$ConfigurationSetName": "<p>The configuration set used by default when sending from this identity.</p>",
+        "PutConfigurationSetArchivingOptionsRequest$ConfigurationSetName": "<p>The name of the configuration set to associate with a MailManager archive.</p>",
         "PutConfigurationSetDeliveryOptionsRequest$ConfigurationSetName": "<p>The name of the configuration set to associate with a dedicated IP pool.</p>",
         "PutConfigurationSetReputationOptionsRequest$ConfigurationSetName": "<p>The name of the configuration set.</p>",
         "PutConfigurationSetSendingOptionsRequest$ConfigurationSetName": "<p>The name of the configuration set to enable or disable email sending for.</p>",
@@ -1020,7 +1085,7 @@
       }
     },
     "EmailContent": {
-      "base": "<p>An object that defines the entire content of the email, including the message headers and the body content. You can create a simple email message, in which you specify the subject and the text and HTML versions of the message body. You can also create raw messages, in which you specify a complete MIME-formatted message. Raw messages can include attachments and custom headers.</p>",
+      "base": "<p>An object that defines the entire content of the email, including the message headers, body content, and attachments. For a simple email message, you specify the subject and provide both text and HTML versions of the message body. You can also add attachments to simple and templated messages. For a raw message, you provide a complete MIME-formatted message, which can include custom headers and attachments.</p>",
       "refs": {
         "CreateDeliverabilityTestReportRequest$Content": "<p>The HTML body of the message that you sent when you performed the predictive inbox placement test.</p>",
         "SendEmailRequest$Content": "<p>An object that contains the body of the message. You can send either a Simple message, Raw message, or a Templated message.</p>"
@@ -2001,7 +2066,7 @@
       }
     },
     "ListRecommendationsFilterKey": {
-      "base": "<p>The <code>ListRecommendations</code> filter type. This can be one of the following:</p> <ul> <li> <p> <code>TYPE</code> – The recommendation type, with values like <code>DKIM</code>, <code>SPF</code>, <code>DMARC</code> or <code>BIMI</code>.</p> </li> <li> <p> <code>IMPACT</code> – The recommendation impact, with values like <code>HIGH</code> or <code>LOW</code>.</p> </li> <li> <p> <code>STATUS</code> – The recommendation status, with values like <code>OPEN</code> or <code>FIXED</code>.</p> </li> <li> <p> <code>RESOURCE_ARN</code> – The resource affected by the recommendation, with values like <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>.</p> </li> </ul>",
+      "base": "<p>The <code>ListRecommendations</code> filter type. This can be one of the following:</p> <ul> <li> <p> <code>TYPE</code> – The recommendation type, with values like <code>DKIM</code>, <code>SPF</code>, <code>DMARC</code>, <code>BIMI</code>, or <code>COMPLAINT</code>.</p> </li> <li> <p> <code>IMPACT</code> – The recommendation impact, with values like <code>HIGH</code> or <code>LOW</code>.</p> </li> <li> <p> <code>STATUS</code> – The recommendation status, with values like <code>OPEN</code> or <code>FIXED</code>.</p> </li> <li> <p> <code>RESOURCE_ARN</code> – The resource affected by the recommendation, with values like <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>.</p> </li> </ul>",
       "refs": {
         "ListRecommendationsFilter$key": null
       }
@@ -2108,7 +2173,7 @@
     "Message": {
       "base": "<p>Represents the email message that you're sending. The <code>Message</code> object consists of a subject line and a message body.</p>",
       "refs": {
-        "EmailContent$Simple": "<p>The simple email message. The message consists of a subject and a message body.</p>"
+        "EmailContent$Simple": "<p>The simple email message. The message consists of a subject, message body and attachments list.</p>"
       }
     },
     "MessageContent": {
@@ -2496,6 +2561,16 @@
       "refs": {
       }
     },
+    "PutConfigurationSetArchivingOptionsRequest": {
+      "base": "<p>A request to associate a configuration set with a MailManager archive.</p>",
+      "refs": {
+      }
+    },
+    "PutConfigurationSetArchivingOptionsResponse": {
+      "base": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>",
+      "refs": {
+      }
+    },
     "PutConfigurationSetDeliveryOptionsRequest": {
       "base": "<p>A request to associate a configuration set with a dedicated IP pool.</p>",
       "refs": {
@@ -2676,6 +2751,12 @@
         "MetricDataResult$Id": "<p>The query identifier.</p>"
       }
     },
+    "RawAttachmentData": {
+      "base": null,
+      "refs": {
+        "Attachment$RawContent": "<p> The raw data of the attachment. It needs to be base64-encoded if you are accessing Amazon SES directly through the HTTPS interface. If you are accessing Amazon SES using an Amazon Web Services SDK, the SDK takes care of the base 64-encoding for you.</p>"
+      }
+    },
     "RawMessage": {
       "base": "<p>Represents the raw content of an email message.</p>",
       "refs": {
@@ -2721,7 +2802,7 @@
     "RecommendationType": {
       "base": null,
       "refs": {
-        "Recommendation$Type": "<p>The recommendation type, with values like <code>DKIM</code>, <code>SPF</code>, <code>DMARC</code> or <code>BIMI</code>.</p>"
+        "Recommendation$Type": "<p>The recommendation type, with values like <code>DKIM</code>, <code>SPF</code>, <code>DMARC</code>, <code>BIMI</code>, or <code>COMPLAINT</code>.</p>"
       }
     },
     "RecommendationsList": {
@@ -3329,7 +3410,7 @@
     "VerificationError": {
       "base": null,
       "refs": {
-        "VerificationInfo$ErrorType": "<p>Provides the reason for the failure describing why Amazon SES was not able to successfully verify the identity. Below are the possible values: </p> <ul> <li> <p> <code>INVALID_VALUE</code> – Amazon SES was able to find the record, but the value contained within the record was invalid. Ensure you have published the correct values for the record.</p> </li> <li> <p> <code>TYPE_NOT_FOUND</code> – The queried hostname exists but does not have the requested type of DNS record. Ensure that you have published the correct type of DNS record.</p> </li> <li> <p> <code>HOST_NOT_FOUND</code> – The queried hostname does not exist or was not reachable at the time of the request. Ensure that you have published the required DNS record(s). </p> </li> <li> <p> <code>SERVICE_ERROR</code> – A temporary issue is preventing Amazon SES from determining the verification status of the domain.</p> </li> <li> <p> <code>DNS_SERVER_ERROR</code> – The DNS server encountered an issue and was unable to complete the request.</p> </li> <li> <p> <code>REPLICATION_ACCESS_DENIED</code> – The verification failed because the user does not have the required permissions to replicate the DKIM key from the primary region. Ensure you have the necessary permissions in both primary and replica regions. </p> </li> <li> <p> <code>REPLICATION_PRIMARY_NOT_FOUND</code> – The verification failed because no corresponding identity was found in the specified primary region. Ensure the identity exists in the primary region before attempting replication. </p> </li> <li> <p> <code>REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED</code> – The verification failed because the identity in the primary region is configured with Bring Your Own DKIM (BYODKIM). DKIM key replication is only supported for identities using Easy DKIM. </p> </li> <li> <p> <code>REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED</code> – The verification failed because the specified primary identity is a replica of another identity, and multi-level replication is not supported; the primary identity must be a non-replica identity. </p> </li> <li> <p> <code>REPLICATION_PRIMARY_INVALID_REGION</code> – The verification failed due to an invalid primary region specified. Ensure you provide a valid AWS region where Amazon SES is available and different from the replica region. </p> </li> </ul>"
+        "VerificationInfo$ErrorType": "<p>Provides the reason for the failure describing why Amazon SES was not able to successfully verify the identity. Below are the possible values: </p> <ul> <li> <p> <code>INVALID_VALUE</code> – Amazon SES was able to find the record, but the value contained within the record was invalid. Ensure you have published the correct values for the record.</p> </li> <li> <p> <code>TYPE_NOT_FOUND</code> – The queried hostname exists but does not have the requested type of DNS record. Ensure that you have published the correct type of DNS record.</p> </li> <li> <p> <code>HOST_NOT_FOUND</code> – The queried hostname does not exist or was not reachable at the time of the request. Ensure that you have published the required DNS record(s). </p> </li> <li> <p> <code>SERVICE_ERROR</code> – A temporary issue is preventing Amazon SES from determining the verification status of the domain.</p> </li> <li> <p> <code>DNS_SERVER_ERROR</code> – The DNS server encountered an issue and was unable to complete the request.</p> </li> <li> <p> <code>REPLICATION_ACCESS_DENIED</code> – The verification failed because the user does not have the required permissions to replicate the DKIM key from the primary region. Ensure you have the necessary permissions in both primary and replica regions. </p> </li> <li> <p> <code>REPLICATION_PRIMARY_NOT_FOUND</code> – The verification failed because no corresponding identity was found in the specified primary region. Ensure the identity exists in the primary region before attempting replication. </p> </li> <li> <p> <code>REPLICATION_PRIMARY_BYO_DKIM_NOT_SUPPORTED</code> – The verification failed because the identity in the primary region is configured with Bring Your Own DKIM (BYODKIM). DKIM key replication is only supported for identities using Easy DKIM. </p> </li> <li> <p> <code>REPLICATION_REPLICA_AS_PRIMARY_NOT_SUPPORTED</code> – The verification failed because the specified primary identity is a replica of another identity, and multi-level replication is not supported; the primary identity must be a non-replica identity. </p> </li> <li> <p> <code>REPLICATION_PRIMARY_INVALID_REGION</code> – The verification failed due to an invalid primary region specified. Ensure you provide a valid Amazon Web Services region where Amazon SES is available and different from the replica region. </p> </li> </ul>"
       }
     },
     "VerificationInfo": {

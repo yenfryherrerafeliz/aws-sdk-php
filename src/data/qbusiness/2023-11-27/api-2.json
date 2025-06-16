@@ -35,10 +35,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -72,10 +72,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -106,10 +106,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -128,6 +128,38 @@
                 }
             ]
         },
+        "CancelSubscription": {
+            "name": "CancelSubscription",
+            "http": {
+                "method": "DELETE",
+                "requestUri": "\/applications\/{applicationId}\/subscriptions\/{subscriptionId}",
+                "responseCode": 200
+            },
+            "input": {
+                "shape": "CancelSubscriptionRequest"
+            },
+            "output": {
+                "shape": "CancelSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "shape": "InternalServerException"
+                },
+                {
+                    "shape": "ResourceNotFoundException"
+                },
+                {
+                    "shape": "ThrottlingException"
+                },
+                {
+                    "shape": "ValidationException"
+                },
+                {
+                    "shape": "AccessDeniedException"
+                }
+            ],
+            "idempotent": true
+        },
         "ChatSync": {
             "name": "ChatSync",
             "http": {
@@ -143,16 +175,16 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
-                },
-                {
                     "shape": "InternalServerException"
                 },
                 {
-                    "shape": "LicenseNotFoundException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
+                },
+                {
+                    "shape": "LicenseNotFoundException"
                 },
                 {
                     "shape": "ExternalResourceException"
@@ -165,6 +197,71 @@
                 },
                 {
                     "shape": "AccessDeniedException"
+                }
+            ]
+        },
+        "CheckDocumentAccess": {
+            "name": "CheckDocumentAccess",
+            "http": {
+                "method": "GET",
+                "requestUri": "\/applications\/{applicationId}\/index\/{indexId}\/users\/{userId}\/documents\/{documentId}\/check-document-access",
+                "responseCode": 200
+            },
+            "input": {
+                "shape": "CheckDocumentAccessRequest"
+            },
+            "output": {
+                "shape": "CheckDocumentAccessResponse"
+            },
+            "errors": [
+                {
+                    "shape": "InternalServerException"
+                },
+                {
+                    "shape": "ResourceNotFoundException"
+                },
+                {
+                    "shape": "ThrottlingException"
+                },
+                {
+                    "shape": "ValidationException"
+                },
+                {
+                    "shape": "AccessDeniedException"
+                }
+            ]
+        },
+        "CreateAnonymousWebExperienceUrl": {
+            "name": "CreateAnonymousWebExperienceUrl",
+            "http": {
+                "method": "POST",
+                "requestUri": "\/applications\/{applicationId}\/experiences\/{webExperienceId}\/anonymous-url",
+                "responseCode": 200
+            },
+            "input": {
+                "shape": "CreateAnonymousWebExperienceUrlRequest"
+            },
+            "output": {
+                "shape": "CreateAnonymousWebExperienceUrlResponse"
+            },
+            "errors": [
+                {
+                    "shape": "InternalServerException"
+                },
+                {
+                    "shape": "ResourceNotFoundException"
+                },
+                {
+                    "shape": "ThrottlingException"
+                },
+                {
+                    "shape": "ValidationException"
+                },
+                {
+                    "shape": "AccessDeniedException"
+                },
+                {
+                    "shape": "ServiceQuotaExceededException"
                 }
             ]
         },
@@ -183,10 +280,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -221,10 +318,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -259,10 +356,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -297,10 +394,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -334,10 +431,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -372,10 +469,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -394,6 +491,41 @@
                 }
             ]
         },
+        "CreateSubscription": {
+            "name": "CreateSubscription",
+            "http": {
+                "method": "POST",
+                "requestUri": "\/applications\/{applicationId}\/subscriptions",
+                "responseCode": 200
+            },
+            "input": {
+                "shape": "CreateSubscriptionRequest"
+            },
+            "output": {
+                "shape": "CreateSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "shape": "InternalServerException"
+                },
+                {
+                    "shape": "ResourceNotFoundException"
+                },
+                {
+                    "shape": "ConflictException"
+                },
+                {
+                    "shape": "ThrottlingException"
+                },
+                {
+                    "shape": "ValidationException"
+                },
+                {
+                    "shape": "AccessDeniedException"
+                }
+            ],
+            "idempotent": true
+        },
         "CreateUser": {
             "name": "CreateUser",
             "http": {
@@ -409,10 +541,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -447,10 +579,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -484,13 +616,48 @@
             },
             "errors": [
                 {
+                    "shape": "InternalServerException"
+                },
+                {
                     "shape": "ResourceNotFoundException"
                 },
+                {
+                    "shape": "ConflictException"
+                },
+                {
+                    "shape": "ThrottlingException"
+                },
+                {
+                    "shape": "ValidationException"
+                },
+                {
+                    "shape": "AccessDeniedException"
+                }
+            ],
+            "idempotent": true
+        },
+        "DeleteAttachment": {
+            "name": "DeleteAttachment",
+            "http": {
+                "method": "DELETE",
+                "requestUri": "\/applications\/{applicationId}\/conversations\/{conversationId}\/attachments\/{attachmentId}",
+                "responseCode": 200
+            },
+            "input": {
+                "shape": "DeleteAttachmentRequest"
+            },
+            "output": {
+                "shape": "DeleteAttachmentResponse"
+            },
+            "errors": [
                 {
                     "shape": "InternalServerException"
                 },
                 {
-                    "shape": "ConflictException"
+                    "shape": "ResourceNotFoundException"
+                },
+                {
+                    "shape": "LicenseNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -519,10 +686,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -551,10 +718,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "LicenseNotFoundException"
@@ -586,10 +753,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -621,10 +788,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -656,10 +823,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -691,10 +858,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -726,10 +893,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -761,10 +928,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -796,10 +963,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -831,10 +998,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -866,10 +1033,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -901,10 +1068,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -932,10 +1099,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -963,10 +1130,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -994,10 +1161,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1025,10 +1192,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -1059,10 +1226,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1090,10 +1257,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "LicenseNotFoundException"
@@ -1127,10 +1294,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1158,10 +1325,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1189,10 +1356,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1220,10 +1387,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -1254,10 +1421,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1313,10 +1480,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "LicenseNotFoundException"
@@ -1347,10 +1514,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "LicenseNotFoundException"
@@ -1381,10 +1548,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1412,10 +1579,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -1446,10 +1613,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1477,10 +1644,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1508,10 +1675,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -1542,10 +1709,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1573,10 +1740,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "LicenseNotFoundException"
@@ -1607,10 +1774,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1694,10 +1861,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1725,10 +1892,44 @@
             },
             "errors": [
                 {
+                    "shape": "InternalServerException"
+                },
+                {
                     "shape": "ResourceNotFoundException"
                 },
                 {
+                    "shape": "ThrottlingException"
+                },
+                {
+                    "shape": "ValidationException"
+                },
+                {
+                    "shape": "AccessDeniedException"
+                }
+            ]
+        },
+        "ListSubscriptions": {
+            "name": "ListSubscriptions",
+            "http": {
+                "method": "GET",
+                "requestUri": "\/applications\/{applicationId}\/subscriptions",
+                "responseCode": 200
+            },
+            "input": {
+                "shape": "ListSubscriptionsRequest"
+            },
+            "output": {
+                "shape": "ListSubscriptionsResponse"
+            },
+            "errors": [
+                {
                     "shape": "InternalServerException"
+                },
+                {
+                    "shape": "ResourceNotFoundException"
+                },
+                {
+                    "shape": "ConflictException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1756,10 +1957,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1787,10 +1988,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1815,10 +2016,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -1846,10 +2047,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -1884,10 +2085,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "LicenseNotFoundException"
@@ -1918,10 +2119,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -1955,10 +2156,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -1989,10 +2190,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -2024,10 +2225,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -2056,10 +2257,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -2091,10 +2292,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -2129,10 +2330,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -2164,10 +2365,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -2199,10 +2400,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -2237,10 +2438,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -2275,10 +2476,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -2298,6 +2499,41 @@
             ],
             "idempotent": true
         },
+        "UpdateSubscription": {
+            "name": "UpdateSubscription",
+            "http": {
+                "method": "PUT",
+                "requestUri": "\/applications\/{applicationId}\/subscriptions\/{subscriptionId}",
+                "responseCode": 200
+            },
+            "input": {
+                "shape": "UpdateSubscriptionRequest"
+            },
+            "output": {
+                "shape": "UpdateSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "shape": "InternalServerException"
+                },
+                {
+                    "shape": "ResourceNotFoundException"
+                },
+                {
+                    "shape": "ConflictException"
+                },
+                {
+                    "shape": "ThrottlingException"
+                },
+                {
+                    "shape": "ValidationException"
+                },
+                {
+                    "shape": "AccessDeniedException"
+                }
+            ],
+            "idempotent": true
+        },
         "UpdateUser": {
             "name": "UpdateUser",
             "http": {
@@ -2313,10 +2549,13 @@
             },
             "errors": [
                 {
+                    "shape": "InternalServerException"
+                },
+                {
                     "shape": "ResourceNotFoundException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ConflictException"
                 },
                 {
                     "shape": "ThrottlingException"
@@ -2348,10 +2587,10 @@
             },
             "errors": [
                 {
-                    "shape": "ResourceNotFoundException"
+                    "shape": "InternalServerException"
                 },
                 {
-                    "shape": "InternalServerException"
+                    "shape": "ResourceNotFoundException"
                 },
                 {
                     "shape": "ConflictException"
@@ -2767,6 +3006,17 @@
                 }
             }
         },
+        "AppliedOrchestrationConfiguration": {
+            "type": "structure",
+            "required": [
+                "control"
+            ],
+            "members": {
+                "control": {
+                    "shape": "OrchestrationControl"
+                }
+            }
+        },
         "AssociatePermissionRequest": {
             "type": "structure",
             "required": [
@@ -2798,6 +3048,40 @@
                 "statement": {
                     "shape": "String"
                 }
+            }
+        },
+        "AssociatedGroup": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "shape": "GroupName"
+                },
+                "type": {
+                    "shape": "MembershipType"
+                }
+            }
+        },
+        "AssociatedGroups": {
+            "type": "list",
+            "member": {
+                "shape": "AssociatedGroup"
+            }
+        },
+        "AssociatedUser": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "shape": "String"
+                },
+                "type": {
+                    "shape": "MembershipType"
+                }
+            }
+        },
+        "AssociatedUsers": {
+            "type": "list",
+            "member": {
+                "shape": "AssociatedUser"
             }
         },
         "Attachment": {
@@ -2987,6 +3271,51 @@
             "enum": [
                 "DELETE"
             ]
+        },
+        "AudioExtractionConfiguration": {
+            "type": "structure",
+            "required": [
+                "audioExtractionStatus"
+            ],
+            "members": {
+                "audioExtractionStatus": {
+                    "shape": "AudioExtractionStatus"
+                }
+            }
+        },
+        "AudioExtractionStatus": {
+            "type": "string",
+            "enum": [
+                "ENABLED",
+                "DISABLED"
+            ]
+        },
+        "AudioExtractionType": {
+            "type": "string",
+            "enum": [
+                "TRANSCRIPT",
+                "SUMMARY"
+            ]
+        },
+        "AudioSourceDetails": {
+            "type": "structure",
+            "members": {
+                "mediaId": {
+                    "shape": "MediaId"
+                },
+                "mediaMimeType": {
+                    "shape": "String"
+                },
+                "startTimeMilliseconds": {
+                    "shape": "Long"
+                },
+                "endTimeMilliseconds": {
+                    "shape": "Long"
+                },
+                "audioExtractionType": {
+                    "shape": "AudioExtractionType"
+                }
+            }
         },
         "AuthChallengeRequest": {
             "type": "structure",
@@ -3236,6 +3565,39 @@
             "max": 2,
             "min": 0
         },
+        "CancelSubscriptionRequest": {
+            "type": "structure",
+            "required": [
+                "applicationId",
+                "subscriptionId"
+            ],
+            "members": {
+                "applicationId": {
+                    "shape": "ApplicationId",
+                    "location": "uri",
+                    "locationName": "applicationId"
+                },
+                "subscriptionId": {
+                    "shape": "SubscriptionId",
+                    "location": "uri",
+                    "locationName": "subscriptionId"
+                }
+            }
+        },
+        "CancelSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "subscriptionArn": {
+                    "shape": "SubscriptionArn"
+                },
+                "currentSubscription": {
+                    "shape": "SubscriptionDetails"
+                },
+                "nextSubscription": {
+                    "shape": "SubscriptionDetails"
+                }
+            }
+        },
         "ChatInput": {
             "type": "structure",
             "required": [
@@ -3433,6 +3795,59 @@
                 }
             }
         },
+        "CheckDocumentAccessRequest": {
+            "type": "structure",
+            "required": [
+                "applicationId",
+                "indexId",
+                "userId",
+                "documentId"
+            ],
+            "members": {
+                "applicationId": {
+                    "shape": "ApplicationId",
+                    "location": "uri",
+                    "locationName": "applicationId"
+                },
+                "indexId": {
+                    "shape": "IndexId",
+                    "location": "uri",
+                    "locationName": "indexId"
+                },
+                "userId": {
+                    "shape": "String",
+                    "location": "uri",
+                    "locationName": "userId"
+                },
+                "documentId": {
+                    "shape": "DocumentId",
+                    "location": "uri",
+                    "locationName": "documentId"
+                },
+                "dataSourceId": {
+                    "shape": "DataSourceId",
+                    "location": "querystring",
+                    "locationName": "dataSourceId"
+                }
+            }
+        },
+        "CheckDocumentAccessResponse": {
+            "type": "structure",
+            "members": {
+                "userGroups": {
+                    "shape": "AssociatedGroups"
+                },
+                "userAliases": {
+                    "shape": "AssociatedUsers"
+                },
+                "hasAccess": {
+                    "shape": "Boolean"
+                },
+                "documentAcl": {
+                    "shape": "DocumentAcl"
+                }
+            }
+        },
         "ClientIdForOIDC": {
             "type": "string",
             "max": 255,
@@ -3589,6 +4004,36 @@
                 }
             },
             "union": true
+        },
+        "CreateAnonymousWebExperienceUrlRequest": {
+            "type": "structure",
+            "required": [
+                "applicationId",
+                "webExperienceId"
+            ],
+            "members": {
+                "applicationId": {
+                    "shape": "ApplicationId",
+                    "location": "uri",
+                    "locationName": "applicationId"
+                },
+                "webExperienceId": {
+                    "shape": "WebExperienceId",
+                    "location": "uri",
+                    "locationName": "webExperienceId"
+                },
+                "sessionDurationInMinutes": {
+                    "shape": "SessionDurationInMinutes"
+                }
+            }
+        },
+        "CreateAnonymousWebExperienceUrlResponse": {
+            "type": "structure",
+            "members": {
+                "anonymousUrl": {
+                    "shape": "Url"
+                }
+            }
         },
         "CreateApplicationRequest": {
             "type": "structure",
@@ -3905,6 +4350,48 @@
                 },
                 "retrieverArn": {
                     "shape": "RetrieverArn"
+                }
+            }
+        },
+        "CreateSubscriptionRequest": {
+            "type": "structure",
+            "required": [
+                "applicationId",
+                "principal",
+                "type"
+            ],
+            "members": {
+                "applicationId": {
+                    "shape": "ApplicationId",
+                    "location": "uri",
+                    "locationName": "applicationId"
+                },
+                "principal": {
+                    "shape": "SubscriptionPrincipal"
+                },
+                "type": {
+                    "shape": "SubscriptionType"
+                },
+                "clientToken": {
+                    "shape": "ClientToken",
+                    "idempotencyToken": true
+                }
+            }
+        },
+        "CreateSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "subscriptionId": {
+                    "shape": "SubscriptionId"
+                },
+                "subscriptionArn": {
+                    "shape": "SubscriptionArn"
+                },
+                "currentSubscription": {
+                    "shape": "SubscriptionDetails"
+                },
+                "nextSubscription": {
+                    "shape": "SubscriptionDetails"
                 }
             }
         },
@@ -4300,6 +4787,40 @@
             "type": "structure",
             "members": []
         },
+        "DeleteAttachmentRequest": {
+            "type": "structure",
+            "required": [
+                "applicationId",
+                "conversationId",
+                "attachmentId"
+            ],
+            "members": {
+                "applicationId": {
+                    "shape": "ApplicationId",
+                    "location": "uri",
+                    "locationName": "applicationId"
+                },
+                "conversationId": {
+                    "shape": "ConversationId",
+                    "location": "uri",
+                    "locationName": "conversationId"
+                },
+                "attachmentId": {
+                    "shape": "AttachmentId",
+                    "location": "uri",
+                    "locationName": "attachmentId"
+                },
+                "userId": {
+                    "shape": "UserId",
+                    "location": "querystring",
+                    "locationName": "userId"
+                }
+            }
+        },
+        "DeleteAttachmentResponse": {
+            "type": "structure",
+            "members": []
+        },
         "DeleteChatControlsConfigurationRequest": {
             "type": "structure",
             "required": [
@@ -4622,6 +5143,82 @@
                 "mediaExtractionConfiguration": {
                     "shape": "MediaExtractionConfiguration"
                 }
+            }
+        },
+        "DocumentAcl": {
+            "type": "structure",
+            "members": {
+                "allowlist": {
+                    "shape": "DocumentAclMembership"
+                },
+                "denyList": {
+                    "shape": "DocumentAclMembership"
+                }
+            }
+        },
+        "DocumentAclCondition": {
+            "type": "structure",
+            "members": {
+                "memberRelation": {
+                    "shape": "MemberRelation"
+                },
+                "users": {
+                    "shape": "DocumentAclUsers"
+                },
+                "groups": {
+                    "shape": "DocumentAclGroups"
+                }
+            }
+        },
+        "DocumentAclConditions": {
+            "type": "list",
+            "member": {
+                "shape": "DocumentAclCondition"
+            }
+        },
+        "DocumentAclGroup": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "shape": "GroupName"
+                },
+                "type": {
+                    "shape": "MembershipType"
+                }
+            }
+        },
+        "DocumentAclGroups": {
+            "type": "list",
+            "member": {
+                "shape": "DocumentAclGroup"
+            }
+        },
+        "DocumentAclMembership": {
+            "type": "structure",
+            "members": {
+                "memberRelation": {
+                    "shape": "MemberRelation"
+                },
+                "conditions": {
+                    "shape": "DocumentAclConditions"
+                }
+            }
+        },
+        "DocumentAclUser": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "shape": "String"
+                },
+                "type": {
+                    "shape": "MembershipType"
+                }
+            }
+        },
+        "DocumentAclUsers": {
+            "type": "list",
+            "member": {
+                "shape": "DocumentAclUser"
             }
         },
         "DocumentAttribute": {
@@ -5132,6 +5729,9 @@
                 "responseScope": {
                     "shape": "ResponseScope"
                 },
+                "orchestrationConfiguration": {
+                    "shape": "AppliedOrchestrationConfiguration"
+                },
                 "blockedPhrases": {
                     "shape": "BlockedPhrasesConfiguration"
                 },
@@ -5143,6 +5743,9 @@
                 },
                 "nextToken": {
                     "shape": "NextToken"
+                },
+                "hallucinationReductionConfiguration": {
+                    "shape": "HallucinationReductionConfiguration"
                 }
             }
         },
@@ -5666,6 +6269,12 @@
                 }
             }
         },
+        "GroupIdentifier": {
+            "type": "string",
+            "max": 47,
+            "min": 1,
+            "pattern": "([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}"
+        },
         "GroupMembers": {
             "type": "structure",
             "members": {
@@ -5730,6 +6339,21 @@
                 "shape": "GroupSummary"
             }
         },
+        "HallucinationReductionConfiguration": {
+            "type": "structure",
+            "members": {
+                "hallucinationReductionControl": {
+                    "shape": "HallucinationReductionControl"
+                }
+            }
+        },
+        "HallucinationReductionControl": {
+            "type": "string",
+            "enum": [
+                "ENABLED",
+                "DISABLED"
+            ]
+        },
         "HookConfiguration": {
             "type": "structure",
             "members": {
@@ -5792,7 +6416,8 @@
                 "AWS_IAM_IDP_SAML",
                 "AWS_IAM_IDP_OIDC",
                 "AWS_IAM_IDC",
-                "AWS_QUICKSIGHT_IDP"
+                "AWS_QUICKSIGHT_IDP",
+                "ANONYMOUS"
             ]
         },
         "ImageExtractionConfiguration": {
@@ -5812,6 +6437,17 @@
                 "ENABLED",
                 "DISABLED"
             ]
+        },
+        "ImageSourceDetails": {
+            "type": "structure",
+            "members": {
+                "mediaId": {
+                    "shape": "MediaId"
+                },
+                "mediaMimeType": {
+                    "shape": "String"
+                }
+            }
         },
         "Index": {
             "type": "structure",
@@ -6591,6 +7227,40 @@
                 }
             }
         },
+        "ListSubscriptionsRequest": {
+            "type": "structure",
+            "required": [
+                "applicationId"
+            ],
+            "members": {
+                "applicationId": {
+                    "shape": "ApplicationId",
+                    "location": "uri",
+                    "locationName": "applicationId"
+                },
+                "nextToken": {
+                    "shape": "NextToken",
+                    "location": "querystring",
+                    "locationName": "nextToken"
+                },
+                "maxResults": {
+                    "shape": "MaxResultsIntegerForListSubscriptions",
+                    "location": "querystring",
+                    "locationName": "maxResults"
+                }
+            }
+        },
+        "ListSubscriptionsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "shape": "NextToken"
+                },
+                "subscriptions": {
+                    "shape": "Subscriptions"
+                }
+            }
+        },
         "ListTagsForResourceRequest": {
             "type": "structure",
             "required": [
@@ -6756,6 +7426,12 @@
             "max": 50,
             "min": 1
         },
+        "MaxResultsIntegerForListSubscriptions": {
+            "type": "integer",
+            "box": true,
+            "max": 100,
+            "min": 1
+        },
         "MaxResultsIntegerForListWebExperiencesRequest": {
             "type": "integer",
             "box": true,
@@ -6767,6 +7443,12 @@
             "members": {
                 "imageExtractionConfiguration": {
                     "shape": "ImageExtractionConfiguration"
+                },
+                "audioExtractionConfiguration": {
+                    "shape": "AudioExtractionConfiguration"
+                },
+                "videoExtractionConfiguration": {
+                    "shape": "VideoExtractionConfiguration"
                 }
             }
         },
@@ -7060,6 +7742,24 @@
                     "shape": "RoleArn"
                 }
             }
+        },
+        "OrchestrationConfiguration": {
+            "type": "structure",
+            "required": [
+                "control"
+            ],
+            "members": {
+                "control": {
+                    "shape": "OrchestrationControl"
+                }
+            }
+        },
+        "OrchestrationControl": {
+            "type": "string",
+            "enum": [
+                "ENABLED",
+                "DISABLED"
+            ]
         },
         "Origin": {
             "type": "string",
@@ -7801,6 +8501,12 @@
             },
             "exception": true
         },
+        "SessionDurationInMinutes": {
+            "type": "integer",
+            "box": true,
+            "max": 60,
+            "min": 15
+        },
         "SnippetExcerpt": {
             "type": "structure",
             "members": {
@@ -7846,6 +8552,21 @@
             "member": {
                 "shape": "SourceAttribution"
             }
+        },
+        "SourceDetails": {
+            "type": "structure",
+            "members": {
+                "imageSourceDetails": {
+                    "shape": "ImageSourceDetails"
+                },
+                "audioSourceDetails": {
+                    "shape": "AudioSourceDetails"
+                },
+                "videoSourceDetails": {
+                    "shape": "VideoSourceDetails"
+                }
+            },
+            "union": true
         },
         "StartDataSourceSyncJobRequest": {
             "type": "structure",
@@ -7984,12 +8705,69 @@
                 "shape": "SubnetId"
             }
         },
+        "Subscription": {
+            "type": "structure",
+            "members": {
+                "subscriptionId": {
+                    "shape": "SubscriptionId"
+                },
+                "subscriptionArn": {
+                    "shape": "SubscriptionArn"
+                },
+                "principal": {
+                    "shape": "SubscriptionPrincipal"
+                },
+                "currentSubscription": {
+                    "shape": "SubscriptionDetails"
+                },
+                "nextSubscription": {
+                    "shape": "SubscriptionDetails"
+                }
+            }
+        },
+        "SubscriptionArn": {
+            "type": "string",
+            "max": 1224,
+            "min": 10,
+            "pattern": "arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^\/].{0,1023}"
+        },
+        "SubscriptionDetails": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "shape": "SubscriptionType"
+                }
+            }
+        },
+        "SubscriptionId": {
+            "type": "string",
+            "max": 1224,
+            "min": 0
+        },
+        "SubscriptionPrincipal": {
+            "type": "structure",
+            "members": {
+                "user": {
+                    "shape": "UserIdentifier"
+                },
+                "group": {
+                    "shape": "GroupIdentifier"
+                }
+            },
+            "union": true
+        },
         "SubscriptionType": {
             "type": "string",
             "enum": [
                 "Q_LITE",
                 "Q_BUSINESS"
             ]
+        },
+        "Subscriptions": {
+            "type": "list",
+            "member": {
+                "shape": "Subscription"
+            }
         },
         "SyncSchedule": {
             "type": "string",
@@ -8008,6 +8786,13 @@
             "max": 350,
             "min": 0,
             "pattern": "\\P{C}*"
+        },
+        "SystemMessageType": {
+            "type": "string",
+            "enum": [
+                "RESPONSE",
+                "GROUNDED_RESPONSE"
+            ]
         },
         "Tag": {
             "type": "structure",
@@ -8097,6 +8882,9 @@
         "TextOutputEvent": {
             "type": "structure",
             "members": {
+                "systemMessageType": {
+                    "shape": "SystemMessageType"
+                },
                 "conversationId": {
                     "shape": "ConversationId"
                 },
@@ -8125,10 +8913,19 @@
                     "shape": "SnippetExcerpt"
                 },
                 "mediaId": {
-                    "shape": "SourceAttributionMediaId"
+                    "shape": "SourceAttributionMediaId",
+                    "deprecated": true,
+                    "deprecatedMessage": "Deprecated in favor of using mediaId within the respective sourceDetails field.",
+                    "deprecatedSince": "2025-02-28"
                 },
                 "mediaMimeType": {
-                    "shape": "String"
+                    "shape": "String",
+                    "deprecated": true,
+                    "deprecatedMessage": "Deprecated in favor of using mediaMimeType within the respective sourceDetails field.",
+                    "deprecatedSince": "2025-02-28"
+                },
+                "sourceDetails": {
+                    "shape": "SourceDetails"
                 }
             }
         },
@@ -8285,6 +9082,9 @@
                 "responseScope": {
                     "shape": "ResponseScope"
                 },
+                "orchestrationConfiguration": {
+                    "shape": "OrchestrationConfiguration"
+                },
                 "blockedPhrasesConfigurationUpdate": {
                     "shape": "BlockedPhrasesConfigurationUpdate"
                 },
@@ -8296,6 +9096,9 @@
                 },
                 "creatorModeConfiguration": {
                     "shape": "CreatorModeConfiguration"
+                },
+                "hallucinationReductionConfiguration": {
+                    "shape": "HallucinationReductionConfiguration"
                 }
             }
         },
@@ -8491,6 +9294,43 @@
             "type": "structure",
             "members": []
         },
+        "UpdateSubscriptionRequest": {
+            "type": "structure",
+            "required": [
+                "applicationId",
+                "subscriptionId",
+                "type"
+            ],
+            "members": {
+                "applicationId": {
+                    "shape": "ApplicationId",
+                    "location": "uri",
+                    "locationName": "applicationId"
+                },
+                "subscriptionId": {
+                    "shape": "SubscriptionId",
+                    "location": "uri",
+                    "locationName": "subscriptionId"
+                },
+                "type": {
+                    "shape": "SubscriptionType"
+                }
+            }
+        },
+        "UpdateSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "subscriptionArn": {
+                    "shape": "SubscriptionArn"
+                },
+                "currentSubscription": {
+                    "shape": "SubscriptionDetails"
+                },
+                "nextSubscription": {
+                    "shape": "SubscriptionDetails"
+                }
+            }
+        },
         "UpdateUserRequest": {
             "type": "structure",
             "required": [
@@ -8626,6 +9466,12 @@
             "min": 1,
             "pattern": "\\P{C}*"
         },
+        "UserIdentifier": {
+            "type": "string",
+            "max": 47,
+            "min": 1,
+            "pattern": "([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}"
+        },
         "UserIds": {
             "type": "list",
             "member": {
@@ -8697,6 +9543,51 @@
                 "FIELD_VALIDATION_FAILED",
                 "UNKNOWN_OPERATION"
             ]
+        },
+        "VideoExtractionConfiguration": {
+            "type": "structure",
+            "required": [
+                "videoExtractionStatus"
+            ],
+            "members": {
+                "videoExtractionStatus": {
+                    "shape": "VideoExtractionStatus"
+                }
+            }
+        },
+        "VideoExtractionStatus": {
+            "type": "string",
+            "enum": [
+                "ENABLED",
+                "DISABLED"
+            ]
+        },
+        "VideoExtractionType": {
+            "type": "string",
+            "enum": [
+                "TRANSCRIPT",
+                "SUMMARY"
+            ]
+        },
+        "VideoSourceDetails": {
+            "type": "structure",
+            "members": {
+                "mediaId": {
+                    "shape": "MediaId"
+                },
+                "mediaMimeType": {
+                    "shape": "String"
+                },
+                "startTimeMilliseconds": {
+                    "shape": "Long"
+                },
+                "endTimeMilliseconds": {
+                    "shape": "Long"
+                },
+                "videoExtractionType": {
+                    "shape": "VideoExtractionType"
+                }
+            }
         },
         "WebExperience": {
             "type": "structure",

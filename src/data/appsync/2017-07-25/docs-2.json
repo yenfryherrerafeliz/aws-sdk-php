@@ -138,9 +138,9 @@
     "ApiCachingBehavior": {
       "base": null,
       "refs": {
-        "ApiCache$apiCachingBehavior": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resolvers that you specify are cached.</p> </li> </ul>",
-        "CreateApiCacheRequest$apiCachingBehavior": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resolvers that you specify are cached.</p> </li> </ul>",
-        "UpdateApiCacheRequest$apiCachingBehavior": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resolvers that you specify are cached.</p> </li> </ul>"
+        "ApiCache$apiCachingBehavior": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests from the same user are cached. Individual resolvers are automatically cached. All API calls will try to return responses from the cache.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resolvers that you specify are cached.</p> </li> <li> <p> <b>OPERATION_LEVEL_CACHING</b>: Full requests are cached together and returned without executing resolvers.</p> </li> </ul>",
+        "CreateApiCacheRequest$apiCachingBehavior": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests from the same user are cached. Individual resolvers are automatically cached. All API calls will try to return responses from the cache.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resolvers that you specify are cached.</p> </li> <li> <p> <b>OPERATION_LEVEL_CACHING</b>: Full requests are cached together and returned without executing resolvers.</p> </li> </ul>",
+        "UpdateApiCacheRequest$apiCachingBehavior": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests from the same user are cached. Individual resolvers are automatically cached. All API calls will try to return responses from the cache.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resolvers that you specify are cached.</p> </li> <li> <p> <b>OPERATION_LEVEL_CACHING</b>: Full requests are cached together and returned without executing resolvers.</p> </li> </ul>"
       }
     },
     "ApiKey": {
@@ -1221,6 +1221,27 @@
         "ListGraphqlApisResponse$graphqlApis": "<p>The <code>GraphqlApi</code> objects.</p>"
       }
     },
+    "HandlerBehavior": {
+      "base": null,
+      "refs": {
+        "HandlerConfig$behavior": "<p>The behavior for the handler.</p>"
+      }
+    },
+    "HandlerConfig": {
+      "base": "<p>The configuration for a handler.</p>",
+      "refs": {
+        "HandlerConfigs$onPublish": "<p>The configuration for the <code>OnPublish</code> handler.</p>",
+        "HandlerConfigs$onSubscribe": "<p>The configuration for the <code>OnSubscribe</code> handler.</p>"
+      }
+    },
+    "HandlerConfigs": {
+      "base": "<p>The configuration for the <code>OnPublish</code> and <code>OnSubscribe</code> handlers.</p>",
+      "refs": {
+        "ChannelNamespace$handlerConfigs": "<p>The configuration for the <code>OnPublish</code> and <code>OnSubscribe</code> handlers.</p>",
+        "CreateChannelNamespaceRequest$handlerConfigs": "<p>The configuration for the <code>OnPublish</code> and <code>OnSubscribe</code> handlers.</p>",
+        "UpdateChannelNamespaceRequest$handlerConfigs": "<p>The configuration for the <code>OnPublish</code> and <code>OnSubscribe</code> handlers.</p>"
+      }
+    },
     "HttpDataSourceConfig": {
       "base": "<p>Describes an HTTP data source configuration.</p>",
       "refs": {
@@ -1229,9 +1250,21 @@
         "UpdateDataSourceRequest$httpConfig": "<p>The new HTTP endpoint configuration.</p>"
       }
     },
+    "Integration": {
+      "base": "<p>The integration data source configuration for the handler.</p>",
+      "refs": {
+        "HandlerConfig$integration": "<p>The integration data source configuration for the handler.</p>"
+      }
+    },
     "InternalFailureException": {
       "base": "<p>An internal AppSync error occurred. Try your request again.</p>",
       "refs": {
+      }
+    },
+    "InvokeType": {
+      "base": null,
+      "refs": {
+        "LambdaConfig$invokeType": "<p>The invocation type for a Lambda data source.</p>"
       }
     },
     "LambdaAuthorizerConfig": {
@@ -1242,6 +1275,12 @@
         "CreateGraphqlApiRequest$lambdaAuthorizerConfig": "<p>Configuration for Lambda function authorization.</p>",
         "GraphqlApi$lambdaAuthorizerConfig": "<p>Configuration for Lambda function authorization.</p>",
         "UpdateGraphqlApiRequest$lambdaAuthorizerConfig": "<p>Configuration for Lambda function authorization.</p>"
+      }
+    },
+    "LambdaConfig": {
+      "base": "<p>The configuration for a Lambda data source.</p>",
+      "refs": {
+        "Integration$lambdaConfig": "<p>The configuration for a Lambda data source.</p>"
       }
     },
     "LambdaConflictHandlerConfig": {
@@ -1523,6 +1562,13 @@
       "base": null,
       "refs": {
         "EnhancedMetricsConfig$operationLevelMetricsConfig": "<p> Controls how operation metrics will be emitted to CloudWatch. Operation metrics include:</p> <ul> <li> <p>Requests: The number of times a specified GraphQL operation was called.</p> </li> <li> <p>GraphQL errors: The number of GraphQL errors that occurred during a specified GraphQL operation.</p> </li> </ul> <p>Metrics will be recorded by API ID and operation name. You can set the value to <code>ENABLED</code> or <code>DISABLED</code>.</p>"
+      }
+    },
+    "OutErrors": {
+      "base": null,
+      "refs": {
+        "EvaluateCodeResponse$outErrors": "<p>The list of runtime errors that are added to the GraphQL operation response.</p>",
+        "EvaluateMappingTemplateResponse$outErrors": "<p>The list of runtime errors that are added to the GraphQL operation response.</p>"
       }
     },
     "OutputType": {
@@ -1822,6 +1868,13 @@
       "refs": {
       }
     },
+    "Stash": {
+      "base": null,
+      "refs": {
+        "EvaluateCodeResponse$stash": "<p>An object available inside each resolver and function handler. A single <code>stash</code> object lives through a single resolver run. Therefore, you can use the stash to pass arbitrary data across request and response handlers and across functions in a pipeline resolver.</p>",
+        "EvaluateMappingTemplateResponse$stash": "<p>An object available inside each resolver and function handler. A single <code>stash</code> object lives through a single resolver run. Therefore, you can use the stash to pass arbitrary data across request and response handlers and across functions in a pipeline resolver.</p>"
+      }
+    },
     "String": {
       "base": null,
       "refs": {
@@ -1903,6 +1956,7 @@
         "DisassociateSourceGraphqlApiRequest$associationId": "<p>The ID generated by the AppSync service for the source API association.</p>",
         "DomainNameConfig$appsyncDomainName": "<p>The domain name that AppSync provides.</p>",
         "DomainNameConfig$hostedZoneId": "<p>The ID of your Amazon Route 53 hosted zone.</p>",
+        "DomainNameConfig$domainNameArn": "<p>The Amazon Resource Name (ARN) of the domain name.</p>",
         "DynamodbDataSourceConfig$tableName": "<p>The table name.</p>",
         "DynamodbDataSourceConfig$awsRegion": "<p>The Amazon Web Services Region.</p>",
         "ElasticsearchDataSourceConfig$endpoint": "<p>The endpoint.</p>",
@@ -1940,6 +1994,7 @@
         "GraphqlApi$owner": "<p>The account owner of the GraphQL API.</p>",
         "GraphqlApi$ownerContact": "<p>The owner contact information for an API resource.</p> <p>This field accepts any string input with a length of 0 - 256 characters.</p>",
         "HttpDataSourceConfig$endpoint": "<p>The HTTP URL endpoint. You can specify either the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If you don't specify the port, AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.</p>",
+        "Integration$dataSourceName": "<p>The unique name of the data source that has been configured on the API.</p>",
         "InternalFailureException$message": null,
         "LambdaAuthorizerConfig$authorizerUri": "<p>The Amazon Resource Name (ARN) of the Lambda function to be called for authorization. This can be a standard Lambda ARN, a version ARN (<code>.../v3</code>), or an alias ARN. </p> <p> <b>Note</b>: This Lambda function must have the following resource-based policy assigned to it. When configuring Lambda authorizers in the console, this is done for you. To use the Command Line Interface (CLI), run the following:</p> <p> <code>aws lambda add-permission --function-name \"arn:aws:lambda:us-east-2:111122223333:function:my-function\" --statement-id \"appsync\" --principal appsync.amazonaws.com --action lambda:InvokeFunction</code> </p>",
         "LambdaAuthorizerConfig$identityValidationExpression": "<p>A regular expression for validation of tokens before the Lambda function is called.</p>",
@@ -2064,7 +2119,9 @@
         "ChannelNamespace$tags": null,
         "CreateApiRequest$tags": null,
         "CreateChannelNamespaceRequest$tags": null,
+        "CreateDomainNameRequest$tags": null,
         "CreateGraphqlApiRequest$tags": "<p>A <code>TagMap</code> object.</p>",
+        "DomainNameConfig$tags": null,
         "GraphqlApi$tags": "<p>The tags.</p>",
         "ListTagsForResourceResponse$tags": "<p>A <code>TagMap</code> object.</p>",
         "TagResourceRequest$tags": "<p>A <code>TagMap</code> object.</p>"

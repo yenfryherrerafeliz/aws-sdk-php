@@ -80,23 +80,19 @@
   "shapes": {
     "AcceptAdministratorInvitationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "AcceptAdministratorInvitationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "AcceptInvitationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "AcceptInvitationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "AccessControlList": {
       "base": "<p>Contains information on the current access control policies for the bucket.</p>",
@@ -106,8 +102,7 @@
     },
     "AccessDeniedException": {
       "base": "<p>An access denied exception object.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "AccessKey": {
       "base": "<p>Contains information about the access keys.</p>",
@@ -308,13 +303,11 @@
     },
     "ArchiveFindingsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ArchiveFindingsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "AutoEnableMembers": {
       "base": null,
@@ -337,8 +330,7 @@
     },
     "BadRequestException": {
       "base": "<p>A bad request exception object.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "Behavior": {
       "base": null,
@@ -440,8 +432,7 @@
     },
     "ConflictException": {
       "base": "<p>A request conflict exception object.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "Container": {
       "base": "<p>Details of a container.</p>",
@@ -593,53 +584,43 @@
     },
     "CreateDetectorRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateDetectorResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateFilterRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateFilterResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateIPSetRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateIPSetResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateMalwareProtectionPlanRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateMalwareProtectionPlanResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateMembersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateMembersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateProtectedResource": {
       "base": "<p>Information about the protected resource that is associated with the created Malware Protection plan. Presently, <code>S3Bucket</code> is the only supported protected resource.</p>",
@@ -650,13 +631,11 @@
     },
     "CreatePublishingDestinationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreatePublishingDestinationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateS3BucketResource": {
       "base": "<p>Information about the protected S3 bucket resource.</p>",
@@ -666,23 +645,19 @@
     },
     "CreateSampleFindingsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateSampleFindingsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateThreatIntelSetRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateThreatIntelSetResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "Criterion": {
       "base": null,
@@ -766,13 +741,11 @@
     },
     "DeclineInvitationsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeclineInvitationsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DefaultServerSideEncryption": {
       "base": "<p>Contains information on the server side encryption method used in the S3 bucket. See <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html\">S3 Server-Side Encryption</a> for more information.</p>",
@@ -782,108 +755,87 @@
     },
     "DeleteDetectorRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteDetectorResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteFilterRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteFilterResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteIPSetRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteIPSetResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteInvitationsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteInvitationsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteMalwareProtectionPlanRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteMembersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteMembersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeletePublishingDestinationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeletePublishingDestinationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteThreatIntelSetRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteThreatIntelSetResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeMalwareScansRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeMalwareScansResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeOrganizationConfigurationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeOrganizationConfigurationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribePublishingDestinationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribePublishingDestinationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "Destination": {
       "base": "<p>Contains information about the publishing destination, including the ID, type, and status.</p>",
@@ -1061,43 +1013,35 @@
     },
     "DisableOrganizationAdminAccountRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DisableOrganizationAdminAccountResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DisassociateFromAdministratorAccountRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DisassociateFromAdministratorAccountResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DisassociateFromMasterAccountRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DisassociateFromMasterAccountResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DisassociateMembersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DisassociateMembersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DnsRequestAction": {
       "base": "<p>Contains information about the DNS_REQUEST action described in this finding.</p>",
@@ -1122,7 +1066,7 @@
         "NetworkGeoLocation$Latitude": "<p>The latitude information of the endpoint location.</p>",
         "NetworkGeoLocation$Longitude": "<p>The longitude information of the endpoint location.</p>",
         "SeverityStatistics$Severity": "<p>The severity level associated with each finding type.</p>",
-        "Signal$Severity": "<p>The severity associated with the signal. For more information about severity, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html\">Findings severity levels</a> in the <i>GuardDuty User Guide</i>.</p>"
+        "Signal$Severity": "<p>The severity associated with the signal. For more information about severity, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html\">Findings severity levels</a> in the <i>Amazon GuardDuty User Guide</i>.</p>"
       }
     },
     "EbsSnapshotPreservation": {
@@ -1195,13 +1139,11 @@
     },
     "EnableOrganizationAdminAccountRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "EnableOrganizationAdminAccountResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "EndpointIds": {
       "base": null,
@@ -1339,7 +1281,7 @@
     "FindingCriteria": {
       "base": "<p>Contains information about the criteria used for querying findings.</p>",
       "refs": {
-        "CreateFilterRequest$FindingCriteria": "<p>Represents the criteria to be used in the filter for querying findings.</p> <p>You can only use the following attributes to query findings:</p> <ul> <li> <p>accountId</p> </li> <li> <p>id</p> </li> <li> <p>region</p> </li> <li> <p>severity</p> <p>To filter on the basis of severity, the API and CLI use the following input list for the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_FindingCriteria.html\">FindingCriteria</a> condition:</p> <ul> <li> <p> <b>Low</b>: <code>[\"1\", \"2\", \"3\"]</code> </p> </li> <li> <p> <b>Medium</b>: <code>[\"4\", \"5\", \"6\"]</code> </p> </li> <li> <p> <b>High</b>: <code>[\"7\", \"8\"]</code> </p> </li> <li> <p> <b>Critical</b>: <code>[\"9\", \"10\"]</code> </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html\">Findings severity levels</a> in the <i>Amazon GuardDuty User Guide</i>.</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.effectivePermissions</p> </li> <li> <p>resource.s3BucketDetails.name</p> </li> <li> <p>resource.s3BucketDetails.tags.key</p> </li> <li> <p>resource.s3BucketDetails.tags.value</p> </li> <li> <p>resource.s3BucketDetails.type</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.errorCode</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.dnsRequestAction.domainWithSuffix</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.action.awsApiCallAction.remoteAccountDetails.affiliated</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.kubernetesApiCallAction.namespace</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.kubernetesApiCallAction.requestUri</p> </li> <li> <p>service.action.kubernetesApiCallAction.statusCode</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV6</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.awsApiCallAction.remoteAccountDetails.accountId</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>resource.eksClusterDetails.name</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.name</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.namespace</p> </li> <li> <p>resource.kubernetesDetails.kubernetesUserDetails.username</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.image</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.imagePrefix</p> </li> <li> <p>service.ebsVolumeScanDetails.scanId</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.name</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.severity</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.hash</p> </li> <li> <p>resource.ecsClusterDetails.name</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.image</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.definitionArn</p> </li> <li> <p>resource.containerDetails.image</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbInstanceIdentifier</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbClusterIdentifier</p> </li> <li> <p>resource.rdsDbInstanceDetails.engine</p> </li> <li> <p>resource.rdsDbUserDetails.user</p> </li> <li> <p>resource.rdsDbInstanceDetails.tags.key</p> </li> <li> <p>resource.rdsDbInstanceDetails.tags.value</p> </li> <li> <p>service.runtimeDetails.process.executableSha256</p> </li> <li> <p>service.runtimeDetails.process.name</p> </li> <li> <p>service.runtimeDetails.process.name</p> </li> <li> <p>resource.lambdaDetails.functionName</p> </li> <li> <p>resource.lambdaDetails.functionArn</p> </li> <li> <p>resource.lambdaDetails.tags.key</p> </li> <li> <p>resource.lambdaDetails.tags.value</p> </li> </ul>",
+        "CreateFilterRequest$FindingCriteria": "<p>Represents the criteria to be used in the filter for querying findings.</p> <p>You can only use the following attributes to query findings:</p> <ul> <li> <p>accountId</p> </li> <li> <p>id</p> </li> <li> <p>region</p> </li> <li> <p>severity</p> <p>To filter on the basis of severity, the API and CLI use the following input list for the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_FindingCriteria.html\">FindingCriteria</a> condition:</p> <ul> <li> <p> <b>Low</b>: <code>[\"1\", \"2\", \"3\"]</code> </p> </li> <li> <p> <b>Medium</b>: <code>[\"4\", \"5\", \"6\"]</code> </p> </li> <li> <p> <b>High</b>: <code>[\"7\", \"8\"]</code> </p> </li> <li> <p> <b>Critical</b>: <code>[\"9\", \"10\"]</code> </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html\">Findings severity levels</a> in the <i>Amazon GuardDuty User Guide</i>.</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.effectivePermissions</p> </li> <li> <p>resource.s3BucketDetails.name</p> </li> <li> <p>resource.s3BucketDetails.tags.key</p> </li> <li> <p>resource.s3BucketDetails.tags.value</p> </li> <li> <p>resource.s3BucketDetails.type</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.errorCode</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.dnsRequestAction.domainWithSuffix</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.action.awsApiCallAction.remoteAccountDetails.affiliated</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.kubernetesApiCallAction.namespace</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.kubernetesApiCallAction.requestUri</p> </li> <li> <p>service.action.kubernetesApiCallAction.statusCode</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV6</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.awsApiCallAction.remoteAccountDetails.accountId</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>resource.eksClusterDetails.name</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.name</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.namespace</p> </li> <li> <p>resource.kubernetesDetails.kubernetesUserDetails.username</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.image</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.imagePrefix</p> </li> <li> <p>service.ebsVolumeScanDetails.scanId</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.name</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.severity</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.hash</p> </li> <li> <p>resource.ecsClusterDetails.name</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.image</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.definitionArn</p> </li> <li> <p>resource.containerDetails.image</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbInstanceIdentifier</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbClusterIdentifier</p> </li> <li> <p>resource.rdsDbInstanceDetails.engine</p> </li> <li> <p>resource.rdsDbUserDetails.user</p> </li> <li> <p>resource.rdsDbInstanceDetails.tags.key</p> </li> <li> <p>resource.rdsDbInstanceDetails.tags.value</p> </li> <li> <p>service.runtimeDetails.process.executableSha256</p> </li> <li> <p>service.runtimeDetails.process.name</p> </li> <li> <p>service.runtimeDetails.process.executablePath</p> </li> <li> <p>resource.lambdaDetails.functionName</p> </li> <li> <p>resource.lambdaDetails.functionArn</p> </li> <li> <p>resource.lambdaDetails.tags.key</p> </li> <li> <p>resource.lambdaDetails.tags.value</p> </li> </ul>",
         "GetFilterResponse$FindingCriteria": "<p>Represents the criteria to be used in the filter for querying findings.</p>",
         "GetFindingsStatisticsRequest$FindingCriteria": "<p>Represents the criteria that is used for querying findings.</p>",
         "ListFindingsRequest$FindingCriteria": "<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.dnsRequestAction.domainWithSuffix</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to 'true', only archived findings are listed. When it's set to 'false', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.ebsVolumeScanDetails.scanId</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>",
@@ -1450,175 +1392,142 @@
       }
     },
     "GeoLocation": {
-      "base": "<p>Contains information about the location of the remote IP address.</p>",
+      "base": "<p>Contains information about the location of the remote IP address. By default, GuardDuty returns <code>Geolocation</code> with <code>Lat</code> and <code>Lon</code> as <code>0.0</code>.</p>",
       "refs": {
         "RemoteIpDetails$GeoLocation": "<p>The location information of the remote IP address.</p>"
       }
     },
     "GetAdministratorAccountRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetAdministratorAccountResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCoverageStatisticsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetCoverageStatisticsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDetectorRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetDetectorResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetFilterRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetFilterResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetFindingsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetFindingsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetFindingsStatisticsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetFindingsStatisticsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetIPSetRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetIPSetResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetInvitationsCountRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetInvitationsCountResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMalwareProtectionPlanRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMalwareProtectionPlanResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMalwareScanSettingsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMalwareScanSettingsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMasterAccountRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMasterAccountResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMemberDetectorsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMemberDetectorsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMembersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMembersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetOrganizationStatisticsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetRemainingFreeTrialDaysRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetRemainingFreeTrialDaysResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetThreatIntelSetRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetThreatIntelSetResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetUsageStatisticsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetUsageStatisticsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GroupByType": {
       "base": null,
@@ -1711,7 +1620,7 @@
     "IndicatorType": {
       "base": null,
       "refs": {
-        "Indicator$Key": "<p>Specific indicator keys observed in the attack sequence.</p>"
+        "Indicator$Key": "<p>Specific indicator keys observed in the attack sequence. For description of the valid values for key, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-summary.html#guardduty-extended-threat-detection-attack-sequence-finding-details\">Attack sequence finding details</a> in the <i>Amazon GuardDuty User Guide</i>.</p>"
       }
     },
     "IndicatorValueString": {
@@ -1723,7 +1632,7 @@
     "IndicatorValues": {
       "base": null,
       "refs": {
-        "Indicator$Values": "<p>Values associated with each indicator key. For example, if the indicator key is <code>SUSPICIOUS_NETWORK</code>, then the value will be the name of the network. If the indicator key is <code>ATTACK_TACTIC</code>, then the value will be one of the MITRE tactics. </p> <p>For more information about the values associated with the key, see GuardDuty Extended Threat Detection in the <i>GuardDuty User Guide.</i> </p>"
+        "Indicator$Values": "<p>Values associated with each indicator key. For example, if the indicator key is <code>SUSPICIOUS_NETWORK</code>, then the value will be the name of the network. If the indicator key is <code>ATTACK_TACTIC</code>, then the value will be one of the MITRE tactics. </p>"
       }
     },
     "Indicators": {
@@ -1807,8 +1716,7 @@
     },
     "InternalServerErrorException": {
       "base": "<p>An internal server error exception object.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "Invitation": {
       "base": "<p>Contains information about the invitation to become a member account.</p>",
@@ -1824,13 +1732,11 @@
     },
     "InviteMembersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "InviteMembersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "IpSetFormat": {
       "base": null,
@@ -1968,123 +1874,99 @@
     },
     "ListCoverageRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListCoverageResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDetectorsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListDetectorsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListFiltersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListFiltersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListFindingsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListFindingsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListIPSetsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListIPSetsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListInvitationsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListInvitationsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListMalwareProtectionPlansRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListMalwareProtectionPlansResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListMembersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListMembersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListOrganizationAdminAccountsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListOrganizationAdminAccountsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListPublishingDestinationsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListPublishingDestinationsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTagsForResourceRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTagsForResourceResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListThreatIntelSetsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListThreatIntelSetsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "LocalIpDetails": {
       "base": "<p>Contains information about the local IP address of the connection.</p>",
@@ -2864,8 +2746,7 @@
     },
     "ResourceNotFoundException": {
       "base": "<p>The requested resource can't be found.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ResourceStatistics": {
       "base": "<p>Information about each resource type associated with the <code>groupedByResource</code> statistics.</p>",
@@ -3163,7 +3044,7 @@
     "SignalType": {
       "base": null,
       "refs": {
-        "Signal$Type": "<p>The type of the signal used to identify an attack sequence.</p> <p>Signals can be GuardDuty findings or activities observed in data sources that GuardDuty monitors. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html\">Foundational data sources</a> in the <i>GuardDuty User Guide</i>.</p> <p>A signal type can be one of the valid values listed in this API. Here are the related descriptions:</p> <ul> <li> <p> <code>FINDING</code> - Individually generated GuardDuty finding.</p> </li> <li> <p> <code>CLOUD_TRAIL</code> - Activity observed from CloudTrail logs</p> </li> <li> <p> <code>S3_DATA_EVENTS</code> - Activity observed from CloudTrail data events for S3. Activities associated with this type will show up only when you have enabled GuardDuty S3 Protection feature in your account. For more information about S3 Protection and steps to enable it, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/s3-protection.html\">S3 Protection</a> in the <i>GuardDuty User Guide</i>.</p> </li> </ul>"
+        "Signal$Type": "<p>The type of the signal used to identify an attack sequence.</p> <p>Signals can be GuardDuty findings or activities observed in data sources that GuardDuty monitors. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html\">Foundational data sources</a> in the <i>Amazon GuardDuty User Guide</i>.</p> <p>A signal type can be one of the valid values listed in this API. Here are the related descriptions:</p> <ul> <li> <p> <code>FINDING</code> - Individually generated GuardDuty finding.</p> </li> <li> <p> <code>CLOUD_TRAIL</code> - Activity observed from CloudTrail logs</p> </li> <li> <p> <code>S3_DATA_EVENTS</code> - Activity observed from CloudTrail data events for S3. Activities associated with this type will show up only when you have enabled GuardDuty S3 Protection feature in your account. For more information about S3 Protection and steps to enable it, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/s3-protection.html\">S3 Protection</a> in the <i>Amazon GuardDuty User Guide</i>.</p> </li> </ul>"
       }
     },
     "Signals": {
@@ -3194,33 +3075,27 @@
     },
     "StartMalwareScanRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMalwareScanResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMonitoringMembersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMonitoringMembersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopMonitoringMembersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopMonitoringMembersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "String": {
       "base": null,
@@ -3460,7 +3335,7 @@
         "MalwareProtectionConfigurationResult$ServiceRole": "<p>The GuardDuty Malware Protection service role.</p>",
         "MalwareProtectionPlanObjectPrefixesList$member": null,
         "MalwareProtectionPlanStatusReason$Code": "<p>Issue code.</p>",
-        "MalwareProtectionPlanStatusReason$Message": "<p>Issue message that specifies the reason. For information about potential troubleshooting steps, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/troubleshoot-s3-malware-protection-status-errors.html\">Troubleshooting Malware Protection for S3 status issues</a> in the <i>GuardDuty User Guide</i>.</p>",
+        "MalwareProtectionPlanStatusReason$Message": "<p>Issue message that specifies the reason. For information about potential troubleshooting steps, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/troubleshoot-s3-malware-protection-status-errors.html\">Troubleshooting Malware Protection for S3 status issues</a> in the <i>Amazon GuardDuty User Guide</i>.</p>",
         "MalwareProtectionPlanSummary$MalwareProtectionPlanId": "<p>A unique identifier associated with Malware Protection plan.</p>",
         "Master$InvitationId": "<p>The value used to validate the administrator account to the member account.</p>",
         "Master$RelationshipStatus": "<p>The status of the relationship between the administrator and member accounts.</p>",
@@ -3677,13 +3552,11 @@
     },
     "TagResourceRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "TagResourceResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "TagValue": {
       "base": null,
@@ -3821,13 +3694,11 @@
     },
     "UnarchiveFindingsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UnarchiveFindingsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UnprocessedAccount": {
       "base": "<p>Contains information about the accounts that weren't processed.</p>",
@@ -3860,88 +3731,71 @@
     },
     "UntagResourceRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UntagResourceResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateDetectorRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateDetectorResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateFilterRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateFilterResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateFindingsFeedbackRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateFindingsFeedbackResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateIPSetRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateIPSetResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateMalwareProtectionPlanRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateMalwareScanSettingsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateMalwareScanSettingsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateMemberDetectorsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateMemberDetectorsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateOrganizationConfigurationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateOrganizationConfigurationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateProtectedResource": {
       "base": "<p>Information about the protected resource that is associated with the created Malware Protection plan. Presently, <code>S3Bucket</code> is the only supported protected resource.</p>",
@@ -3951,13 +3805,11 @@
     },
     "UpdatePublishingDestinationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdatePublishingDestinationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateS3BucketResource": {
       "base": "<p>Information about the protected S3 bucket resource.</p>",
@@ -3967,13 +3819,11 @@
     },
     "UpdateThreatIntelSetRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateThreatIntelSetResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UsageAccountResult": {
       "base": "<p>Contains information on the total of usage based on account IDs.</p>",

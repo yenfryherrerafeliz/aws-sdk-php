@@ -60,7 +60,7 @@
     "DescribeMetadataModelImports": "<p>Returns a paginated list of metadata model imports.</p>",
     "DescribeMigrationProjects": "<p>Returns a paginated list of migration projects for your account in the current region.</p>",
     "DescribeOrderableReplicationInstances": "<p>Returns information about the replication instance types that can be created in the specified region.</p>",
-    "DescribePendingMaintenanceActions": "<p>For internal use only</p>",
+    "DescribePendingMaintenanceActions": "<p>Returns a list of upcoming maintenance events for replication instances in your account in the current Region.</p>",
     "DescribeRecommendationLimitations": "<p>Returns a paginated list of limitations for recommendations of target Amazon Web Services engines.</p>",
     "DescribeRecommendations": "<p>Returns a paginated list of target engine recommendations for your source databases.</p>",
     "DescribeRefreshSchemasStatus": "<p>Returns the status of the RefreshSchemas operation.</p>",
@@ -118,8 +118,7 @@
   "shapes": {
     "AccessDeniedFault": {
       "base": "<p>DMS was denied access to the endpoint. Check that the role is correctly configured.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "AccountQuota": {
       "base": "<p>Describes a quota for an Amazon Web Services account, for example the number of replication instances allowed.</p>",
@@ -135,23 +134,19 @@
     },
     "AddTagsToResourceMessage": {
       "base": "<p>Associates a set of tags with an DMS resource.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "AddTagsToResourceResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ApplyPendingMaintenanceActionMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ApplyPendingMaintenanceActionResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ArnList": {
       "base": null,
@@ -217,13 +212,11 @@
     },
     "BatchStartRecommendationsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "BatchStartRecommendationsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "Boolean": {
       "base": null,
@@ -231,6 +224,7 @@
         "EventSubscription$Enabled": "<p>Boolean value that indicates if the event subscription is enabled.</p>",
         "ModifyReplicationInstanceMessage$ApplyImmediately": "<p>Indicates whether the changes should be applied immediately or during the next maintenance window.</p>",
         "ModifyReplicationInstanceMessage$AllowMajorVersionUpgrade": "<p>Indicates that major version upgrades are allowed. Changing this parameter does not result in an outage, and the change is asynchronously applied as soon as possible.</p> <p>This parameter must be set to <code>true</code> when specifying a value for the <code>EngineVersion</code> parameter that is a different major version than the replication instance's current version.</p>",
+        "PremigrationAssessmentStatus$FailOnAssessmentFailure": "<p>A configurable setting you can set to <code>true</code> (the defualt setting) or <code>false</code>. Use this setting to to stop the replication from starting automatically if the assessment fails. This can help you evaluate the issue that is preventing the replication from running successfully.</p>",
         "ProvisionData$IsNewProvisioningAvailable": "<p>Whether the new provisioning is available to the replication.</p>",
         "ReplicationInstance$MultiAZ": "<p> Specifies whether the replication instance is a Multi-AZ deployment. You can't set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. </p>",
         "ReplicationInstance$AutoMinorVersionUpgrade": "<p>Boolean value indicating if minor version upgrades will be automatically applied to the instance.</p>",
@@ -357,13 +351,11 @@
     },
     "CancelReplicationTaskAssessmentRunMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CancelReplicationTaskAssessmentRunResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CannedAclForObjectsValue": {
       "base": null,
@@ -406,8 +398,7 @@
     },
     "CollectorNotFoundFault": {
       "base": "<p>The specified collector doesn't exist.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CollectorResponse": {
       "base": "<p>Describes a Fleet Advisor collector.</p>",
@@ -469,113 +460,91 @@
     },
     "CreateDataMigrationMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateDataMigrationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateDataProviderMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateDataProviderResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateEndpointMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateEndpointResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateEventSubscriptionMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateEventSubscriptionResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateFleetAdvisorCollectorRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateFleetAdvisorCollectorResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateInstanceProfileMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateInstanceProfileResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateMigrationProjectMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateMigrationProjectResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateReplicationConfigMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateReplicationConfigResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateReplicationInstanceMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateReplicationInstanceResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateReplicationSubnetGroupMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateReplicationSubnetGroupResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateReplicationTaskMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateReplicationTaskResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DataFormatValue": {
       "base": null,
@@ -719,588 +688,471 @@
     },
     "DeleteCertificateMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteCertificateResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteCollectorRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteConnectionMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteConnectionResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteDataMigrationMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteDataMigrationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteDataProviderMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteDataProviderResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteEndpointMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteEndpointResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteEventSubscriptionMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteEventSubscriptionResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteFleetAdvisorDatabasesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteFleetAdvisorDatabasesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteInstanceProfileMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteInstanceProfileResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteMigrationProjectMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteMigrationProjectResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteReplicationConfigMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteReplicationConfigResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteReplicationInstanceMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteReplicationInstanceResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteReplicationSubnetGroupMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteReplicationSubnetGroupResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteReplicationTaskAssessmentRunMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteReplicationTaskAssessmentRunResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteReplicationTaskMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteReplicationTaskResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeAccountAttributesMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeAccountAttributesResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeApplicableIndividualAssessmentsMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeApplicableIndividualAssessmentsResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeCertificatesMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeCertificatesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeConnectionsMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeConnectionsResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeConversionConfigurationMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeConversionConfigurationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeDataMigrationsMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeDataMigrationsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeDataProvidersMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeDataProvidersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEndpointSettingsMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEndpointSettingsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEndpointTypesMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEndpointTypesResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEndpointsMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEndpointsResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEngineVersionsMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEngineVersionsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEventCategoriesMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEventCategoriesResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEventSubscriptionsMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEventSubscriptionsResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEventsMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeEventsResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeExtensionPackAssociationsMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeExtensionPackAssociationsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeFleetAdvisorCollectorsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeFleetAdvisorCollectorsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeFleetAdvisorDatabasesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeFleetAdvisorDatabasesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeFleetAdvisorLsaAnalysisRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeFleetAdvisorLsaAnalysisResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeFleetAdvisorSchemaObjectSummaryRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeFleetAdvisorSchemaObjectSummaryResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeFleetAdvisorSchemasRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeFleetAdvisorSchemasResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeInstanceProfilesMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeInstanceProfilesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeMetadataModelAssessmentsMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeMetadataModelAssessmentsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeMetadataModelConversionsMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeMetadataModelConversionsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeMetadataModelExportsAsScriptMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeMetadataModelExportsAsScriptResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeMetadataModelExportsToTargetMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeMetadataModelExportsToTargetResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeMetadataModelImportsMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeMetadataModelImportsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeMigrationProjectsMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeMigrationProjectsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeOrderableReplicationInstancesMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeOrderableReplicationInstancesResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribePendingMaintenanceActionsMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribePendingMaintenanceActionsResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeRecommendationLimitationsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeRecommendationLimitationsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeRecommendationsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeRecommendationsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeRefreshSchemasStatusMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeRefreshSchemasStatusResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationConfigsMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationConfigsResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationInstanceTaskLogsMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationInstanceTaskLogsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationInstancesMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationInstancesResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationSubnetGroupsMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationSubnetGroupsResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationTableStatisticsMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationTableStatisticsResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationTaskAssessmentResultsMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationTaskAssessmentResultsResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationTaskAssessmentRunsMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationTaskAssessmentRunsResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationTaskIndividualAssessmentsMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationTaskIndividualAssessmentsResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationTasksMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationTasksResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationsMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeReplicationsResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeSchemasMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeSchemasResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeTableStatisticsMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeTableStatisticsResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "DmsSslModeValue": {
       "base": null,
@@ -1308,6 +1160,8 @@
         "CreateEndpointMessage$SslMode": "<p>The Secure Sockets Layer (SSL) mode to use for the SSL connection. The default is <code>none</code> </p>",
         "DocDbDataProviderSettings$SslMode": "<p>The SSL mode used to connect to the DocumentDB data provider. The default value is <code>none</code>.</p>",
         "Endpoint$SslMode": "<p>The SSL mode used to connect to the endpoint. The default value is <code>none</code>.</p>",
+        "IbmDb2LuwDataProviderSettings$SslMode": "<p>The SSL mode used to connect to the DB2 LUW data provider. The default value is <code>none</code>. Valid Values: <code>none</code> and <code>verify-ca</code>.</p>",
+        "IbmDb2zOsDataProviderSettings$SslMode": "<p>The SSL mode used to connect to the DB2 for z/OS data provider. The default value is <code>none</code>. Valid Values: <code>none</code> and <code>verify-ca</code>.</p>",
         "MariaDbDataProviderSettings$SslMode": "<p>The SSL mode used to connect to the MariaDB data provider. The default value is <code>none</code>.</p>",
         "MicrosoftSqlServerDataProviderSettings$SslMode": "<p>The SSL mode used to connect to the Microsoft SQL Server data provider. The default value is <code>none</code>.</p>",
         "ModifyEndpointMessage$SslMode": "<p>The SSL mode used to connect to the endpoint. The default value is <code>none</code>.</p>",
@@ -1346,7 +1200,8 @@
         "RdsConfiguration$InstanceMemory": "<p>Describes the memory on the recommended Amazon RDS DB instance that meets your requirements.</p>",
         "RdsRequirements$InstanceVcpu": "<p>The required number of virtual CPUs (vCPU) on the Amazon RDS DB instance.</p>",
         "RdsRequirements$InstanceMemory": "<p>The required memory on the Amazon RDS DB instance.</p>",
-        "SchemaResponse$Similarity": "<p>The similarity value for a schema in a Fleet Advisor collector inventory. A higher similarity value indicates that a schema is likely to be a duplicate.</p>"
+        "SchemaResponse$Similarity": "<p>The similarity value for a schema in a Fleet Advisor collector inventory. A higher similarity value indicates that a schema is likely to be a duplicate.</p>",
+        "TableStatistics$ResyncProgress": "<p>Calculates the percentage of failed validations that were successfully resynced to the system.</p>"
       }
     },
     "DynamoDbSettings": {
@@ -1524,13 +1379,11 @@
     },
     "ExportMetadataModelAssessmentMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ExportMetadataModelAssessmentResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ExportMetadataModelAssessmentResultEntry": {
       "base": "<p>Provides information about an exported metadata model assessment.</p>",
@@ -1547,8 +1400,7 @@
     },
     "FailedDependencyFault": {
       "base": "<p>A dependency threw an exception.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "Filter": {
       "base": "<p>Identifies the name and value of a filter object. This filter is used to limit the number and type of DMS objects that are returned for a particular <code>Describe*</code> call or similar operation. Filters are used as an optional parameter for certain API operations. </p>",
@@ -1566,7 +1418,7 @@
         "DescribeEndpointTypesMessage$Filters": "<p>Filters applied to the endpoint types.</p> <p>Valid filter names: engine-name | endpoint-type</p>",
         "DescribeEndpointsMessage$Filters": "<p>Filters applied to the endpoints.</p> <p>Valid filter names: endpoint-arn | endpoint-type | endpoint-id | engine-name</p>",
         "DescribeEventCategoriesMessage$Filters": "<p>Filters applied to the event categories.</p>",
-        "DescribeEventSubscriptionsMessage$Filters": "<p>Filters applied to event subscriptions.</p> <p>Valid filter names: event-subscription-arn | event-subscription-id </p>",
+        "DescribeEventSubscriptionsMessage$Filters": "<p>Filters applied to event subscriptions.</p> <p>Valid filter names: <code>event-subscription-arn</code> | <code>event-subscription-id</code> </p>",
         "DescribeEventsMessage$Filters": "<p>Filters applied to events. The only valid filter is <code>replication-instance-id</code>.</p>",
         "DescribeExtensionPackAssociationsMessage$Filters": "<p>Filters applied to the extension pack associations described in the form of key-value pairs.</p>",
         "DescribeFleetAdvisorCollectorsRequest$Filters": "<p> If you specify any of the following filters, the output includes information for only those collectors that meet the filter criteria:</p> <ul> <li> <p> <code>collector-referenced-id</code> – The ID of the collector agent, for example <code>d4610ac5-e323-4ad9-bc50-eaf7249dfe9d</code>.</p> </li> <li> <p> <code>collector-name</code> – The name of the collector agent.</p> </li> </ul> <p>An example is: <code>describe-fleet-advisor-collectors --filter Name=\"collector-referenced-id\",Values=\"d4610ac5-e323-4ad9-bc50-eaf7249dfe9d\"</code> </p>",
@@ -1581,8 +1433,8 @@
         "DescribeMetadataModelImportsMessage$Filters": "<p>Filters applied to the metadata model imports described in the form of key-value pairs.</p>",
         "DescribeMigrationProjectsMessage$Filters": "<p>Filters applied to the migration projects described in the form of key-value pairs.</p> <p>Valid filter names and values:</p> <ul> <li> <p>instance-profile-identifier, instance profile arn or name</p> </li> <li> <p>data-provider-identifier, data provider arn or name</p> </li> <li> <p>migration-project-identifier, migration project arn or name</p> </li> </ul>",
         "DescribePendingMaintenanceActionsMessage$Filters": "<p/>",
-        "DescribeRecommendationLimitationsRequest$Filters": "<p>Filters applied to the limitations described in the form of key-value pairs.</p>",
-        "DescribeRecommendationsRequest$Filters": "<p>Filters applied to the target engine recommendations described in the form of key-value pairs.</p>",
+        "DescribeRecommendationLimitationsRequest$Filters": "<p>Filters applied to the limitations described in the form of key-value pairs.</p> <p>Valid filter names: <code>database-id</code> | <code>engine-name</code> </p>",
+        "DescribeRecommendationsRequest$Filters": "<p>Filters applied to the target engine recommendations described in the form of key-value pairs.</p> <p>Valid filter names: <code>database-id</code> | <code>engine-name</code> </p>",
         "DescribeReplicationConfigsMessage$Filters": "<p>Filters applied to the replication configs.</p>",
         "DescribeReplicationInstancesMessage$Filters": "<p>Filters applied to replication instances.</p> <p>Valid filter names: replication-instance-arn | replication-instance-id | replication-instance-class | engine-version</p>",
         "DescribeReplicationSubnetGroupsMessage$Filters": "<p>Filters applied to replication subnet groups.</p> <p>Valid filter names: replication-subnet-group-id</p>",
@@ -1590,7 +1442,7 @@
         "DescribeReplicationTaskAssessmentRunsMessage$Filters": "<p>Filters applied to the premigration assessment runs described in the form of key-value pairs.</p> <p>Valid filter names: <code>replication-task-assessment-run-arn</code>, <code>replication-task-arn</code>, <code>replication-instance-arn</code>, <code>status</code> </p>",
         "DescribeReplicationTaskIndividualAssessmentsMessage$Filters": "<p>Filters applied to the individual assessments described in the form of key-value pairs.</p> <p>Valid filter names: <code>replication-task-assessment-run-arn</code>, <code>replication-task-arn</code>, <code>status</code> </p>",
         "DescribeReplicationTasksMessage$Filters": "<p>Filters applied to replication tasks.</p> <p>Valid filter names: replication-task-arn | replication-task-id | migration-type | endpoint-arn | replication-instance-arn</p>",
-        "DescribeReplicationsMessage$Filters": "<p>Filters applied to the replications.</p>",
+        "DescribeReplicationsMessage$Filters": "<p>Filters applied to the replications.</p> <p> Valid filter names: <code>replication-config-arn</code> | <code>replication-config-id</code> </p>",
         "DescribeTableStatisticsMessage$Filters": "<p>Filters applied to table statistics.</p> <p>Valid filter names: schema-name | table-name | table-state</p> <p>A combination of filters creates an AND condition where each record matches all specified filters.</p>"
       }
     },
@@ -1646,15 +1498,25 @@
         "ModifyEndpointMessage$IBMDb2Settings": "<p>Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html#CHAP_Source.DB2.ConnectionAttrib\">Extra connection attributes when using Db2 LUW as a source for DMS</a> in the <i>Database Migration Service User Guide.</i> </p>"
       }
     },
+    "IbmDb2LuwDataProviderSettings": {
+      "base": "<p>Provides information about an IBM DB2 LUW data provider.</p>",
+      "refs": {
+        "DataProviderSettings$IbmDb2LuwSettings": "<p>Provides information that defines an IBM DB2 LUW data provider.</p>"
+      }
+    },
+    "IbmDb2zOsDataProviderSettings": {
+      "base": "<p>Provides information about an IBM DB2 for z/OS data provider.</p>",
+      "refs": {
+        "DataProviderSettings$IbmDb2zOsSettings": "<p>Provides information that defines an IBM DB2 for z/OS data provider.</p>"
+      }
+    },
     "ImportCertificateMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ImportCertificateResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "IncludeTestList": {
       "base": null,
@@ -1685,8 +1547,7 @@
     },
     "InsufficientResourceCapacityFault": {
       "base": "<p>There are not enough resources allocated to the database migration.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "Integer": {
       "base": null,
@@ -1717,6 +1578,7 @@
         "ReplicationTaskAssessmentRunResultStatistic$Error": "<p>The number of individual assessments that encountered a critical error and could not complete properly.</p>",
         "ReplicationTaskAssessmentRunResultStatistic$Warning": "<p>Indicates that the recent completed AssessmentRun triggered a warning.</p>",
         "ReplicationTaskAssessmentRunResultStatistic$Cancelled": "<p> The number of individual assessments that were cancelled during the assessment run. </p>",
+        "ReplicationTaskAssessmentRunResultStatistic$Skipped": "<p>The number of individual assessments that were skipped during the assessment run.</p>",
         "ReplicationTaskStats$FullLoadProgressPercent": "<p>The percent complete for the full load migration task.</p>",
         "ReplicationTaskStats$TablesLoaded": "<p>The number of tables loaded for this task.</p>",
         "ReplicationTaskStats$TablesLoading": "<p>The number of tables currently loading for this task.</p>",
@@ -1799,6 +1661,8 @@
         "IBMDb2Settings$LoadTimeout": "<p>The amount of time (in milliseconds) before DMS times out operations performed by DMS on the Db2 target. The default value is 1200 (20 minutes).</p>",
         "IBMDb2Settings$WriteBufferSize": "<p>The size (in KB) of the in-memory file write buffer used when generating .csv files on the local disk on the DMS replication instance. The default value is 1024 (1 MB).</p>",
         "IBMDb2Settings$MaxFileSize": "<p>Specifies the maximum size (in KB) of .csv files used to transfer data to Db2 LUW.</p>",
+        "IbmDb2LuwDataProviderSettings$Port": "<p>The port value for the DB2 LUW data provider.</p>",
+        "IbmDb2zOsDataProviderSettings$Port": "<p>The port value for the DB2 for z/OS data provider.</p>",
         "InventoryData$NumberOfDatabases": "<p>The number of databases in the Fleet Advisor collector inventory.</p>",
         "InventoryData$NumberOfSchemas": "<p>The number of schemas in the Fleet Advisor collector inventory.</p>",
         "KafkaSettings$MessageMaxBytes": "<p>The maximum size in bytes for records created on the endpoint The default is 1,000,000.</p>",
@@ -1861,23 +1725,19 @@
     },
     "InvalidCertificateFault": {
       "base": "<p>The certificate was not valid.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "InvalidOperationFault": {
       "base": "<p>The action or operation requested isn't valid.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "InvalidResourceStateFault": {
       "base": "<p>The resource is in a state that prevents it from being used for database migration.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "InvalidSubnet": {
       "base": "<p>The subnet provided isn't valid.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "InventoryData": {
       "base": "<p>Describes a Fleet Advisor collector inventory.</p>",
@@ -1902,38 +1762,31 @@
     },
     "KMSAccessDeniedFault": {
       "base": "<p>The ciphertext references a key that doesn't exist or that the DMS account doesn't have access to.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "KMSDisabledFault": {
       "base": "<p>The specified KMS key isn't enabled.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "KMSFault": {
       "base": "<p>An Key Management Service (KMS) error is preventing access to KMS.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "KMSInvalidStateFault": {
       "base": "<p>The state of the specified KMS resource isn't valid for this request.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "KMSKeyNotAccessibleFault": {
       "base": "<p>DMS cannot access the KMS key.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "KMSNotFoundFault": {
       "base": "<p>The specified KMS entity or resource can't be found.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "KMSThrottlingFault": {
       "base": "<p>This request triggered KMS request throttling.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "KafkaSaslMechanism": {
       "base": null,
@@ -1962,11 +1815,11 @@
       }
     },
     "KerberosAuthenticationSettings": {
-      "base": "<p>Specifies using Kerberos authentication settings for use with DMS.</p>",
+      "base": "<p>Specifies the settings required for kerberos authentication when creating the replication instance.</p>",
       "refs": {
-        "CreateReplicationInstanceMessage$KerberosAuthenticationSettings": "<p>Specifies the ID of the secret that stores the key cache file required for kerberos authentication, when creating a replication instance.</p>",
-        "ModifyReplicationInstanceMessage$KerberosAuthenticationSettings": "<p>Specifies the ID of the secret that stores the key cache file required for kerberos authentication, when modifying a replication instance.</p>",
-        "ReplicationInstance$KerberosAuthenticationSettings": "<p>Specifies the ID of the secret that stores the key cache file required for kerberos authentication, when replicating an instance.</p>"
+        "CreateReplicationInstanceMessage$KerberosAuthenticationSettings": "<p>Specifies the settings required for kerberos authentication when creating the replication instance.</p>",
+        "ModifyReplicationInstanceMessage$KerberosAuthenticationSettings": "<p>Specifies the settings required for kerberos authentication when modifying a replication instance.</p>",
+        "ReplicationInstance$KerberosAuthenticationSettings": "<p>Specifies the settings required for kerberos authentication when replicating an instance.</p>"
       }
     },
     "KeyList": {
@@ -1997,13 +1850,11 @@
     },
     "ListTagsForResourceMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTagsForResourceResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "Long": {
       "base": null,
@@ -2038,7 +1889,10 @@
         "TableStatistics$AppliedInserts": "<p>The number of insert actions applied on a target table.</p>",
         "TableStatistics$AppliedDeletes": "<p>The number of delete actions applied on a target table.</p>",
         "TableStatistics$AppliedUpdates": "<p>The number of update actions applied on a target table.</p>",
-        "TableStatistics$AppliedDdls": "<p>The number of data definition language (DDL) statements used to build and modify the structure of your tables applied on the target.</p>"
+        "TableStatistics$AppliedDdls": "<p>The number of data definition language (DDL) statements used to build and modify the structure of your tables applied on the target.</p>",
+        "TableStatistics$ResyncRowsAttempted": "<p>Records the total number of mismatched data rows where the system attempted to apply fixes in the target database.</p>",
+        "TableStatistics$ResyncRowsSucceeded": "<p>Records the total number of mismatched data rows where fixes were successfully applied in the target database.</p>",
+        "TableStatistics$ResyncRowsFailed": "<p>Records the total number of mismatched data rows where fix attempts failed in the target database.</p>"
       }
     },
     "LongVarcharMappingType": {
@@ -2090,6 +1944,26 @@
         "ModifyMigrationProjectResponse$MigrationProject": "<p>The migration project that was modified.</p>"
       }
     },
+    "MigrationProjectIdentifier": {
+      "base": null,
+      "refs": {
+        "DescribeConversionConfigurationMessage$MigrationProjectIdentifier": "<p>The name or Amazon Resource Name (ARN) for the schema conversion project to describe.</p>",
+        "DescribeExtensionPackAssociationsMessage$MigrationProjectIdentifier": "<p>The name or Amazon Resource Name (ARN) for the migration project.</p>",
+        "DescribeMetadataModelAssessmentsMessage$MigrationProjectIdentifier": "<p>The name or Amazon Resource Name (ARN) of the migration project.</p>",
+        "DescribeMetadataModelConversionsMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+        "DescribeMetadataModelExportsAsScriptMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+        "DescribeMetadataModelExportsToTargetMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+        "DescribeMetadataModelImportsMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+        "ExportMetadataModelAssessmentMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+        "ModifyConversionConfigurationMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+        "StartExtensionPackAssociationMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+        "StartMetadataModelAssessmentMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+        "StartMetadataModelConversionMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+        "StartMetadataModelExportAsScriptMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+        "StartMetadataModelExportToTargetMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
+        "StartMetadataModelImportMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>"
+      }
+    },
     "MigrationProjectList": {
       "base": null,
       "refs": {
@@ -2114,113 +1988,91 @@
     },
     "ModifyConversionConfigurationMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyConversionConfigurationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyDataMigrationMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyDataMigrationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyDataProviderMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyDataProviderResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyEndpointMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyEndpointResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyEventSubscriptionMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyEventSubscriptionResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyInstanceProfileMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyInstanceProfileResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyMigrationProjectMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyMigrationProjectResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyReplicationConfigMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyReplicationConfigResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyReplicationInstanceMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyReplicationInstanceResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyReplicationSubnetGroupMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyReplicationSubnetGroupResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyReplicationTaskMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ModifyReplicationTaskResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "MongoDbDataProviderSettings": {
       "base": "<p>Provides information that defines a MongoDB data provider.</p>",
@@ -2238,12 +2090,16 @@
     },
     "MoveReplicationTaskMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "MoveReplicationTaskResponse": {
       "base": "<p/>",
+      "refs": {}
+    },
+    "MySQLAuthenticationMethod": {
+      "base": null,
       "refs": {
+        "MySQLSettings$AuthenticationMethod": "<p>This attribute allows you to specify the authentication method as \"iam auth\".</p>"
       }
     },
     "MySQLSettings": {
@@ -2278,7 +2134,7 @@
     "OracleAuthenticationMethod": {
       "base": null,
       "refs": {
-        "OracleSettings$AuthenticationMethod": "<p>Specifies using Kerberos authentication with Oracle.</p>"
+        "OracleSettings$AuthenticationMethod": "<p>Specifies the authentication method to be used with Oracle.</p>"
       }
     },
     "OracleDataProviderSettings": {
@@ -2344,6 +2200,12 @@
         "PostgreSQLSettings$PluginName": "<p>Specifies the plugin to use to create a replication slot.</p> <p>The default value is <code>pglogical</code>.</p>"
       }
     },
+    "PostgreSQLAuthenticationMethod": {
+      "base": null,
+      "refs": {
+        "PostgreSQLSettings$AuthenticationMethod": "<p>This attribute allows you to specify the authentication method as \"iam auth\".</p>"
+      }
+    },
     "PostgreSQLSettings": {
       "base": "<p>Provides information that defines a PostgreSQL endpoint.</p>",
       "refs": {
@@ -2356,6 +2218,18 @@
       "base": "<p>Provides information that defines a PostgreSQL data provider.</p>",
       "refs": {
         "DataProviderSettings$PostgreSqlSettings": null
+      }
+    },
+    "PremigrationAssessmentStatus": {
+      "base": "<p>The results returned in <code>describe-replications</code> to display the results of the premigration assessment from the replication configuration.</p>",
+      "refs": {
+        "PremigrationAssessmentStatusList$member": null
+      }
+    },
+    "PremigrationAssessmentStatusList": {
+      "base": null,
+      "refs": {
+        "Replication$PremigrationAssessmentStatuses": "<p>The status output of premigration assessment in describe-replications.</p>"
       }
     },
     "ProvisionData": {
@@ -2390,13 +2264,11 @@
     },
     "RebootReplicationInstanceMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RebootReplicationInstanceResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "Recommendation": {
       "base": "<p>Provides information that describes a recommendation of a target engine.</p> <p>A <i>recommendation</i> is a set of possible Amazon Web Services target engines that you can choose to migrate your source on-premises database. In this set, Fleet Advisor suggests a single target engine as the right sized migration destination. To determine this rightsized migration destination, Fleet Advisor uses the inventory metadata and metrics from data collector. You can use recommendations before the start of migration to save costs and reduce risks.</p> <p>With recommendations, you can explore different target options and compare metrics, so you can make an informed decision when you choose the migration target.</p>",
@@ -2454,13 +2326,11 @@
     },
     "RefreshSchemasMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "RefreshSchemasResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "RefreshSchemasStatus": {
       "base": "<p>Provides information that describes status of a schema at an endpoint specified by the <code>DescribeRefreshSchemaStatus</code> operation.</p>",
@@ -2491,33 +2361,27 @@
     },
     "ReloadReplicationTablesMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ReloadReplicationTablesResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ReloadTablesMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ReloadTablesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RemoveTagsFromResourceMessage": {
       "base": "<p>Removes one or more tags from an DMS resource.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "RemoveTagsFromResourceResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "Replication": {
       "base": "<p>Provides information that describes a serverless replication created by the <code>CreateReplication</code> operation.</p>",
@@ -2636,8 +2500,7 @@
     },
     "ReplicationSubnetGroupDoesNotCoverEnoughAZs": {
       "base": "<p>The replication subnet group does not cover enough Availability Zones (AZs). Edit the replication subnet group and add more AZs.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ReplicationSubnetGroups": {
       "base": null,
@@ -2694,12 +2557,14 @@
     "ReplicationTaskAssessmentRunProgress": {
       "base": "<p>The progress values reported by the <code>AssessmentProgress</code> response element.</p>",
       "refs": {
+        "PremigrationAssessmentStatus$AssessmentProgress": null,
         "ReplicationTaskAssessmentRun$AssessmentProgress": "<p>Indication of the completion progress for the individual assessments specified to run.</p>"
       }
     },
     "ReplicationTaskAssessmentRunResultStatistic": {
       "base": "<p>The object containing the result statistics for a completed assessment run.</p>",
       "refs": {
+        "PremigrationAssessmentStatus$ResultStatistic": null,
         "ReplicationTaskAssessmentRun$ResultStatistic": "<p> Result statistics for a completed assessment run, showing aggregated statistics of IndividualAssessments for how many assessments were passed, failed, or encountered issues such as errors or warnings. </p>"
       }
     },
@@ -2729,8 +2594,7 @@
     },
     "ResourceAlreadyExistsFault": {
       "base": "<p>The resource you are attempting to create already exists.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ResourceArn": {
       "base": null,
@@ -2740,8 +2604,7 @@
     },
     "ResourceNotFoundFault": {
       "base": "<p>The resource could not be found.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ResourcePendingMaintenanceActions": {
       "base": "<p>Identifies an DMS resource and any pending actions for it.</p>",
@@ -2752,23 +2615,19 @@
     },
     "ResourceQuotaExceededFault": {
       "base": "<p>The quota for this resource quota has been exceeded.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "RunFleetAdvisorLsaAnalysisResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "S3AccessDeniedFault": {
       "base": "<p>Insufficient privileges are preventing access to an Amazon S3 object.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "S3ResourceNotFoundFault": {
       "base": "<p>A specified Amazon S3 bucket, bucket folder, or other object can't be found.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "S3Settings": {
       "base": "<p>Settings for exporting data to Amazon S3. </p>",
@@ -2788,13 +2647,11 @@
     },
     "SNSInvalidTopicFault": {
       "base": "<p>The SNS topic is invalid.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "SNSNoAuthorizationFault": {
       "base": "<p>You are not authorized for the SNS subscription.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "SafeguardPolicy": {
       "base": null,
@@ -2902,7 +2759,7 @@
     "SqlServerAuthenticationMethod": {
       "base": null,
       "refs": {
-        "MicrosoftSQLServerSettings$AuthenticationMethod": "<p>Specifies using Kerberos authentication with Microsoft SQL Server.</p>"
+        "MicrosoftSQLServerSettings$AuthenticationMethod": "<p>Specifies the authentication method to be used with Microsoft SQL Server.</p>"
       }
     },
     "SslSecurityProtocolValue": {
@@ -2913,78 +2770,63 @@
     },
     "StartDataMigrationMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartDataMigrationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartExtensionPackAssociationMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartExtensionPackAssociationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMetadataModelAssessmentMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMetadataModelAssessmentResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMetadataModelConversionMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMetadataModelConversionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMetadataModelExportAsScriptMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMetadataModelExportAsScriptResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMetadataModelExportToTargetMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMetadataModelExportToTargetResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMetadataModelImportMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMetadataModelImportResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartRecommendationsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartRecommendationsRequestEntry": {
       "base": "<p>Provides information about the source database to analyze and provide target recommendations according to the specified requirements.</p>",
@@ -3000,8 +2842,7 @@
     },
     "StartReplicationMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "StartReplicationMigrationTypeValue": {
       "base": null,
@@ -3011,38 +2852,31 @@
     },
     "StartReplicationResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "StartReplicationTaskAssessmentMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "StartReplicationTaskAssessmentResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "StartReplicationTaskAssessmentRunMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "StartReplicationTaskAssessmentRunResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "StartReplicationTaskMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "StartReplicationTaskResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "StartReplicationTaskTypeValue": {
       "base": null,
@@ -3052,38 +2886,31 @@
     },
     "StopDataMigrationMessage": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopDataMigrationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopReplicationMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "StopReplicationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopReplicationTaskMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "StopReplicationTaskResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "StorageQuotaExceededFault": {
       "base": "<p>The storage quota has been exceeded.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "String": {
       "base": null,
@@ -3091,7 +2918,7 @@
         "AccountQuota$AccountQuotaName": "<p>The name of the DMS quota for this Amazon Web Services account.</p>",
         "AddTagsToResourceMessage$ResourceArn": "<p>Identifies the DMS resource to which tags should be added. The value for this parameter is an Amazon Resource Name (ARN).</p> <p>For DMS, you can tag a replication instance, an endpoint, or a replication task.</p>",
         "ApplyPendingMaintenanceActionMessage$ReplicationInstanceArn": "<p>The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance action applies to.</p>",
-        "ApplyPendingMaintenanceActionMessage$ApplyAction": "<p>The pending maintenance action to apply to this resource.</p> <p>Valid values: <code>os-upgrade</code>, <code>system-update</code>, <code>db-upgrade</code> </p>",
+        "ApplyPendingMaintenanceActionMessage$ApplyAction": "<p>The pending maintenance action to apply to this resource.</p> <p>Valid values: <code>os-upgrade</code>, <code>system-update</code>, <code>db-upgrade</code>, <code>os-patch</code> </p>",
         "ApplyPendingMaintenanceActionMessage$OptInType": "<p>A value that specifies the type of opt-in request, or undoes an opt-in request. You can't undo an opt-in request of type <code>immediate</code>.</p> <p>Valid values:</p> <ul> <li> <p> <code>immediate</code> - Apply the maintenance action immediately.</p> </li> <li> <p> <code>next-maintenance</code> - Apply the maintenance action during the next maintenance window for the resource.</p> </li> <li> <p> <code>undo-opt-in</code> - Cancel any existing <code>next-maintenance</code> opt-in requests.</p> </li> </ul>",
         "ArnList$member": null,
         "AvailabilityZone$Name": "<p>The name of the Availability Zone.</p>",
@@ -3134,7 +2961,7 @@
         "CreateDataMigrationMessage$ServiceAccessRoleArn": "<p>The Amazon Resource Name (ARN) for the service access role that you want to use to create the data migration.</p>",
         "CreateDataProviderMessage$DataProviderName": "<p>A user-friendly name for the data provider.</p>",
         "CreateDataProviderMessage$Description": "<p>A user-friendly description of the data provider.</p>",
-        "CreateDataProviderMessage$Engine": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>",
+        "CreateDataProviderMessage$Engine": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>",
         "CreateEndpointMessage$EndpointIdentifier": "<p>The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive hyphens.</p>",
         "CreateEndpointMessage$EngineName": "<p>The type of engine for the endpoint. Valid values, depending on the <code>EndpointType</code> value, include <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"opensearch\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"db2-zos\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>, <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"docdb\"</code>, <code>\"sqlserver\"</code>, <code>\"neptune\"</code>, <code>\"babelfish\"</code>, <code>redshift-serverless</code>, <code>aurora-serverless</code>, <code>aurora-postgresql-serverless</code>, <code>gcp-mysql</code>, <code>azure-sql-managed-instance</code>, <code>redis</code>, <code>dms-transfer</code>.</p>",
         "CreateEndpointMessage$Username": "<p>The user name to be used to log in to the endpoint database.</p>",
@@ -3207,7 +3034,7 @@
         "DataProvider$DataProviderName": "<p>The name of the data provider.</p>",
         "DataProvider$DataProviderArn": "<p>The Amazon Resource Name (ARN) string that uniquely identifies the data provider.</p>",
         "DataProvider$Description": "<p>A description of the data provider. Descriptions can have up to 31 characters. A description can contain only ASCII letters, digits, and hyphens ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens, and can only begin with a letter.</p>",
-        "DataProvider$Engine": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>",
+        "DataProvider$Engine": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>",
         "DataProviderDescriptor$SecretsManagerSecretId": "<p>The identifier of the Amazon Web Services Secrets Manager Secret used to store access credentials for the data provider.</p>",
         "DataProviderDescriptor$SecretsManagerAccessRoleArn": "<p>The ARN of the role used to access Amazon Web Services Secrets Manager.</p>",
         "DataProviderDescriptor$DataProviderName": "<p>The user-friendly name of the data provider.</p>",
@@ -3247,6 +3074,7 @@
         "DescribeAccountAttributesResponse$UniqueAccountIdentifier": "<p>A unique DMS identifier for an account in a particular Amazon Web Services Region. The value of this identifier has the following format: <code>c99999999999</code>. DMS uses this identifier to name artifacts. For example, DMS uses this identifier to name the default Amazon S3 bucket for storing task assessment reports in a given Amazon Web Services Region. The format of this S3 bucket name is the following: <code>dms-<i>AccountNumber</i>-<i>UniqueAccountIdentifier</i>.</code> Here is an example name for this default S3 bucket: <code>dms-111122223333-c44445555666</code>.</p> <note> <p>DMS supports the <code>UniqueAccountIdentifier</code> parameter in versions 3.1.4 and later.</p> </note>",
         "DescribeApplicableIndividualAssessmentsMessage$ReplicationTaskArn": "<p>Amazon Resource Name (ARN) of a migration task on which you want to base the default list of individual assessments.</p>",
         "DescribeApplicableIndividualAssessmentsMessage$ReplicationInstanceArn": "<p>ARN of a replication instance on which you want to base the default list of individual assessments.</p>",
+        "DescribeApplicableIndividualAssessmentsMessage$ReplicationConfigArn": "<p>Amazon Resource Name (ARN) of a serverless replication on which you want to base the default list of individual assessments.</p>",
         "DescribeApplicableIndividualAssessmentsMessage$SourceEngineName": "<p>Name of a database engine that the specified replication instance supports as a source.</p>",
         "DescribeApplicableIndividualAssessmentsMessage$TargetEngineName": "<p>Name of a database engine that the specified replication instance supports as a target.</p>",
         "DescribeApplicableIndividualAssessmentsMessage$Marker": "<p>Optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>",
@@ -3255,7 +3083,6 @@
         "DescribeCertificatesResponse$Marker": "<p>The pagination token.</p>",
         "DescribeConnectionsMessage$Marker": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
         "DescribeConnectionsResponse$Marker": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
-        "DescribeConversionConfigurationMessage$MigrationProjectIdentifier": "<p>The name or Amazon Resource Name (ARN) for the schema conversion project to describe.</p>",
         "DescribeConversionConfigurationResponse$MigrationProjectIdentifier": "<p>The name or Amazon Resource Name (ARN) for the schema conversion project.</p>",
         "DescribeConversionConfigurationResponse$ConversionConfiguration": "<p>The configuration parameters for the schema conversion project.</p>",
         "DescribeDataProvidersMessage$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
@@ -3276,7 +3103,6 @@
         "DescribeEventsMessage$SourceIdentifier": "<p> The identifier of an event source.</p>",
         "DescribeEventsMessage$Marker": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
         "DescribeEventsResponse$Marker": "<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>",
-        "DescribeExtensionPackAssociationsMessage$MigrationProjectIdentifier": "<p>The name or Amazon Resource Name (ARN) for the migration project.</p>",
         "DescribeExtensionPackAssociationsMessage$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
         "DescribeExtensionPackAssociationsResponse$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
         "DescribeFleetAdvisorCollectorsRequest$NextToken": "<p>If <code>NextToken</code> is returned by a previous response, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>",
@@ -3291,19 +3117,14 @@
         "DescribeFleetAdvisorSchemasResponse$NextToken": "<p>If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>",
         "DescribeInstanceProfilesMessage$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
         "DescribeInstanceProfilesResponse$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
-        "DescribeMetadataModelAssessmentsMessage$MigrationProjectIdentifier": "<p>The name or Amazon Resource Name (ARN) of the migration project.</p>",
         "DescribeMetadataModelAssessmentsMessage$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
         "DescribeMetadataModelAssessmentsResponse$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
-        "DescribeMetadataModelConversionsMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
         "DescribeMetadataModelConversionsMessage$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
         "DescribeMetadataModelConversionsResponse$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
-        "DescribeMetadataModelExportsAsScriptMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
         "DescribeMetadataModelExportsAsScriptMessage$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
         "DescribeMetadataModelExportsAsScriptResponse$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
-        "DescribeMetadataModelExportsToTargetMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
         "DescribeMetadataModelExportsToTargetMessage$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
         "DescribeMetadataModelExportsToTargetResponse$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
-        "DescribeMetadataModelImportsMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
         "DescribeMetadataModelImportsMessage$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
         "DescribeMetadataModelImportsResponse$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
         "DescribeMigrationProjectsMessage$Marker": "<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>",
@@ -3397,7 +3218,6 @@
         "EventSubscription$SubscriptionCreationTime": "<p>The time the DMS event notification subscription was created.</p>",
         "EventSubscription$SourceType": "<p> The type of DMS resource that generates events. </p> <p>Valid values: replication-instance | replication-server | security-group | replication-task</p>",
         "ExcludeTestList$member": null,
-        "ExportMetadataModelAssessmentMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
         "ExportMetadataModelAssessmentMessage$SelectionRules": "<p>A value that specifies the database objects to assess.</p>",
         "ExportMetadataModelAssessmentMessage$FileName": "<p>The name of the assessment file to create in your Amazon S3 bucket.</p>",
         "ExportMetadataModelAssessmentResultEntry$S3ObjectKey": "<p>The object key for the object containing the exported metadata model assessment.</p>",
@@ -3423,6 +3243,12 @@
         "IBMDb2Settings$Username": "<p>Endpoint connection user name.</p>",
         "IBMDb2Settings$SecretsManagerAccessRoleArn": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the trusted entity and grants the required permissions to access the value in <code>SecretsManagerSecret</code>. The role must allow the <code>iam:PassRole</code> action. <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager secret that allows access to the Db2 LUW endpoint. </p> <note> <p>You can specify one of two sets of values for these permissions. You can specify the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more information on creating this <code>SecretsManagerSecret</code> and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service resources</a> in the <i>Database Migration Service User Guide</i>.</p> </note>",
         "IBMDb2Settings$SecretsManagerSecretId": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the Db2 LUW endpoint connection details.</p>",
+        "IbmDb2LuwDataProviderSettings$ServerName": "<p>The name of the DB2 LUW server.</p>",
+        "IbmDb2LuwDataProviderSettings$DatabaseName": "<p>The database name on the DB2 LUW data provider.</p>",
+        "IbmDb2LuwDataProviderSettings$CertificateArn": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>",
+        "IbmDb2zOsDataProviderSettings$ServerName": "<p>The name of the DB2 for z/OS server.</p>",
+        "IbmDb2zOsDataProviderSettings$DatabaseName": "<p>The database name on the DB2 for z/OS data provider.</p>",
+        "IbmDb2zOsDataProviderSettings$CertificateArn": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>",
         "ImportCertificateMessage$CertificateIdentifier": "<p>A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.</p>",
         "IncludeTestList$member": null,
         "IndividualAssessmentNameList$member": null,
@@ -3439,9 +3265,9 @@
         "KafkaSettings$SslClientKeyArn": "<p>The Amazon Resource Name (ARN) for the client private key used to securely connect to a Kafka target endpoint.</p>",
         "KafkaSettings$SslCaCertificateArn": "<p> The Amazon Resource Name (ARN) for the private certificate authority (CA) cert that DMS uses to securely connect to your Kafka target endpoint.</p>",
         "KafkaSettings$SaslUsername": "<p> The secure user name you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.</p>",
-        "KerberosAuthenticationSettings$KeyCacheSecretId": "<p>Specifies the secret ID of the key cache for the replication instance.</p>",
-        "KerberosAuthenticationSettings$KeyCacheSecretIamArn": "<p>Specifies the Amazon Resource Name (ARN) of the IAM role that grants Amazon Web Services DMS access to the secret containing key cache file for the replication instance.</p>",
-        "KerberosAuthenticationSettings$Krb5FileContents": "<p>Specifies the ID of the secret that stores the key cache file required for kerberos authentication of the replication instance.</p>",
+        "KerberosAuthenticationSettings$KeyCacheSecretId": "<p>Specifies the ID of the secret that stores the key cache file required for kerberos authentication.</p>",
+        "KerberosAuthenticationSettings$KeyCacheSecretIamArn": "<p>Specifies the Amazon Resource Name (ARN) of the IAM role that grants Amazon Web Services DMS access to the secret containing key cache file for the kerberos authentication.</p>",
+        "KerberosAuthenticationSettings$Krb5FileContents": "<p>Specifies the contents of krb5 configuration file required for kerberos authentication.</p>",
         "KeyList$member": null,
         "KinesisSettings$StreamArn": "<p>The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams endpoint.</p>",
         "KinesisSettings$ServiceAccessRoleArn": "<p>The Amazon Resource Name (ARN) for the IAM role that DMS uses to write to the Kinesis data stream. The role must allow the <code>iam:PassRole</code> action.</p>",
@@ -3469,7 +3295,6 @@
         "MigrationProject$InstanceProfileName": "<p>The name of the associated instance profile.</p>",
         "MigrationProject$TransformationRules": "<p>The settings in JSON format for migration rules. Migration rules make it possible for you to change the object names according to the rules that you specify. For example, you can change an object name to lowercase or uppercase, add or remove a prefix or suffix, or rename objects.</p>",
         "MigrationProject$Description": "<p>A user-friendly description of the migration project.</p>",
-        "ModifyConversionConfigurationMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
         "ModifyConversionConfigurationMessage$ConversionConfiguration": "<p>The new conversion configuration.</p>",
         "ModifyConversionConfigurationResponse$MigrationProjectIdentifier": "<p>The name or Amazon Resource Name (ARN) of the modified configuration.</p>",
         "ModifyDataMigrationMessage$DataMigrationIdentifier": "<p>The identifier (name or ARN) of the data migration to modify.</p>",
@@ -3478,7 +3303,7 @@
         "ModifyDataProviderMessage$DataProviderIdentifier": "<p>The identifier of the data provider. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive hyphens.</p>",
         "ModifyDataProviderMessage$DataProviderName": "<p>The name of the data provider.</p>",
         "ModifyDataProviderMessage$Description": "<p>A user-friendly description of the data provider.</p>",
-        "ModifyDataProviderMessage$Engine": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>",
+        "ModifyDataProviderMessage$Engine": "<p>The type of database engine for the data provider. Valid values include <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, <code>\"sqlserver\"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>\"aurora\"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>",
         "ModifyEndpointMessage$EndpointArn": "<p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>",
         "ModifyEndpointMessage$EndpointIdentifier": "<p>The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.</p>",
         "ModifyEndpointMessage$EngineName": "<p>The database engine name. Valid values, depending on the EndpointType, include <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"db2-zos\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>, <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, <code>\"neptune\"</code>, and <code>\"babelfish\"</code>.</p>",
@@ -3547,6 +3372,7 @@
         "MySQLSettings$Username": "<p>Endpoint connection user name.</p>",
         "MySQLSettings$SecretsManagerAccessRoleArn": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the trusted entity and grants the required permissions to access the value in <code>SecretsManagerSecret</code>. The role must allow the <code>iam:PassRole</code> action. <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager secret that allows access to the MySQL endpoint.</p> <note> <p>You can specify one of two sets of values for these permissions. You can specify the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more information on creating this <code>SecretsManagerSecret</code> and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service resources</a> in the <i>Database Migration Service User Guide</i>.</p> </note>",
         "MySQLSettings$SecretsManagerSecretId": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the MySQL endpoint connection details.</p>",
+        "MySQLSettings$ServiceAccessRoleArn": "<p>The IAM role you can use to authenticate when connecting to your endpoint. Ensure to include <code>iam:PassRole</code> and <code>rds-db:connect</code> actions in permission policy.</p>",
         "MySqlDataProviderSettings$ServerName": "<p>The name of the MySQL server.</p>",
         "MySqlDataProviderSettings$CertificateArn": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>",
         "NeptuneSettings$ServiceAccessRoleArn": "<p>The Amazon Resource Name (ARN) of the service role that you created for the Neptune target endpoint. The role must allow the <code>iam:PassRole</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole\">Creating an IAM Service Role for Accessing Amazon Neptune as a Target</a> in the <i>Database Migration Service User Guide. </i> </p>",
@@ -3588,9 +3414,17 @@
         "PostgreSQLSettings$SecretsManagerAccessRoleArn": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the trusted entity and grants the required permissions to access the value in <code>SecretsManagerSecret</code>. The role must allow the <code>iam:PassRole</code> action. <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager secret that allows access to the PostgreSQL endpoint.</p> <note> <p>You can specify one of two sets of values for these permissions. You can specify the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more information on creating this <code>SecretsManagerSecret</code> and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service resources</a> in the <i>Database Migration Service User Guide</i>.</p> </note>",
         "PostgreSQLSettings$SecretsManagerSecretId": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the PostgreSQL endpoint connection details.</p>",
         "PostgreSQLSettings$BabelfishDatabaseName": "<p>The Babelfish for Aurora PostgreSQL database name for the endpoint.</p>",
+        "PostgreSQLSettings$ServiceAccessRoleArn": "<p>The IAM role arn you can use to authenticate the connection to your endpoint. Ensure to include <code>iam:PassRole</code> and <code>rds-db:connect</code> actions in permission policy.</p>",
         "PostgreSqlDataProviderSettings$ServerName": "<p>The name of the PostgreSQL server.</p>",
         "PostgreSqlDataProviderSettings$DatabaseName": "<p>The database name on the PostgreSQL data provider.</p>",
         "PostgreSqlDataProviderSettings$CertificateArn": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>",
+        "PremigrationAssessmentStatus$PremigrationAssessmentRunArn": "<p>The Amazon Resource Name (ARN) of this assessment run.</p>",
+        "PremigrationAssessmentStatus$Status": "<p>This describes the assessment run status. The status can be one of the following values:</p> <ul> <li> <p> <code>cancelling</code>: The assessment run was canceled.</p> </li> <li> <p> <code>deleting</code>: The assessment run was deleted.</p> </li> <li> <p> <code>failed</code>: At least one individual assessment completed with a failed status. </p> </li> <li> <p> <code>error-provisioning</code>: An internal error occurred while resources were provisioned (during the <code>provisioning</code> status).</p> </li> <li> <p> <code>error-executing</code> An internal error occurred while individual assessments ran (during the <code>running</code> status).</p> </li> <li> <p> <code>invalid state</code>: The assessment run is in an unknown state. </p> </li> <li> <p> <code>passed</code>: All individual assessments have completed and none have a failed status.</p> </li> <li> <p> <code>provisioning</code>: The resources required to run individual assessments are being provisioned. </p> </li> <li> <p> <code>running</code>: Individual assessments are being run. </p> </li> <li> <p> <code>starting</code>: The assessment run is starting, but resources are not yet being provisioned for individual assessments. </p> </li> <li> <p> <code>warning</code>: At least one individual assessment completed with a warning status. </p> </li> </ul>",
+        "PremigrationAssessmentStatus$LastFailureMessage": "<p>The last message generated by an individual assessment failure.</p>",
+        "PremigrationAssessmentStatus$ResultLocationBucket": "<p>The Amazon S3 bucket that Database Migration Service Serverless created to store the results of this assessment run.</p>",
+        "PremigrationAssessmentStatus$ResultLocationFolder": "<p>The folder within an Amazon S3 bucket where you want Database Migration Service to store the results of this assessment run.</p>",
+        "PremigrationAssessmentStatus$ResultEncryptionMode": "<p>The supported values are <code>SSE_KMS</code> and <code>SSE_S3</code>. If these values are not provided, then the files are not encrypted at rest. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.KMSKeys\">Creating Amazon Web Services KMS keys to encrypt Amazon S3 target objects</a>.</p>",
+        "PremigrationAssessmentStatus$ResultKmsKeyArn": "<p>The ARN of a custom KMS encryption key that you specify when you set <code>ResultEncryptionMode</code> to <code>SSE_KMS</code>.</p>",
         "ProvisionData$ProvisionState": "<p>The current provisioning state </p>",
         "ProvisionData$ReasonForNewProvisioningData": "<p>A message describing the reason that DMS provisioned new resources for the serverless replication.</p>",
         "PublicIpAddressList$member": null,
@@ -3700,7 +3534,7 @@
         "ReplicationTaskAssessmentResult$AssessmentResults": "<p> The task assessment results in JSON format. </p> <p>The response object only contains this field if you provide <a>DescribeReplicationTaskAssessmentResultsMessage$ReplicationTaskArn</a> in the request.</p>",
         "ReplicationTaskAssessmentRun$ReplicationTaskAssessmentRunArn": "<p>Amazon Resource Name (ARN) of this assessment run.</p>",
         "ReplicationTaskAssessmentRun$ReplicationTaskArn": "<p>ARN of the migration task associated with this premigration assessment run.</p>",
-        "ReplicationTaskAssessmentRun$Status": "<p>Assessment run status. </p> <p>This status can have one of the following values:</p> <ul> <li> <p> <code>\"cancelling\"</code> – The assessment run was canceled by the <code>CancelReplicationTaskAssessmentRun</code> operation.</p> </li> <li> <p> <code>\"deleting\"</code> – The assessment run was deleted by the <code>DeleteReplicationTaskAssessmentRun</code> operation.</p> </li> <li> <p> <code>\"failed\"</code> – At least one individual assessment completed with a <code>failed</code> status.</p> </li> <li> <p> <code>\"error-provisioning\"</code> – An internal error occurred while resources were provisioned (during <code>provisioning</code> status).</p> </li> <li> <p> <code>\"error-executing\"</code> – An internal error occurred while individual assessments ran (during <code>running</code> status).</p> </li> <li> <p> <code>\"invalid state\"</code> – The assessment run is in an unknown state.</p> </li> <li> <p> <code>\"passed\"</code> – All individual assessments have completed, and none has a <code>failed</code> status.</p> </li> <li> <p> <code>\"provisioning\"</code> – Resources required to run individual assessments are being provisioned.</p> </li> <li> <p> <code>\"running\"</code> – Individual assessments are being run.</p> </li> <li> <p> <code>\"starting\"</code> – The assessment run is starting, but resources are not yet being provisioned for individual assessments.</p> </li> <li> <p> <code>\"warning\"</code> – At least one individual assessment completed with a <code>warning</code> status.</p> </li> </ul>",
+        "ReplicationTaskAssessmentRun$Status": "<p>Assessment run status. </p> <p>This status can have one of the following values:</p> <ul> <li> <p> <code>\"cancelling\"</code> – The assessment run was canceled by the <code>CancelReplicationTaskAssessmentRun</code> operation.</p> </li> <li> <p> <code>\"deleting\"</code> – The assessment run was deleted by the <code>DeleteReplicationTaskAssessmentRun</code> operation.</p> </li> <li> <p> <code>\"failed\"</code> – At least one individual assessment completed with a <code>failed</code> status.</p> </li> <li> <p> <code>\"error-provisioning\"</code> – An internal error occurred while resources were provisioned (during <code>provisioning</code> status).</p> </li> <li> <p> <code>\"error-executing\"</code> – An internal error occurred while individual assessments ran (during <code>running</code> status).</p> </li> <li> <p> <code>\"invalid state\"</code> – The assessment run is in an unknown state.</p> </li> <li> <p> <code>\"passed\"</code> – All individual assessments have completed, and none has a <code>failed</code> status.</p> </li> <li> <p> <code>\"provisioning\"</code> – Resources required to run individual assessments are being provisioned.</p> </li> <li> <p> <code>\"running\"</code> – Individual assessments are being run.</p> </li> <li> <p> <code>\"starting\"</code> – The assessment run is starting, but resources are not yet being provisioned for individual assessments.</p> </li> <li> <p> <code>\"warning\"</code> – At least one individual assessment completed with a <code>warning</code> status or all individual assessments were skipped (completed with a <code>skipped</code> status).</p> </li> </ul>",
         "ReplicationTaskAssessmentRun$LastFailureMessage": "<p>Last message generated by an individual assessment failure.</p>",
         "ReplicationTaskAssessmentRun$ServiceAccessRoleArn": "<p>ARN of the service role used to start the assessment run using the <code>StartReplicationTaskAssessmentRun</code> operation. The role must allow the <code>iam:PassRole</code> action.</p>",
         "ReplicationTaskAssessmentRun$ResultLocationBucket": "<p>Amazon S3 bucket where DMS stores the results of this assessment run.</p>",
@@ -3711,7 +3545,7 @@
         "ReplicationTaskIndividualAssessment$ReplicationTaskIndividualAssessmentArn": "<p>Amazon Resource Name (ARN) of this individual assessment.</p>",
         "ReplicationTaskIndividualAssessment$ReplicationTaskAssessmentRunArn": "<p>ARN of the premigration assessment run that is created to run this individual assessment.</p>",
         "ReplicationTaskIndividualAssessment$IndividualAssessmentName": "<p>Name of this individual assessment.</p>",
-        "ReplicationTaskIndividualAssessment$Status": "<p>Individual assessment status.</p> <p>This status can have one of the following values:</p> <ul> <li> <p> <code>\"cancelled\"</code> </p> </li> <li> <p> <code>\"error\"</code> </p> </li> <li> <p> <code>\"failed\"</code> </p> </li> <li> <p> <code>\"passed\"</code> </p> </li> <li> <p> <code>\"pending\"</code> </p> </li> <li> <p> <code>\"running\"</code> </p> </li> </ul>",
+        "ReplicationTaskIndividualAssessment$Status": "<p>Individual assessment status.</p> <p>This status can have one of the following values:</p> <ul> <li> <p> <code>\"cancelled\"</code> </p> </li> <li> <p> <code>\"error\"</code> </p> </li> <li> <p> <code>\"failed\"</code> </p> </li> <li> <p> <code>\"passed\"</code> </p> </li> <li> <p> <code>\"pending\"</code> </p> </li> <li> <p> <code>\"skipped\"</code> </p> </li> <li> <p> <code>\"running\"</code> </p> </li> </ul>",
         "ResourcePendingMaintenanceActions$ResourceIdentifier": "<p>The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance action applies to. For information about creating an ARN, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.AWS.ARN.html\"> Constructing an Amazon Resource Name (ARN) for DMS</a> in the DMS documentation.</p>",
         "RunFleetAdvisorLsaAnalysisResponse$LsaAnalysisId": "<p>The ID of the LSA analysis run.</p>",
         "RunFleetAdvisorLsaAnalysisResponse$Status": "<p>The status of the LSA analysis, for example <code>COMPLETED</code>.</p>",
@@ -3749,28 +3583,23 @@
         "SourceDataSetting$SlotName": "<p>The name of the replication slot on the source data provider. This attribute is only valid for a PostgreSQL or Aurora PostgreSQL source.</p>",
         "SourceIdsList$member": null,
         "StartDataMigrationMessage$DataMigrationIdentifier": "<p>The identifier (name or ARN) of the data migration to start.</p>",
-        "StartExtensionPackAssociationMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
         "StartExtensionPackAssociationResponse$RequestIdentifier": "<p>The identifier for the request operation.</p>",
-        "StartMetadataModelAssessmentMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
         "StartMetadataModelAssessmentMessage$SelectionRules": "<p>A value that specifies the database objects to assess.</p>",
         "StartMetadataModelAssessmentResponse$RequestIdentifier": "<p>The identifier for the assessment operation.</p>",
-        "StartMetadataModelConversionMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
         "StartMetadataModelConversionMessage$SelectionRules": "<p>A value that specifies the database objects to convert.</p>",
         "StartMetadataModelConversionResponse$RequestIdentifier": "<p>The identifier for the conversion operation.</p>",
-        "StartMetadataModelExportAsScriptMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
         "StartMetadataModelExportAsScriptMessage$SelectionRules": "<p>A value that specifies the database objects to export.</p>",
         "StartMetadataModelExportAsScriptMessage$FileName": "<p>The name of the model file to create in the Amazon S3 bucket.</p>",
         "StartMetadataModelExportAsScriptResponse$RequestIdentifier": "<p>The identifier for the export operation.</p>",
-        "StartMetadataModelExportToTargetMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
         "StartMetadataModelExportToTargetMessage$SelectionRules": "<p>A value that specifies the database objects to export.</p>",
         "StartMetadataModelExportToTargetResponse$RequestIdentifier": "<p>The identifier for the export operation.</p>",
-        "StartMetadataModelImportMessage$MigrationProjectIdentifier": "<p>The migration project name or Amazon Resource Name (ARN).</p>",
         "StartMetadataModelImportMessage$SelectionRules": "<p>A value that specifies the database objects to import.</p>",
         "StartMetadataModelImportResponse$RequestIdentifier": "<p>The identifier for the import operation.</p>",
         "StartRecommendationsRequest$DatabaseId": "<p>The identifier of the source database to analyze and provide recommendations for.</p>",
         "StartRecommendationsRequestEntry$DatabaseId": "<p>The identifier of the source database.</p>",
         "StartReplicationMessage$ReplicationConfigArn": "<p>The Amazon Resource Name of the replication for which to start replication.</p>",
         "StartReplicationMessage$StartReplicationType": "<p>The replication type.</p> <p>When the replication type is <code>full-load</code> or <code>full-load-and-cdc</code>, the only valid value for the first run of the replication is <code>start-replication</code>. This option will start the replication.</p> <p>You can also use <a>ReloadTables</a> to reload specific tables that failed during replication instead of restarting the replication.</p> <p>The <code>resume-processing</code> option isn't applicable for a full-load replication, because you can't resume partially loaded tables during the full load phase.</p> <p>For a <code>full-load-and-cdc</code> replication, DMS migrates table data, and then applies data changes that occur on the source. To load all the tables again, and start capturing source changes, use <code>reload-target</code>. Otherwise use <code>resume-processing</code>, to replicate the changes from the last stop position.</p>",
+        "StartReplicationMessage$PremigrationAssessmentSettings": "<p>User-defined settings for the premigration assessment. The possible values are:</p> <ul> <li> <p> <code>ResultLocationFolder</code>: The folder within an Amazon S3 bucket where you want DMS to store the results of this assessment run.</p> </li> <li> <p> <code>ResultEncryptionMode</code>: The supported values are <code>SSE_KMS</code> and <code>SSE_S3</code>. If these values are not provided, then the files are not encrypted at rest. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.KMSKeys\">Creating Amazon Web Services KMS keys to encrypt Amazon S3 target objects</a>.</p> </li> <li> <p> <code>ResultKmsKeyArn</code>: The ARN of a customer KMS encryption key that you specify when you set <code>ResultEncryptionMode</code> to <code>SSE_KMS</code>.</p> </li> <li> <p> <code>IncludeOnly</code>: A space-separated list of names for specific individual assessments that you want to include. These names come from the default list of individual assessments that Database Migration Service supports for the associated migration.</p> </li> <li> <p> <code>Exclude</code>: A space-separated list of names for specific individual assessments that you want to exclude. These names come from the default list of individual assessments that Database Migration Service supports for the associated migration.</p> </li> <li> <p> <code>FailOnAssessmentFailure</code>: A configurable setting you can set to <code>true</code> (the default setting) or <code>false</code>. Use this setting to to stop the replication from starting automatically if the assessment fails. This can help you evaluate the issue that is preventing the replication from running successfully.</p> </li> </ul>",
         "StartReplicationMessage$CdcStartPosition": "<p>Indicates when you want a change data capture (CDC) operation to start. Use either <code>CdcStartPosition</code> or <code>CdcStartTime</code> to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p>The value can be in date, checkpoint, or LSN/SCN format.</p>",
         "StartReplicationMessage$CdcStopPosition": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p>",
         "StartReplicationTaskAssessmentMessage$ReplicationTaskArn": "<p> The Amazon Resource Name (ARN) of the replication task. </p>",
@@ -3804,6 +3633,7 @@
         "TableStatistics$TableState": "<p>The state of the tables described.</p> <p>Valid states: Table does not exist | Before load | Full load | Table completed | Table cancelled | Table error | Table is being reloaded</p>",
         "TableStatistics$ValidationState": "<p>The validation state of the table.</p> <p>This parameter can have the following values:</p> <ul> <li> <p>Not enabled – Validation isn't enabled for the table in the migration task.</p> </li> <li> <p>Pending records – Some records in the table are waiting for validation.</p> </li> <li> <p>Mismatched records – Some records in the table don't match between the source and target.</p> </li> <li> <p>Suspended records – Some records in the table couldn't be validated.</p> </li> <li> <p>No primary key –The table couldn't be validated because it has no primary key.</p> </li> <li> <p>Table error – The table wasn't validated because it's in an error state and some data wasn't migrated.</p> </li> <li> <p>Validated – All rows in the table are validated. If the table is updated, the status can change from Validated.</p> </li> <li> <p>Error – The table couldn't be validated because of an unexpected error.</p> </li> <li> <p>Pending validation – The table is waiting validation.</p> </li> <li> <p>Preparing table – Preparing the table enabled in the migration task for validation.</p> </li> <li> <p>Pending revalidation – All rows in the table are pending validation after the table was updated.</p> </li> </ul>",
         "TableStatistics$ValidationStateDetails": "<p>Additional details about the state of validation.</p>",
+        "TableStatistics$ResyncState": "<p>Records the current state of table resynchronization in the migration task.</p> <p>This parameter can have the following values:</p> <ul> <li> <p>Not enabled – Resync is not enabled for the table in the migration task.</p> </li> <li> <p>Pending – The tables are waiting for resync.</p> </li> <li> <p>In progress – Resync in progress for some records in the table.</p> </li> <li> <p>No primary key – The table could not be resynced because it has no primary key.</p> </li> <li> <p>Last resync at: <code>date/time</code> – Resync session is finished at time. Time provided in UTC format.</p> </li> </ul>",
         "TableToReload$SchemaName": "<p>The schema name of the table to be reloaded.</p>",
         "TableToReload$TableName": "<p>The table name of the table to be reloaded.</p>",
         "Tag$Key": "<p>A key is the required name of the tag. The string value can be 1-128 Unicode characters in length and can't be prefixed with \"aws:\" or \"dms:\". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regular expressions: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>",
@@ -3839,8 +3669,7 @@
     },
     "SubnetAlreadyInUse": {
       "base": "<p>The specified subnet is already in use.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "SubnetIdentifierList": {
       "base": null,
@@ -3893,6 +3722,7 @@
         "PendingMaintenanceAction$AutoAppliedAfterDate": "<p>The date of the maintenance window when the action is to be applied. The maintenance action is applied to the resource during its first maintenance window after this date. If this date is specified, any <code>next-maintenance</code> opt-in requests are ignored.</p>",
         "PendingMaintenanceAction$ForcedApplyDate": "<p>The date when the maintenance action will be automatically applied. The maintenance action is applied to the resource on this date regardless of the maintenance window for the resource. If this date is specified, any <code>immediate</code> opt-in requests are ignored.</p>",
         "PendingMaintenanceAction$CurrentApplyDate": "<p>The effective date when the pending maintenance action will be applied to the resource. This date takes into account opt-in requests received from the <code>ApplyPendingMaintenanceAction</code> API operation, and also the <code>AutoAppliedAfterDate</code> and <code>ForcedApplyDate</code> parameter values. This value is blank if an opt-in request has not been received and nothing has been specified for <code>AutoAppliedAfterDate</code> or <code>ForcedApplyDate</code>.</p>",
+        "PremigrationAssessmentStatus$PremigrationAssessmentRunCreationDate": "<p>The date which the assessment run was created.</p>",
         "ProvisionData$DateProvisioned": "<p>The timestamp when DMS provisioned replication resources.</p>",
         "ProvisionData$DateNewProvisioningDataAvailable": "<p>The timestamp when provisioning became available.</p>",
         "RefreshSchemasStatus$LastRefreshDate": "<p>The date the schema was last refreshed.</p>",
@@ -3932,6 +3762,12 @@
       "refs": {
         "ReloadReplicationTablesMessage$TablesToReload": "<p>The list of tables to reload.</p>",
         "ReloadTablesMessage$TablesToReload": "<p>The name and schema of the table to be reloaded. </p>"
+      }
+    },
+    "TablePreparationMode": {
+      "base": null,
+      "refs": {
+        "TargetDataSetting$TablePreparationMode": "<p>This setting determines how DMS handles the target tables before starting a data migration, either by leaving them untouched, dropping and recreating them, or truncating the existing data in the target tables.</p>"
       }
     },
     "TableStatistics": {
@@ -3978,6 +3814,20 @@
         "StartReplicationTaskAssessmentRunMessage$Tags": "<p>One or more tags to be assigned to the premigration assessment run that you want to start.</p>"
       }
     },
+    "TargetDataSetting": {
+      "base": "<p>Defines settings for a target data provider for a data migration.</p>",
+      "refs": {
+        "TargetDataSettings$member": null
+      }
+    },
+    "TargetDataSettings": {
+      "base": null,
+      "refs": {
+        "CreateDataMigrationMessage$TargetDataSettings": "<p>Specifies information about the target data provider.</p>",
+        "DataMigration$TargetDataSettings": "<p>Specifies information about the data migration's target data provider.</p>",
+        "ModifyDataMigrationMessage$TargetDataSettings": "<p>The new information about the target data provider for the data migration.</p>"
+      }
+    },
     "TargetDbType": {
       "base": null,
       "refs": {
@@ -3987,13 +3837,11 @@
     },
     "TestConnectionMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "TestConnectionResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "TimestreamSettings": {
       "base": "<p>Provides information that defines an Amazon Timestream endpoint.</p>",
@@ -4011,18 +3859,15 @@
     },
     "UpdateSubscriptionsToEventBridgeMessage": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateSubscriptionsToEventBridgeResponse": {
       "base": "<p/>",
-      "refs": {
-      }
+      "refs": {}
     },
     "UpgradeDependencyFailureFault": {
       "base": "<p>An upgrade dependency is preventing the database migration.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "VersionStatus": {
       "base": null,

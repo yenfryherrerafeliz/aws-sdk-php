@@ -116,6 +116,24 @@
         {"shape":"InsufficientCapacityException"}
       ]
     },
+    "CreateVpcEndpointAssociation":{
+      "name":"CreateVpcEndpointAssociation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateVpcEndpointAssociationRequest"},
+      "output":{"shape":"CreateVpcEndpointAssociationResponse"},
+      "errors":[
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerError"},
+        {"shape":"InsufficientCapacityException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidOperationException"}
+      ]
+    },
     "DeleteFirewall":{
       "name":"DeleteFirewall",
       "http":{
@@ -199,6 +217,22 @@
         {"shape":"InvalidOperationException"}
       ]
     },
+    "DeleteVpcEndpointAssociation":{
+      "name":"DeleteVpcEndpointAssociation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteVpcEndpointAssociationRequest"},
+      "output":{"shape":"DeleteVpcEndpointAssociationResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InvalidOperationException"}
+      ]
+    },
     "DescribeFirewall":{
       "name":"DescribeFirewall",
       "http":{
@@ -207,6 +241,21 @@
       },
       "input":{"shape":"DescribeFirewallRequest"},
       "output":{"shape":"DescribeFirewallResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "DescribeFirewallMetadata":{
+      "name":"DescribeFirewallMetadata",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeFirewallMetadataRequest"},
+      "output":{"shape":"DescribeFirewallMetadataResponse"},
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"InternalServerError"},
@@ -227,6 +276,21 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServerError"}
+      ]
+    },
+    "DescribeFlowOperation":{
+      "name":"DescribeFlowOperation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeFlowOperationRequest"},
+      "output":{"shape":"DescribeFlowOperationResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "DescribeLoggingConfiguration":{
@@ -304,6 +368,21 @@
         {"shape":"ThrottlingException"}
       ]
     },
+    "DescribeVpcEndpointAssociation":{
+      "name":"DescribeVpcEndpointAssociation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeVpcEndpointAssociationRequest"},
+      "output":{"shape":"DescribeVpcEndpointAssociationResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
     "DisassociateSubnets":{
       "name":"DisassociateSubnets",
       "http":{
@@ -319,6 +398,36 @@
         {"shape":"ThrottlingException"},
         {"shape":"InvalidTokenException"},
         {"shape":"InvalidOperationException"}
+      ]
+    },
+    "GetAnalysisReportResults":{
+      "name":"GetAnalysisReportResults",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetAnalysisReportResultsRequest"},
+      "output":{"shape":"GetAnalysisReportResultsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "ListAnalysisReports":{
+      "name":"ListAnalysisReports",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListAnalysisReportsRequest"},
+      "output":{"shape":"ListAnalysisReportsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "ListFirewallPolicies":{
@@ -346,6 +455,36 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"InternalServerError"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "ListFlowOperationResults":{
+      "name":"ListFlowOperationResults",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListFlowOperationResultsRequest"},
+      "output":{"shape":"ListFlowOperationResultsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "ListFlowOperations":{
+      "name":"ListFlowOperations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListFlowOperationsRequest"},
+      "output":{"shape":"ListFlowOperationsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"}
       ]
     },
@@ -392,6 +531,20 @@
         {"shape":"InvalidRequestException"}
       ]
     },
+    "ListVpcEndpointAssociations":{
+      "name":"ListVpcEndpointAssociations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListVpcEndpointAssociationsRequest"},
+      "output":{"shape":"ListVpcEndpointAssociationsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
     "PutResourcePolicy":{
       "name":"PutResourcePolicy",
       "http":{
@@ -406,6 +559,51 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"InvalidResourcePolicyException"}
+      ]
+    },
+    "StartAnalysisReport":{
+      "name":"StartAnalysisReport",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartAnalysisReportRequest"},
+      "output":{"shape":"StartAnalysisReportResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "StartFlowCapture":{
+      "name":"StartFlowCapture",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartFlowCaptureRequest"},
+      "output":{"shape":"StartFlowCaptureResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "StartFlowFlush":{
+      "name":"StartFlowFlush",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartFlowFlushRequest"},
+      "output":{"shape":"StartFlowFlushResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "TagResource":{
@@ -436,6 +634,21 @@
         {"shape":"InternalServerError"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidRequestException"}
+      ]
+    },
+    "UpdateFirewallAnalysisSettings":{
+      "name":"UpdateFirewallAnalysisSettings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateFirewallAnalysisSettingsRequest"},
+      "output":{"shape":"UpdateFirewallAnalysisSettingsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "UpdateFirewallDeleteProtection":{
@@ -589,6 +802,12 @@
     }
   },
   "shapes":{
+    "AZSyncState":{
+      "type":"structure",
+      "members":{
+        "Attachment":{"shape":"Attachment"}
+      }
+    },
     "ActionDefinition":{
       "type":"structure",
       "members":{
@@ -618,6 +837,35 @@
       "type":"list",
       "member":{"shape":"Address"}
     },
+    "Age":{"type":"integer"},
+    "AnalysisReport":{
+      "type":"structure",
+      "members":{
+        "AnalysisReportId":{"shape":"AnalysisReportId"},
+        "AnalysisType":{"shape":"EnabledAnalysisType"},
+        "ReportTime":{"shape":"ReportTime"},
+        "Status":{"shape":"Status"}
+      }
+    },
+    "AnalysisReportId":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"\\S+"
+    },
+    "AnalysisReportNextToken":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "AnalysisReportResults":{
+      "type":"list",
+      "member":{"shape":"AnalysisTypeReportResult"}
+    },
+    "AnalysisReports":{
+      "type":"list",
+      "member":{"shape":"AnalysisReport"}
+    },
     "AnalysisResult":{
       "type":"structure",
       "members":{
@@ -629,6 +877,17 @@
     "AnalysisResultList":{
       "type":"list",
       "member":{"shape":"AnalysisResult"}
+    },
+    "AnalysisTypeReportResult":{
+      "type":"structure",
+      "members":{
+        "Protocol":{"shape":"CollectionMember_String"},
+        "FirstAccessed":{"shape":"FirstAccessed"},
+        "LastAccessed":{"shape":"LastAccessed"},
+        "Domain":{"shape":"Domain"},
+        "Hits":{"shape":"Hits"},
+        "UniqueSources":{"shape":"UniqueSources"}
+      }
     },
     "AssociateFirewallPolicyRequest":{
       "type":"structure",
@@ -668,6 +927,11 @@
         "UpdateToken":{"shape":"UpdateToken"}
       }
     },
+    "AssociationSyncState":{
+      "type":"map",
+      "key":{"shape":"AvailabilityZone"},
+      "value":{"shape":"AZSyncState"}
+    },
     "Attachment":{
       "type":"structure",
       "members":{
@@ -689,6 +953,12 @@
       ]
     },
     "AvailabilityZone":{"type":"string"},
+    "AvailabilityZoneMetadata":{
+      "type":"structure",
+      "members":{
+        "IPAddressType":{"shape":"IPAddressType"}
+      }
+    },
     "AzSubnet":{
       "type":"string",
       "max":128,
@@ -700,6 +970,7 @@
       "member":{"shape":"AzSubnet"}
     },
     "Boolean":{"type":"boolean"},
+    "ByteCount":{"type":"long"},
     "CIDRCount":{
       "type":"integer",
       "max":1000000,
@@ -739,6 +1010,7 @@
         "CAPACITY_CONSTRAINED"
       ]
     },
+    "Count":{"type":"integer"},
     "CreateFirewallPolicyRequest":{
       "type":"structure",
       "required":[
@@ -769,9 +1041,7 @@
       "type":"structure",
       "required":[
         "FirewallName",
-        "FirewallPolicyArn",
-        "VpcId",
-        "SubnetMappings"
+        "FirewallPolicyArn"
       ],
       "members":{
         "FirewallName":{"shape":"ResourceName"},
@@ -783,7 +1053,8 @@
         "FirewallPolicyChangeProtection":{"shape":"Boolean"},
         "Description":{"shape":"Description"},
         "Tags":{"shape":"TagList"},
-        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"}
+        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
+        "EnabledAnalysisTypes":{"shape":"EnabledAnalysisTypes"}
       }
     },
     "CreateFirewallResponse":{
@@ -850,6 +1121,28 @@
         "TLSInspectionConfigurationResponse":{"shape":"TLSInspectionConfigurationResponse"}
       }
     },
+    "CreateVpcEndpointAssociationRequest":{
+      "type":"structure",
+      "required":[
+        "FirewallArn",
+        "VpcId",
+        "SubnetMapping"
+      ],
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"},
+        "VpcId":{"shape":"VpcId"},
+        "SubnetMapping":{"shape":"SubnetMapping"},
+        "Description":{"shape":"Description"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "CreateVpcEndpointAssociationResponse":{
+      "type":"structure",
+      "members":{
+        "VpcEndpointAssociation":{"shape":"VpcEndpointAssociation"},
+        "VpcEndpointAssociationStatus":{"shape":"VpcEndpointAssociationStatus"}
+      }
+    },
     "CustomAction":{
       "type":"structure",
       "required":[
@@ -902,8 +1195,7 @@
     },
     "DeleteResourcePolicyResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteRuleGroupRequest":{
       "type":"structure",
@@ -932,6 +1224,36 @@
       "required":["TLSInspectionConfigurationResponse"],
       "members":{
         "TLSInspectionConfigurationResponse":{"shape":"TLSInspectionConfigurationResponse"}
+      }
+    },
+    "DeleteVpcEndpointAssociationRequest":{
+      "type":"structure",
+      "required":["VpcEndpointAssociationArn"],
+      "members":{
+        "VpcEndpointAssociationArn":{"shape":"ResourceArn"}
+      }
+    },
+    "DeleteVpcEndpointAssociationResponse":{
+      "type":"structure",
+      "members":{
+        "VpcEndpointAssociation":{"shape":"VpcEndpointAssociation"},
+        "VpcEndpointAssociationStatus":{"shape":"VpcEndpointAssociationStatus"}
+      }
+    },
+    "DescribeFirewallMetadataRequest":{
+      "type":"structure",
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"}
+      }
+    },
+    "DescribeFirewallMetadataResponse":{
+      "type":"structure",
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"},
+        "FirewallPolicyArn":{"shape":"ResourceArn"},
+        "Description":{"shape":"Description"},
+        "Status":{"shape":"FirewallStatusValue"},
+        "SupportedAvailabilityZones":{"shape":"SupportedAvailabilityZones"}
       }
     },
     "DescribeFirewallPolicyRequest":{
@@ -968,6 +1290,35 @@
         "FirewallStatus":{"shape":"FirewallStatus"}
       }
     },
+    "DescribeFlowOperationRequest":{
+      "type":"structure",
+      "required":[
+        "FirewallArn",
+        "FlowOperationId"
+      ],
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"},
+        "AvailabilityZone":{"shape":"AvailabilityZone"},
+        "VpcEndpointAssociationArn":{"shape":"ResourceArn"},
+        "VpcEndpointId":{"shape":"VpcEndpointId"},
+        "FlowOperationId":{"shape":"FlowOperationId"}
+      }
+    },
+    "DescribeFlowOperationResponse":{
+      "type":"structure",
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"},
+        "AvailabilityZone":{"shape":"AvailabilityZone"},
+        "VpcEndpointAssociationArn":{"shape":"ResourceArn"},
+        "VpcEndpointId":{"shape":"VpcEndpointId"},
+        "FlowOperationId":{"shape":"FlowOperationId"},
+        "FlowOperationType":{"shape":"FlowOperationType"},
+        "FlowOperationStatus":{"shape":"FlowOperationStatus"},
+        "StatusMessage":{"shape":"StatusReason"},
+        "FlowRequestTimestamp":{"shape":"FlowRequestTimestamp"},
+        "FlowOperation":{"shape":"FlowOperation"}
+      }
+    },
     "DescribeLoggingConfigurationRequest":{
       "type":"structure",
       "members":{
@@ -979,7 +1330,8 @@
       "type":"structure",
       "members":{
         "FirewallArn":{"shape":"ResourceArn"},
-        "LoggingConfiguration":{"shape":"LoggingConfiguration"}
+        "LoggingConfiguration":{"shape":"LoggingConfiguration"},
+        "EnableMonitoringDashboard":{"shape":"EnableMonitoringDashboard"}
       }
     },
     "DescribeResourcePolicyRequest":{
@@ -1059,6 +1411,20 @@
         "TLSInspectionConfigurationResponse":{"shape":"TLSInspectionConfigurationResponse"}
       }
     },
+    "DescribeVpcEndpointAssociationRequest":{
+      "type":"structure",
+      "required":["VpcEndpointAssociationArn"],
+      "members":{
+        "VpcEndpointAssociationArn":{"shape":"ResourceArn"}
+      }
+    },
+    "DescribeVpcEndpointAssociationResponse":{
+      "type":"structure",
+      "members":{
+        "VpcEndpointAssociation":{"shape":"VpcEndpointAssociation"},
+        "VpcEndpointAssociationStatus":{"shape":"VpcEndpointAssociationStatus"}
+      }
+    },
     "Description":{
       "type":"string",
       "max":512,
@@ -1108,6 +1474,19 @@
         "UpdateToken":{"shape":"UpdateToken"}
       }
     },
+    "Domain":{"type":"string"},
+    "EnableMonitoringDashboard":{"type":"boolean"},
+    "EnabledAnalysisType":{
+      "type":"string",
+      "enum":[
+        "TLS_SNI",
+        "HTTP_HOST"
+      ]
+    },
+    "EnabledAnalysisTypes":{
+      "type":"list",
+      "member":{"shape":"EnabledAnalysisType"}
+    },
     "EncryptionConfiguration":{
       "type":"structure",
       "required":["Type"],
@@ -1123,6 +1502,7 @@
         "AWS_OWNED_KMS_KEY"
       ]
     },
+    "EndTime":{"type":"timestamp"},
     "EndpointId":{"type":"string"},
     "ErrorMessage":{"type":"string"},
     "Firewall":{
@@ -1145,7 +1525,9 @@
         "Description":{"shape":"Description"},
         "FirewallId":{"shape":"ResourceId"},
         "Tags":{"shape":"TagList"},
-        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"}
+        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
+        "NumberOfAssociations":{"shape":"NumberOfAssociations"},
+        "EnabledAnalysisTypes":{"shape":"EnabledAnalysisTypes"}
       }
     },
     "FirewallMetadata":{
@@ -1230,15 +1612,90 @@
       "type":"list",
       "member":{"shape":"FirewallMetadata"}
     },
+    "FirstAccessed":{"type":"timestamp"},
     "Flags":{
       "type":"list",
       "member":{"shape":"TCPFlag"}
     },
+    "Flow":{
+      "type":"structure",
+      "members":{
+        "SourceAddress":{"shape":"Address"},
+        "DestinationAddress":{"shape":"Address"},
+        "SourcePort":{"shape":"Port"},
+        "DestinationPort":{"shape":"Port"},
+        "Protocol":{"shape":"ProtocolString"},
+        "Age":{"shape":"Age"},
+        "PacketCount":{"shape":"PacketCount"},
+        "ByteCount":{"shape":"ByteCount"}
+      }
+    },
+    "FlowFilter":{
+      "type":"structure",
+      "members":{
+        "SourceAddress":{"shape":"Address"},
+        "DestinationAddress":{"shape":"Address"},
+        "SourcePort":{"shape":"Port"},
+        "DestinationPort":{"shape":"Port"},
+        "Protocols":{"shape":"ProtocolStrings"}
+      }
+    },
+    "FlowFilters":{
+      "type":"list",
+      "member":{"shape":"FlowFilter"}
+    },
+    "FlowOperation":{
+      "type":"structure",
+      "members":{
+        "MinimumFlowAgeInSeconds":{"shape":"Age"},
+        "FlowFilters":{"shape":"FlowFilters"}
+      }
+    },
+    "FlowOperationId":{
+      "type":"string",
+      "max":36,
+      "min":36,
+      "pattern":"^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$"
+    },
+    "FlowOperationMetadata":{
+      "type":"structure",
+      "members":{
+        "FlowOperationId":{"shape":"FlowOperationId"},
+        "FlowOperationType":{"shape":"FlowOperationType"},
+        "FlowRequestTimestamp":{"shape":"FlowRequestTimestamp"},
+        "FlowOperationStatus":{"shape":"FlowOperationStatus"}
+      }
+    },
+    "FlowOperationStatus":{
+      "type":"string",
+      "enum":[
+        "COMPLETED",
+        "IN_PROGRESS",
+        "FAILED",
+        "COMPLETED_WITH_ERRORS"
+      ]
+    },
+    "FlowOperationType":{
+      "type":"string",
+      "enum":[
+        "FLOW_FLUSH",
+        "FLOW_CAPTURE"
+      ]
+    },
+    "FlowOperations":{
+      "type":"list",
+      "member":{"shape":"FlowOperationMetadata"}
+    },
+    "FlowRequestTimestamp":{"type":"timestamp"},
     "FlowTimeouts":{
       "type":"structure",
       "members":{
         "TcpIdleTimeoutSeconds":{"shape":"TcpIdleTimeoutRangeBound"}
       }
+    },
+    "Flows":{
+      "type":"list",
+      "member":{"shape":"Flow"}
     },
     "GeneratedRulesType":{
       "type":"string",
@@ -1246,6 +1703,29 @@
         "ALLOWLIST",
         "DENYLIST"
       ]
+    },
+    "GetAnalysisReportResultsRequest":{
+      "type":"structure",
+      "required":["AnalysisReportId"],
+      "members":{
+        "FirewallName":{"shape":"ResourceName"},
+        "AnalysisReportId":{"shape":"AnalysisReportId"},
+        "FirewallArn":{"shape":"ResourceArn"},
+        "NextToken":{"shape":"AnalysisReportNextToken"},
+        "MaxResults":{"shape":"PaginationMaxResults"}
+      }
+    },
+    "GetAnalysisReportResultsResponse":{
+      "type":"structure",
+      "members":{
+        "Status":{"shape":"Status"},
+        "StartTime":{"shape":"StartTime"},
+        "EndTime":{"shape":"EndTime"},
+        "ReportTime":{"shape":"ReportTime"},
+        "AnalysisType":{"shape":"EnabledAnalysisType"},
+        "NextToken":{"shape":"AnalysisReportNextToken"},
+        "AnalysisReportResults":{"shape":"AnalysisReportResults"}
+      }
     },
     "HashMapKey":{
       "type":"string",
@@ -1276,6 +1756,12 @@
         "Direction":{"shape":"StatefulRuleDirection"},
         "Destination":{"shape":"Destination"},
         "DestinationPort":{"shape":"Port"}
+      }
+    },
+    "Hits":{
+      "type":"structure",
+      "members":{
+        "Count":{"shape":"Count"}
       }
     },
     "IPAddressType":{
@@ -1390,6 +1876,7 @@
       "min":1,
       "pattern":".*"
     },
+    "LastAccessed":{"type":"timestamp"},
     "LastUpdateTime":{"type":"timestamp"},
     "LimitExceededException":{
       "type":"structure",
@@ -1397,6 +1884,22 @@
         "Message":{"shape":"ErrorMessage"}
       },
       "exception":true
+    },
+    "ListAnalysisReportsRequest":{
+      "type":"structure",
+      "members":{
+        "FirewallName":{"shape":"ResourceName"},
+        "FirewallArn":{"shape":"ResourceArn"},
+        "NextToken":{"shape":"PaginationToken"},
+        "MaxResults":{"shape":"PaginationMaxResults"}
+      }
+    },
+    "ListAnalysisReportsResponse":{
+      "type":"structure",
+      "members":{
+        "AnalysisReports":{"shape":"AnalysisReports"},
+        "NextToken":{"shape":"PaginationToken"}
+      }
     },
     "ListFirewallPoliciesRequest":{
       "type":"structure",
@@ -1425,6 +1928,57 @@
       "members":{
         "NextToken":{"shape":"PaginationToken"},
         "Firewalls":{"shape":"Firewalls"}
+      }
+    },
+    "ListFlowOperationResultsRequest":{
+      "type":"structure",
+      "required":[
+        "FirewallArn",
+        "FlowOperationId"
+      ],
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"},
+        "FlowOperationId":{"shape":"FlowOperationId"},
+        "NextToken":{"shape":"PaginationToken"},
+        "MaxResults":{"shape":"PaginationMaxResults"},
+        "AvailabilityZone":{"shape":"AvailabilityZone"},
+        "VpcEndpointId":{"shape":"VpcEndpointId"},
+        "VpcEndpointAssociationArn":{"shape":"ResourceArn"}
+      }
+    },
+    "ListFlowOperationResultsResponse":{
+      "type":"structure",
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"},
+        "AvailabilityZone":{"shape":"AvailabilityZone"},
+        "VpcEndpointAssociationArn":{"shape":"ResourceArn"},
+        "VpcEndpointId":{"shape":"VpcEndpointId"},
+        "FlowOperationId":{"shape":"FlowOperationId"},
+        "FlowOperationStatus":{"shape":"FlowOperationStatus"},
+        "StatusMessage":{"shape":"StatusReason"},
+        "FlowRequestTimestamp":{"shape":"FlowRequestTimestamp"},
+        "Flows":{"shape":"Flows"},
+        "NextToken":{"shape":"PaginationToken"}
+      }
+    },
+    "ListFlowOperationsRequest":{
+      "type":"structure",
+      "required":["FirewallArn"],
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"},
+        "AvailabilityZone":{"shape":"AvailabilityZone"},
+        "VpcEndpointAssociationArn":{"shape":"ResourceArn"},
+        "VpcEndpointId":{"shape":"VpcEndpointId"},
+        "FlowOperationType":{"shape":"FlowOperationType"},
+        "NextToken":{"shape":"PaginationToken"},
+        "MaxResults":{"shape":"PaginationMaxResults"}
+      }
+    },
+    "ListFlowOperationsResponse":{
+      "type":"structure",
+      "members":{
+        "FlowOperations":{"shape":"FlowOperations"},
+        "NextToken":{"shape":"PaginationToken"}
       }
     },
     "ListRuleGroupsRequest":{
@@ -1472,6 +2026,21 @@
       "members":{
         "NextToken":{"shape":"PaginationToken"},
         "Tags":{"shape":"TagList"}
+      }
+    },
+    "ListVpcEndpointAssociationsRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"PaginationToken"},
+        "MaxResults":{"shape":"PaginationMaxResults"},
+        "FirewallArn":{"shape":"ResourceArn"}
+      }
+    },
+    "ListVpcEndpointAssociationsResponse":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"PaginationToken"},
+        "VpcEndpointAssociations":{"shape":"VpcEndpointAssociations"}
       }
     },
     "LogDestinationConfig":{
@@ -1545,6 +2114,7 @@
       "type":"string",
       "enum":["DROP_TO_ALERT"]
     },
+    "PacketCount":{"type":"integer"},
     "PaginationMaxResults":{
       "type":"integer",
       "max":100,
@@ -1634,6 +2204,16 @@
       "type":"list",
       "member":{"shape":"ProtocolNumber"}
     },
+    "ProtocolString":{
+      "type":"string",
+      "max":12,
+      "min":1,
+      "pattern":"^.*$"
+    },
+    "ProtocolStrings":{
+      "type":"list",
+      "member":{"shape":"ProtocolString"}
+    },
     "PublishMetricAction":{
       "type":"structure",
       "required":["Dimensions"],
@@ -1654,8 +2234,7 @@
     },
     "PutResourcePolicyResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "ReferenceSets":{
       "type":"structure",
@@ -1663,6 +2242,7 @@
         "IPSetReferences":{"shape":"IPSetReferenceMap"}
       }
     },
+    "ReportTime":{"type":"timestamp"},
     "ResourceArn":{
       "type":"string",
       "max":256,
@@ -1917,6 +2497,69 @@
         "SourceUpdateToken":{"shape":"UpdateToken"}
       }
     },
+    "StartAnalysisReportRequest":{
+      "type":"structure",
+      "required":["AnalysisType"],
+      "members":{
+        "FirewallName":{"shape":"ResourceName"},
+        "FirewallArn":{"shape":"ResourceArn"},
+        "AnalysisType":{"shape":"EnabledAnalysisType"}
+      }
+    },
+    "StartAnalysisReportResponse":{
+      "type":"structure",
+      "required":["AnalysisReportId"],
+      "members":{
+        "AnalysisReportId":{"shape":"AnalysisReportId"}
+      }
+    },
+    "StartFlowCaptureRequest":{
+      "type":"structure",
+      "required":[
+        "FirewallArn",
+        "FlowFilters"
+      ],
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"},
+        "AvailabilityZone":{"shape":"AvailabilityZone"},
+        "VpcEndpointAssociationArn":{"shape":"ResourceArn"},
+        "VpcEndpointId":{"shape":"VpcEndpointId"},
+        "MinimumFlowAgeInSeconds":{"shape":"Age"},
+        "FlowFilters":{"shape":"FlowFilters"}
+      }
+    },
+    "StartFlowCaptureResponse":{
+      "type":"structure",
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"},
+        "FlowOperationId":{"shape":"FlowOperationId"},
+        "FlowOperationStatus":{"shape":"FlowOperationStatus"}
+      }
+    },
+    "StartFlowFlushRequest":{
+      "type":"structure",
+      "required":[
+        "FirewallArn",
+        "FlowFilters"
+      ],
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"},
+        "AvailabilityZone":{"shape":"AvailabilityZone"},
+        "VpcEndpointAssociationArn":{"shape":"ResourceArn"},
+        "VpcEndpointId":{"shape":"VpcEndpointId"},
+        "MinimumFlowAgeInSeconds":{"shape":"Age"},
+        "FlowFilters":{"shape":"FlowFilters"}
+      }
+    },
+    "StartFlowFlushResponse":{
+      "type":"structure",
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"},
+        "FlowOperationId":{"shape":"FlowOperationId"},
+        "FlowOperationStatus":{"shape":"FlowOperationStatus"}
+      }
+    },
+    "StartTime":{"type":"timestamp"},
     "StatefulAction":{
       "type":"string",
       "enum":[
@@ -2056,6 +2699,7 @@
         "CustomActions":{"shape":"CustomActions"}
       }
     },
+    "Status":{"type":"string"},
     "StatusMessage":{"type":"string"},
     "StatusReason":{
       "type":"string",
@@ -2082,6 +2726,11 @@
     "SubnetMappings":{
       "type":"list",
       "member":{"shape":"SubnetMapping"}
+    },
+    "SupportedAvailabilityZones":{
+      "type":"map",
+      "key":{"shape":"AvailabilityZone"},
+      "value":{"shape":"AvailabilityZoneMetadata"}
     },
     "SyncState":{
       "type":"structure",
@@ -2205,8 +2854,7 @@
     },
     "TagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "TagValue":{
       "type":"string",
@@ -2247,6 +2895,12 @@
         "StatusMessage":{"shape":"StatusReason"}
       }
     },
+    "UniqueSources":{
+      "type":"structure",
+      "members":{
+        "Count":{"shape":"Count"}
+      }
+    },
     "UnsupportedOperationException":{
       "type":"structure",
       "members":{
@@ -2267,7 +2921,24 @@
     },
     "UntagResourceResponse":{
       "type":"structure",
+      "members":{}
+    },
+    "UpdateFirewallAnalysisSettingsRequest":{
+      "type":"structure",
       "members":{
+        "EnabledAnalysisTypes":{"shape":"EnabledAnalysisTypes"},
+        "FirewallArn":{"shape":"ResourceArn"},
+        "FirewallName":{"shape":"ResourceName"},
+        "UpdateToken":{"shape":"UpdateToken"}
+      }
+    },
+    "UpdateFirewallAnalysisSettingsResponse":{
+      "type":"structure",
+      "members":{
+        "EnabledAnalysisTypes":{"shape":"EnabledAnalysisTypes"},
+        "FirewallArn":{"shape":"ResourceArn"},
+        "FirewallName":{"shape":"ResourceName"},
+        "UpdateToken":{"shape":"UpdateToken"}
       }
     },
     "UpdateFirewallDeleteProtectionRequest":{
@@ -2376,7 +3047,8 @@
       "members":{
         "FirewallArn":{"shape":"ResourceArn"},
         "FirewallName":{"shape":"ResourceName"},
-        "LoggingConfiguration":{"shape":"LoggingConfiguration"}
+        "LoggingConfiguration":{"shape":"LoggingConfiguration"},
+        "EnableMonitoringDashboard":{"shape":"EnableMonitoringDashboard"}
       }
     },
     "UpdateLoggingConfigurationResponse":{
@@ -2384,7 +3056,8 @@
       "members":{
         "FirewallArn":{"shape":"ResourceArn"},
         "FirewallName":{"shape":"ResourceName"},
-        "LoggingConfiguration":{"shape":"LoggingConfiguration"}
+        "LoggingConfiguration":{"shape":"LoggingConfiguration"},
+        "EnableMonitoringDashboard":{"shape":"EnableMonitoringDashboard"}
       }
     },
     "UpdateRuleGroupRequest":{
@@ -2474,6 +3147,48 @@
     "VariableDefinitionList":{
       "type":"list",
       "member":{"shape":"VariableDefinition"}
+    },
+    "VpcEndpointAssociation":{
+      "type":"structure",
+      "required":[
+        "VpcEndpointAssociationArn",
+        "FirewallArn",
+        "VpcId",
+        "SubnetMapping"
+      ],
+      "members":{
+        "VpcEndpointAssociationId":{"shape":"ResourceId"},
+        "VpcEndpointAssociationArn":{"shape":"ResourceArn"},
+        "FirewallArn":{"shape":"ResourceArn"},
+        "VpcId":{"shape":"VpcId"},
+        "SubnetMapping":{"shape":"SubnetMapping"},
+        "Description":{"shape":"Description"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "VpcEndpointAssociationMetadata":{
+      "type":"structure",
+      "members":{
+        "VpcEndpointAssociationArn":{"shape":"ResourceArn"}
+      }
+    },
+    "VpcEndpointAssociationStatus":{
+      "type":"structure",
+      "required":["Status"],
+      "members":{
+        "Status":{"shape":"FirewallStatusValue"},
+        "AssociationSyncState":{"shape":"AssociationSyncState"}
+      }
+    },
+    "VpcEndpointAssociations":{
+      "type":"list",
+      "member":{"shape":"VpcEndpointAssociationMetadata"}
+    },
+    "VpcEndpointId":{
+      "type":"string",
+      "max":256,
+      "min":5,
+      "pattern":"^vpce-[a-zA-Z0-9]*$"
     },
     "VpcId":{
       "type":"string",

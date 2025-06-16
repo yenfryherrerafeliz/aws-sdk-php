@@ -284,8 +284,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionElastiCache(array $args = [])
  * @method \Aws\ElasticBeanstalk\ElasticBeanstalkClient createElasticBeanstalk(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionElasticBeanstalk(array $args = [])
- * @method \Aws\ElasticInference\ElasticInferenceClient createElasticInference(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionElasticInference(array $args = [])
  * @method \Aws\ElasticLoadBalancing\ElasticLoadBalancingClient createElasticLoadBalancing(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionElasticLoadBalancing(array $args = [])
  * @method \Aws\ElasticLoadBalancingV2\ElasticLoadBalancingV2Client createElasticLoadBalancingV2(array $args = [])
@@ -300,6 +298,8 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionEntityResolution(array $args = [])
  * @method \Aws\EventBridge\EventBridgeClient createEventBridge(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionEventBridge(array $args = [])
+ * @method \Aws\Evs\EvsClient createEvs(array $args = [])
+ * @method \Aws\MultiRegionClient createMultiRegionEvs(array $args = [])
  * @method \Aws\FIS\FISClient createFIS(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionFIS(array $args = [])
  * @method \Aws\FMS\FMSClient createFMS(array $args = [])
@@ -320,6 +320,8 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionFreeTier(array $args = [])
  * @method \Aws\GameLift\GameLiftClient createGameLift(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionGameLift(array $args = [])
+ * @method \Aws\GameLiftStreams\GameLiftStreamsClient createGameLiftStreams(array $args = [])
+ * @method \Aws\MultiRegionClient createMultiRegionGameLiftStreams(array $args = [])
  * @method \Aws\GeoMaps\GeoMapsClient createGeoMaps(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionGeoMaps(array $args = [])
  * @method \Aws\GeoPlaces\GeoPlacesClient createGeoPlaces(array $args = [])
@@ -380,6 +382,8 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionIoTFleetWise(array $args = [])
  * @method \Aws\IoTJobsDataPlane\IoTJobsDataPlaneClient createIoTJobsDataPlane(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionIoTJobsDataPlane(array $args = [])
+ * @method \Aws\IoTManagedIntegrations\IoTManagedIntegrationsClient createIoTManagedIntegrations(array $args = [])
+ * @method \Aws\MultiRegionClient createMultiRegionIoTManagedIntegrations(array $args = [])
  * @method \Aws\IoTSecureTunneling\IoTSecureTunnelingClient createIoTSecureTunneling(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionIoTSecureTunneling(array $args = [])
  * @method \Aws\IoTSiteWise\IoTSiteWiseClient createIoTSiteWise(array $args = [])
@@ -590,8 +594,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionPolly(array $args = [])
  * @method \Aws\Pricing\PricingClient createPricing(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionPricing(array $args = [])
- * @method \Aws\PrivateNetworks\PrivateNetworksClient createPrivateNetworks(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionPrivateNetworks(array $args = [])
  * @method \Aws\PrometheusService\PrometheusServiceClient createPrometheusService(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionPrometheusService(array $args = [])
  * @method \Aws\Proton\ProtonClient createProton(array $args = [])
@@ -662,6 +664,8 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionS3Tables(array $args = [])
  * @method \Aws\SSMContacts\SSMContactsClient createSSMContacts(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionSSMContacts(array $args = [])
+ * @method \Aws\SSMGuiConnect\SSMGuiConnectClient createSSMGuiConnect(array $args = [])
+ * @method \Aws\MultiRegionClient createMultiRegionSSMGuiConnect(array $args = [])
  * @method \Aws\SSMIncidents\SSMIncidentsClient createSSMIncidents(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionSSMIncidents(array $args = [])
  * @method \Aws\SSMQuickSetup\SSMQuickSetupClient createSSMQuickSetup(array $args = [])
@@ -811,7 +815,7 @@ namespace Aws;
  */
 class Sdk
 {
-    const VERSION = '3.338.1';
+    const VERSION = '3.344.2';
 
     /** @var array Arguments for creating clients */
     private $args;
