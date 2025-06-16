@@ -124,6 +124,13 @@ abstract class MultipartDownloader implements PromisorInterface
     }
 
     /**
+     * @return DownloadResponse
+     */
+    public function download(): DownloadResponse {
+        return $this->promise()->wait();
+    }
+
+    /**
      * Returns that resolves a multipart download operation,
      * or to a rejection in case of any failures.
      *
@@ -268,6 +275,18 @@ abstract class MultipartDownloader implements PromisorInterface
      */
     private function downloadFailed(\Throwable $reason): void
     {
+        // Event already propagated.
+        if ($this->currentSnapshot->getReason() !== null) {
+            return;
+        }
+
+        $this->currentSnapshot = new TransferProgressSnapshot(
+            $this->currentSnapshot->getIdentifier(),
+            $this->currentSnapshot->getTransferredBytes(),
+            $this->currentSnapshot->getTotalBytes(),
+            $this->currentSnapshot->getResponse(),
+            $reason
+        );
         $this->stream->close();
         $this->listenerNotifier?->transferFail([
             TransferListener::REQUEST_ARGS_KEY => $this->requestArgs,
