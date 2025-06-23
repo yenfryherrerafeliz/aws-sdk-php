@@ -2,28 +2,31 @@
 
 namespace Aws\S3\S3Transfer;
 
-use Aws\CommandInterface;
 use Aws\ResultInterface;
 use Aws\S3\S3ClientInterface;
 use Aws\S3\S3Transfer\Models\CopyResponse;
 use Aws\S3\S3Transfer\Progress\TransferListenerNotifier;
+use Aws\S3\S3Transfer\Progress\TransferProgressSnapshot;
 use Aws\Arn\ArnParser;
+use Aws\Arn\AccessPointArn;
 use GuzzleHttp\Promise\Create;
 use GuzzleHttp\Promise\PromiseInterface;
+use Aws\CommandPool;
 use Throwable;
 
 /**
  * Multipart copier implementation.
- *
- * @param array $source Location of the data in the format of an array with:
- *        - source_bucket
- *        - source_key
- *        - source_version_id (optional)
+ * 
+ * Handles copying large objects between S3 locations using multipart copy.
+ * 
+ * @property array $source Location of the data in the format of an array with:
+ *        - Bucket - Source bucket name
+ *        - Key - Source object key
+ *        - VersionId - Optional source version ID
  */
 class MultipartCopier extends AbstractMultipartUploader
 {
     private array $source;
-
     public function __construct(
         S3ClientInterface $s3Client,
         array $createMultipartArgs,
@@ -34,6 +37,20 @@ class MultipartCopier extends AbstractMultipartUploader
         ?TransferProgressSnapshot $currentSnapshot = null,
         ?TransferListenerNotifier $listenerNotifier = null,
     ) {
+
+        if (empty($source['Bucket']) || empty($source['Key'])) {
+            throw new \InvalidArgumentException(
+                "The source array must contain 'Bucket' and 'Key' parameters"
+            );
+        }
+
+        // Validate same source/destination
+        if ($source['Bucket'] === $createMultipartArgs['Bucket']
+            && $source['Key'] === $createMultipartArgs['Key']) {
+            throw new \InvalidArgumentException(
+                "Source and destination cannot be the same object"
+            );
+        }
         parent::__construct(
             s3Client: $s3Client,
             createMultipartArgs: $createMultipartArgs,
@@ -45,7 +62,6 @@ class MultipartCopier extends AbstractMultipartUploader
         );
 
         $this->source = $source;
-        $this->calculatedObjectSize = $this->getSourceSize($this->source);
     }
 
     public function copy(): PromiseInterface
@@ -65,23 +81,14 @@ class MultipartCopier extends AbstractMultipartUploader
 
     protected function getTotalSize(): int
     {
-        return $this->calculatedObjectSize;
-    }
-
-    protected function extractPartData(ResultInterface $result, CommandInterface $command): array
-    {
-        $copyResult = $result['CopyPartResult'];
-        $partData = [
-            'PartNumber' => $command['PartNumber'],
-            'ETag' => $copyResult['ETag']
-        ];
-
-        // Add checksum from the CopyPartResult
-        if (isset($result['CopyPartResult']['ChecksumCRC32'])) {
-            $partData['ChecksumCRC32'] = $result['CopyPartResult']['ChecksumCRC32'];
+        if (! isset($this->calculatedObjectSize)) {
+            if (isset($this->config['object_size'])) {
+                $this->calculatedObjectSize = (int) $this->config['object_size'];
+            } else {
+                $this->calculatedObjectSize = $this->getSourceSize();
+            }
         }
-
-        return $partData;
+        return $this->calculatedObjectSize;
     }
 
     protected function createResponse(ResultInterface $result): CopyResponse
@@ -89,23 +96,12 @@ class MultipartCopier extends AbstractMultipartUploader
         return new CopyResponse($result->toArray());
     }
 
-    protected function getCompletionArgs(): array
-    {
-        return []; // No additional args needed for copy completion
-    }
-
     private function copyParts(): PromiseInterface
     {
         $partSize = $this->config['part_size'];
+        $objectSize = $this->getTotalSize();
+        $totalParts = (int) ceil($objectSize / $partSize);
 
-        // Validate part size
-        if ($partSize < AbstractMultipartUploader::PART_MIN_SIZE || $partSize > AbstractMultipartUploader::PART_MAX_SIZE) {
-            throw new \InvalidArgumentException('Part size must be between 5MiB and 5GiB');
-        }
-
-        $totalParts = ceil($this->calculatedObjectSize / $partSize);
-
-        // Check if total parts doesn't exceed S3's limit
         if ($totalParts > AbstractMultipartUploader::PART_MAX_NUM) {
             throw new \InvalidArgumentException('Total parts cannot exceed 10000');
         }
@@ -114,7 +110,7 @@ class MultipartCopier extends AbstractMultipartUploader
 
         for ($partNumber = 1; $partNumber <= $totalParts; $partNumber++) {
             $start = ($partNumber - 1) * $partSize;
-            $end = min($start + $partSize - 1, $this->calculatedObjectSize - 1);
+            $end = min($start + $partSize - 1, $objectSize - 1);
 
             $copySource = $this->getSourcePath($this->source);
 
@@ -126,36 +122,36 @@ class MultipartCopier extends AbstractMultipartUploader
                 'CopySourceRange' => "bytes=$start-$end",
             ];
 
-            // Include checksum settings
-            if (isset($this->createMultipartArgs['ChecksumAlgorithm'])) {
-                $copyPartArgs['ChecksumAlgorithm'] = $this->createMultipartArgs['ChecksumAlgorithm'];
-                $copyPartArgs['RequestChecksumAlgorithm'] = $this->createMultipartArgs['ChecksumAlgorithm'];
-            }
+            $copyPartArgs['requestArgs'] = [...$copyPartArgs];
 
-            $requestArgs = [...$copyPartArgs];
             $command = $this->s3Client->getCommand('UploadPartCopy', $copyPartArgs);
-            $command['requestArgs'] = $requestArgs;
             $commands[] = $command;
         }
 
-        return $this->createCommandPool(
+        return (new CommandPool(
+            $this->s3Client,
             $commands,
-            function (ResultInterface $result, $index) use ($commands) {
-                $command = $commands[$index];
-                $this->collectPart($result, $command);
-                $this->partCompleted(
-                    $this->config['part_size'],
-                    $command['requestArgs']
-                );
-            },
-            function (Throwable $e) {
-                $this->partFailed($e);
-                throw $e;
-            }
-        );
+            [
+                'concurrency' => $this->config['concurrency'],
+                'fulfilled' => function (ResultInterface $result, $index) use ($commands) {
+                    $command = $commands[$index];
+                    $this->collectPart($result, $command);
+                    $this->partCompleted(
+                        $command['requestArgs']['ContentLength'] ?? $this->config['part_size'],
+                        $command['requestArgs']
+                    );
+                },
+                'rejected' => function (Throwable $e) {
+                    $this->partFailed($e);
+                    throw $e;
+                },
+            ]
+        ))->promise();
     }
 
-    private function getSourcePath(array $source): string
+
+
+    protected function getSourcePath(array $source): string
     {
         $path = "/{$source['Bucket']}/";
         if (ArnParser::isArn($source['Bucket'])) {
@@ -164,7 +160,7 @@ class MultipartCopier extends AbstractMultipartUploader
                 $path = "{$source['Bucket']}/object/";
             } catch (\Exception $e) {
                 throw new \InvalidArgumentException(
-                    'Provided ARN was a not a valid S3 access point ARN ('
+                    'Provided ARN was not a valid S3 access point ARN ('
                     . $e->getMessage() . ')',
                     0,
                     $e

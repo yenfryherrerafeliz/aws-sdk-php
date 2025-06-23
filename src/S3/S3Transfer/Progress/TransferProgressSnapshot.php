@@ -8,7 +8,7 @@ class TransferProgressSnapshot
 {
     /** @var string */
     private string $identifier;
-    
+
     /** @var int */
     private int $transferredBytes;
 
