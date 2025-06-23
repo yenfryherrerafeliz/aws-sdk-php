@@ -3,19 +3,19 @@
 namespace Aws\S3\S3Transfer;
 
 use Aws\Arn\ArnParser;
-use Aws\Exception\AwsException;
 use Aws\S3\S3Client;
 use Aws\S3\S3ClientInterface;
 use Aws\S3\S3Transfer\Exceptions\S3TransferException;
-use Aws\S3\S3Transfer\Models\CopyResponse;
 use Aws\S3\S3Transfer\Models\DownloadDirectoryResponse;
 use Aws\S3\S3Transfer\Models\DownloadResponse;
 use Aws\S3\S3Transfer\Models\UploadDirectoryResponse;
 use Aws\S3\S3Transfer\Models\UploadResponse;
+use Aws\S3\S3Transfer\Models\CopyResponse;
 use Aws\S3\S3Transfer\Progress\MultiProgressTracker;
 use Aws\S3\S3Transfer\Progress\SingleProgressTracker;
 use Aws\S3\S3Transfer\Progress\TransferListener;
 use Aws\S3\S3Transfer\Progress\TransferListenerNotifier;
+use Aws\S3\S3Transfer\Progress\TransferProgressSnapshot;
 use FilesystemIterator;
 use GuzzleHttp\Promise\Each;
 use GuzzleHttp\Promise\PromiseInterface;
@@ -24,12 +24,12 @@ use Psr\Http\Message\StreamInterface;
 use function Aws\filter;
 use function Aws\map;
 
-
 class S3TransferManager
 {
     private static array $defaultConfig = [
         'target_part_size_bytes' => 8 * 1024 * 1024,
         'multipart_upload_threshold_bytes' => 16 * 1024 * 1024,
+        'multipart_copy_threshold_bytes' => 16 * 1024 * 1024,
         'checksum_validation_enabled' => true,
         'checksum_algorithm' => 'crc32',
         'multipart_download_type' => 'partGet',
@@ -1079,45 +1079,31 @@ class S3TransferManager
      */
     public function copy(
         array            $source,
-        array             $requestArgs,
+        array             $copyRequestArgs,
         array             $config = [],
         array             $listeners = [],
         ?TransferListener $progressTracker = null,
     ): PromiseInterface
     {
+        // throw exception 5gb single copy
         // Valid required parameters for both source and destination
-        foreach (['Bucket', 'Key'] as $reqParam) {
-            // Check source array
-            $this->requireNonEmpty(
-                array: $source,
-                key: $reqParam,
-                message: "The `$reqParam` parameter must be provided in the source array."
-            );
-            // Check destination parameters
-            $this->requireNonEmpty(
-                array: $requestArgs,
-                key: $reqParam,
-                message: "The `$reqParam` parameter must be provided as part of the request arguments."
-            );
-        }
+        $required = ['Bucket', 'Key'];
+
+        $this->validateRequiredParams($required, $source, 'source array');
+        $this->validateRequiredParams($required, $copyRequestArgs, 'copy request arguments');
 
         // Validate buckets exist and are not identical objects
-        $this->validateNotSameObject(source: $source, dest: $requestArgs);
+        $this->validateNotSameObject(source: $source, dest: $copyRequestArgs);
 
         $mupThreshold = $config['multipart_copy_threshold_bytes']
             ?? $this->config['multipart_copy_threshold_bytes'];
-        if ($mupThreshold < MultipartCopier::PART_MIN_SIZE) {
+        if ($mupThreshold < AbstractMultipartUploader::PART_MIN_SIZE) {
             throw new InvalidArgumentException(
                 message: "The provided config `multipart_copy_threshold_bytes` "
-                . "must be greater than or equal to " . MultipartCopier::PART_MIN_SIZE
+                . "must be greater than or equal to " . AbstractMultipartUploader::PART_MIN_SIZE
             );
         }
 
-        if (!isset($requestArgs['ChecksumAlgorithm'])) {
-            $algorithm = $config['checksum_algorithm']
-                ?? $this->config['checksum_algorithm'];
-            $requestArgs['ChecksumAlgorithm'] = strtoupper($algorithm);
-        }
 
         if ($progressTracker === null
             && ($config['track_progress'] ?? $this->config['track_progress'])) {
@@ -1133,9 +1119,15 @@ class S3TransferManager
 
         // Determine if multipart copy is required
         if ($this->requiresMultipartCopy(source: $source, mupThreshold: $mupThreshold)) {
+            if (!isset($copyRequestArgs['ChecksumAlgorithm'])) {
+                $algorithm = $config['checksum_algorithm']
+                    ?? $this->config['checksum_algorithm'];
+                $copyRequestArgs['ChecksumAlgorithm'] = strtoupper($algorithm);
+            }
+
             return $this->tryMultipartCopy(
                 source: $source,
-                requestArgs: $requestArgs,
+                copyRequestArgs: $copyRequestArgs,
                 config:
                 [
                     'part_size' => $config['part_size'] ?? $this->config['target_part_size_bytes'],
@@ -1147,7 +1139,7 @@ class S3TransferManager
 
         return $this->trySingleCopy(
             source: $source,
-            requestArgs: $requestArgs,
+            copyRequestArgs: $copyRequestArgs,
             listenerNotifier: $listenerNotifier
         );
 
@@ -1155,25 +1147,19 @@ class S3TransferManager
 
     /**
      * @param array $source
-     * @param array $requestArgs
+     * @param array $copyRequestArgs
      * @param array $config
      * @param TransferListenerNotifier|null $listenerNotifier
      * @return PromiseInterface
      */
     public function tryMultipartCopy(
         array $source,
-        array $requestArgs,
+        array $copyRequestArgs,
         array $config = [],
         ?TransferListenerNotifier $listenerNotifier = null
     ): PromiseInterface
     {
-        echo "trying Multipart Copy";
-        $createMultipartArgs = [...$requestArgs];
-
-        // Ensure checksum configuration is properly set
-        if (!isset($createMultipartArgs['ChecksumAlgorithm']) && isset($this->config['checksum_algorithm'])) {
-            $createMultipartArgs['ChecksumAlgorithm'] = strtoupper($this->config['checksum_algorithm']);
-        }
+        $createMultipartArgs = [...$copyRequestArgs];
 
         $copier = new MultipartCopier(
             s3Client: $this->s3Client,
@@ -1188,21 +1174,20 @@ class S3TransferManager
 
     /**
      * @param array $source
-     * @param array $requestArgs
+     * @param array $copyRequestArgs
      * @param ?TransferListenerNotifier $listenerNotifier
      * @return PromiseInterface
      * @throws S3TransferException
      */
     private function trySingleCopy(
         array $source,
-        array $requestArgs,
+        array $copyRequestArgs,
         ?TransferListenerNotifier $listenerNotifier = null
     ): PromiseInterface {
-        echo "trying Single Copy";
         $params = [
-            'Bucket' => $requestArgs['Bucket'],
+            'Bucket' => $copyRequestArgs['Bucket'],
             'CopySource' => $this->getSourcePath(source: $source),
-            'Key' => $requestArgs['Key']
+            'Key' => $copyRequestArgs['Key']
         ];
 
         $objectSize = $this->s3Client->headObject([
@@ -1215,28 +1200,28 @@ class S3TransferManager
 
         if (!empty($listenerNotifier)) {
             $listenerNotifier->transferInitiated([
-                TransferListener::REQUEST_ARGS_KEY => $requestArgs,
+                TransferListener::REQUEST_ARGS_KEY => $copyRequestArgs,
                 TransferListener::PROGRESS_SNAPSHOT_KEY => new TransferProgressSnapshot(
-                    $requestArgs['Key'],
+                    $copyRequestArgs['Key'],
                     0,
                     $objectSize,
                 ),
             ]);
 
             return $promise->then(
-                function ($result) use ($objectSize, $listenerNotifier, $requestArgs) {
+                function ($result) use ($objectSize, $listenerNotifier, $copyRequestArgs) {
                     $listenerNotifier->bytesTransferred([
-                        TransferListener::REQUEST_ARGS_KEY => $requestArgs,
+                        TransferListener::REQUEST_ARGS_KEY => $copyRequestArgs,
                         TransferListener::PROGRESS_SNAPSHOT_KEY => new TransferProgressSnapshot(
-                            $requestArgs['Key'],
+                            $copyRequestArgs['Key'],
                             $objectSize,
                             $objectSize,
                         ),
                     ]);
                     $listenerNotifier->transferComplete([
-                        TransferListener::REQUEST_ARGS_KEY => $requestArgs,
+                        TransferListener::REQUEST_ARGS_KEY => $copyRequestArgs,
                         TransferListener::PROGRESS_SNAPSHOT_KEY => new TransferProgressSnapshot(
-                            $requestArgs['Key'],
+                            $copyRequestArgs['Key'],
                             $objectSize,
                             $objectSize,
                             $result->toArray()
@@ -1244,11 +1229,11 @@ class S3TransferManager
                     ]);
                     return new CopyResponse($result->toArray());
                 }
-            )->otherwise(function ($reason) use ($objectSize, $requestArgs, $listenerNotifier) {
+            )->otherwise(function ($reason) use ($objectSize, $copyRequestArgs, $listenerNotifier) {
                 $listenerNotifier->transferFail([
-                    TransferListener::REQUEST_ARGS_KEY => $requestArgs,
+                    TransferListener::REQUEST_ARGS_KEY => $copyRequestArgs,
                     TransferListener::PROGRESS_SNAPSHOT_KEY => new TransferProgressSnapshot(
-                        $requestArgs['Key'],
+                        $copyRequestArgs['Key'],
                         0,
                         $objectSize,
                     ),
@@ -1320,6 +1305,23 @@ class S3TransferManager
         ]);
         $objectSize = $result['ContentLength'];
         return $objectSize >= $mupThreshold;
+    }
+
+    /**
+     * @param array $params
+     * @param array $context
+     * @param string $contextName
+     * @return void
+     */
+    private function validateRequiredParams(array $params, array $context, string $contextName): void
+    {
+        foreach ($params as $param) {
+            $this->requireNonEmpty(
+                array: $context,
+                key: $param,
+                message: "The `$param` parameter must be provided in the $contextName."
+            );
+        }
     }
 
 }
