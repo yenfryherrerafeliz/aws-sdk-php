@@ -3,10 +3,45 @@ Feature: S3 Transfer Manager
   S3 Transfer Manager should successfully do:
   - object uploads
   - object multipart uploads
+  - object copy
+  - object multipart copy
   - object downloads
   - object multipart downloads
   - directory object uploads
   - directory object downloads
+
+  Scenario Outline: Successfully does a single object copy
+    Given I have an object <object> with content <content> in a source bucket
+    When I copy the object <object> to a destination bucket using the S3 Transfer Manager
+    Then the object <object> should exist in the destination bucket and its content should be <content>
+
+    Examples:
+      | object                 | content           |
+      | single-copy-test-1.txt    | Test content #1   |
+      | single-copy-test-2.txt    | Test content #2   |
+      | single-copy-test-3.txt    | Test content #3   |
+
+  Scenario Outline: Successfully does a multipart object copy
+    Given I have an object <object> where its content size is <objectsize>
+    When I copy the object <object> with part size <partsize> to a destination bucket using the S3 Transfer Manager
+    Then the object <object> exists in the destination bucket with <partnum> parts and its size must be <objectsize>
+
+    Examples:
+      | object                 | objectsize  | partsize  | partnum |
+      | multipart-copy-test-1.txt    | 10485760  | 5242880   | 2       |
+      | multipart-copy-test-2.txt    | 24117248  | 5242880   | 5       |
+      | multipart-copy-test-3.txt    | 24117248  | 8388608   | 3       |
+
+  Scenario Outline: Successfully cleans up uploaded part during multipart copy failure
+    Given I have an object <object> where its content size is <objectsize>
+    When I attempt to copy the object <object> with part size <partsize> to a destination bucket but fail on part <failPart>
+    Then there should be no leftover multipart uploads for object <object> in the destination bucket
+
+    Examples:
+      | object                 | objectsize   | partsize  | failPart |
+      | abort-test-1.txt    | 10485760   | 5242880   | 1        |
+      | abort-test-2.txt    | 24117248   | 5242880   | 3        |
+      | abort-test-3.txt    | 24117248   | 8388608   | 2O        |
 
   Scenario Outline: Successfully does a single file upload
     Given I have a file <filename> with content <content>
