@@ -20,6 +20,61 @@ trait S3ContextTrait
         return $bucketName;
     }
 
+    private static function getDestResourceName(): string
+    {
+        return self::getResourceName() . '-dest';
+    }
+
+    private static function doCreateDestBucket(): void
+    {
+        $client     = self::getSdk()->createS3();
+        $destBucket = self::getDestResourceName();
+
+        if (!$client->doesBucketExistV2($destBucket)) {
+            $client->createBucket(['Bucket' => $destBucket]);
+            $client->waitUntil('BucketExists', ['Bucket' => $destBucket]);
+        }
+    }
+
+    private static function doDeleteDestBucket(): void
+    {
+        $client     = self::getSdk()->createS3();
+        $destBucket = self::getDestResourceName();
+
+        $result = self::executeWithRetries(
+            $client,
+            'listObjectsV2',
+            ['Bucket' => $destBucket],
+            10,
+            [404]
+        );
+
+        $client->deleteMatchingObjects($destBucket, '', '//');
+
+        if (!empty($result['Contents']) && is_array($result['Contents'])) {
+            foreach ($result['Contents'] as $object) {
+                $client->waitUntil('ObjectNotExists', [
+                    'Bucket' => $destBucket,
+                    'Key'    => $object['Key'],
+                    '@waiter' => [
+                        'maxAttempts' => 30,
+                        'delay'       => 1,
+                    ],
+                ]);
+            }
+        }
+
+        self::executeWithRetries(
+            $client,
+            'deleteBucket',
+            ['Bucket' => $destBucket],
+            10,
+            [404]
+        );
+
+        $client->waitUntil('BucketNotExists', ['Bucket' => $destBucket]);
+    }
+
     private static function doCreateTestBucket(): void {
         $client = self::getSdk()->createS3();
         if (!$client->doesBucketExistV2(self::getResourceName())) {
