@@ -41,6 +41,9 @@ abstract class AbstractMultipartUploader implements PromisorInterface
     /** @var array @ */
     protected array $parts;
 
+    /** @var int */
+    protected int $calculatedObjectSize;
+
     /** @var array */
     protected array $onCompletionCallbacks = [];
 
@@ -56,14 +59,14 @@ abstract class AbstractMultipartUploader implements PromisorInterface
      *
      * @var string | null
      */
-    protected ?string $requestChecksum;
+    protected ?string $requestChecksum = null;
 
     /**
      * This will be used for custom or default checksum.
      *
      * @var string | null
      */
-    protected ?string $requestChecksumAlgorithm;
+    protected ?string $requestChecksumAlgorithm = null;
 
     /**
      * @param S3ClientInterface $s3Client
@@ -262,8 +265,7 @@ abstract class AbstractMultipartUploader implements PromisorInterface
      * @param CommandInterface $command
      * @return void
      */
-    protected function collectPart
-    (
+    protected function collectPart(
         ResultInterface $result,
         CommandInterface $command
     ): void
@@ -293,8 +295,7 @@ abstract class AbstractMultipartUploader implements PromisorInterface
      * @param callable $rejectedCallback
      * @return PromiseInterface
      */
-    protected function createCommandPool
-    (
+    protected function createCommandPool(
         array $commands,
         callable $fulfilledCallback,
         callable $rejectedCallback
