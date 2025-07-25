@@ -3326,7 +3326,7 @@ class S3TransferManagerTest extends TestCase
             'multipart_copy_above_threshold' => [
                 'mup_threshold' => AbstractMultipartUploader::PART_MIN_SIZE * 2,
                 'object_size' => AbstractMultipartUploader::PART_MIN_SIZE * 3,
-                'expected_part_count' => 3,
+                'expected_part_count' => 2,
                 'is_multipart_copy' => true
             ],
             'single_copy_below_threshold' => [

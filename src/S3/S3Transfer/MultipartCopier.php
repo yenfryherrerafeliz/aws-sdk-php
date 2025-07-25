@@ -48,22 +48,14 @@ class MultipartCopier extends AbstractMultipartUploader
         ?TransferProgressSnapshot $currentSnapshot = null,
         ?TransferListenerNotifier $listenerNotifier = null
     ) {
-        $partSize = $config['part_size'] ?? self::PART_MIN_SIZE;
-        if ($partSize < self::PART_MIN_SIZE || $partSize > self::PART_MAX_SIZE) {
-            throw new \InvalidArgumentException(
-                "Part size must be between "
-                . self::PART_MIN_SIZE
-                . " and "
-                . self::PART_MAX_SIZE
-            );
-        }
-        $config['part_size'] = $partSize;
+
+        $this->validateConfig($config);
 
         if (empty($source['Bucket']) || empty($source['Key'])) {
             throw new \InvalidArgumentException("The source array must contain 'Bucket' and 'Key'");
         }
         if ($source['Bucket'] === $requestArgs['Bucket']
-            && $source['Key']    === $requestArgs['Key']
+            && $source['Key'] === $requestArgs['Key']
         ) {
             throw new \InvalidArgumentException("Source and destination cannot be the same object");
         }
@@ -82,21 +74,11 @@ class MultipartCopier extends AbstractMultipartUploader
     }
 
     /**
-     * @return PromiseInterface
+     * @return CopyResult
      */
-    public function copy(): PromiseInterface
+    public function copy(): CopyResult
     {
-        try {
-            $totalParts = (int) ceil($this->getTotalSize() / $this->config['part_size']);
-            if ($totalParts > AbstractMultipartUploader::PART_MAX_NUM) {
-                throw new \InvalidArgumentException('Total parts cannot exceed 10000');
-            }
-
-            $result = $this->promise()->wait();
-            return Create::promiseFor($result);
-        } catch (Throwable $e) {
-            return Create::rejectionFor($e);
-        }
+        return $this->promise()->wait();
     }
 
     /**
@@ -131,19 +113,15 @@ class MultipartCopier extends AbstractMultipartUploader
      */
     private function copyParts(): PromiseInterface
     {
-        $partSize   = $this->config['part_size'];
+        $partSize = $this->calculatePartSize();
         $objectSize = $this->getTotalSize();
         $totalParts = (int) ceil($objectSize / $partSize);
-
-        if ($totalParts > self::PART_MAX_NUM) {
-            throw new \InvalidArgumentException('Total parts cannot exceed 10000');
-        }
 
         $commands = [];
 
         for ($partNumber = 1; $partNumber <= $totalParts; $partNumber++) {
             $start = ($partNumber - 1) * $partSize;
-            $end   = min($start + $partSize - 1, $objectSize - 1);
+            $end = min($start + $partSize - 1, $objectSize - 1);
 
             $length = $end - $start + 1;
             $copySource = $this->getSourcePath($this->source);
@@ -156,8 +134,6 @@ class MultipartCopier extends AbstractMultipartUploader
                 'ContentLength' => $length,
             ];
 
-            $copyPartArgs['requestArgs'] = $copyPartArgs;
-
             $command = $this->s3Client->getCommand('UploadPartCopy', $copyPartArgs);
             $commands[] = $command;
         }
@@ -167,9 +143,10 @@ class MultipartCopier extends AbstractMultipartUploader
             'fulfilled' => function (ResultInterface $result, $index) use ($commands) {
                 $command = $commands[$index];
                 $this->collectPart($result, $command);
+                $commandArgs = $command->toArray();
                 $this->partCompleted(
-                    $command['requestArgs']['ContentLength'],
-                    $command['requestArgs']
+                    $commandArgs['ContentLength'],
+                    $commandArgs
                 );
             },
             'rejected' => function (Throwable $e) {
