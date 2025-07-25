@@ -51,8 +51,7 @@ class S3TransferManager
     public function __construct(
         ?S3ClientInterface $s3Client = null,
         array|S3TransferManagerConfig|null $config = null
-    )
-    {
+    ) {
         if ($config === null || is_array($config)) {
             $this->config = S3TransferManagerConfig::fromArray($config ?? []);
         } else {
@@ -549,9 +548,9 @@ class S3TransferManager
      * @return PromiseInterface
      */
     private function tryMultipartDownload(
-        array                     $getObjectRequestArgs,
-        array                     $config,
-        DownloadHandler           $downloadHandler,
+        array $getObjectRequestArgs,
+        array $config,
+        DownloadHandler $downloadHandler,
         ?TransferListenerNotifier $listenerNotifier = null,
     ): PromiseInterface
     {
@@ -577,8 +576,8 @@ class S3TransferManager
      * @return PromiseInterface
      */
     private function trySingleUpload(
-        string|StreamInterface    $source,
-        array                     $requestArgs,
+        string|StreamInterface $source,
+        array $requestArgs,
         ?TransferListenerNotifier $listenerNotifier = null
     ): PromiseInterface
     {
@@ -668,7 +667,7 @@ class S3TransferManager
      * @return PromiseInterface
      */
     private function tryMultipartUpload(
-        UploadRequest             $uploadRequest,
+        UploadRequest $uploadRequest,
         ?TransferListenerNotifier $listenerNotifier = null,
     ): PromiseInterface
     {
@@ -689,7 +688,7 @@ class S3TransferManager
      */
     private function requiresMultipartUpload(
         string|StreamInterface $source,
-        int                    $mupThreshold
+        int $mupThreshold
     ): bool
     {
         if (is_string($source) && is_readable($source)) {
@@ -811,7 +810,6 @@ class S3TransferManager
     public function copy(CopyRequest $request): PromiseInterface
     {
         $request->validateSourceAndDest();
-        $request->validateRequiredParameters();
         $request->updateConfigWithDefaults($this->config->toArray());
         $config = $request->getConfig();
 
@@ -827,8 +825,7 @@ class S3TransferManager
         }
 
         $notifier = new TransferListenerNotifier($listeners);
-        $threshold = $config['multipart_copy_threshold_bytes']
-            ?? $this->config->getMultipartUploadThresholdBytes();
+        $threshold = $config['multipart_copy_threshold_bytes'];
         if ($threshold < AbstractMultipartUploader::PART_MIN_SIZE) {
             throw new InvalidArgumentException(
                 "The provided config `multipart_copy_threshold_bytes`"
@@ -839,7 +836,7 @@ class S3TransferManager
 
         if ($this->requiresMultipartCopy($request->getSource(), $threshold)) {
             $mpConfig = [
-                'part_size' => $config['part_size'] ?? $this->config->getTargetPartSizeBytes(),
+                'target_part_size_bytes' => $config['target_part_size_bytes'] ?? $this->config->getTargetPartSizeBytes(),
                 'concurrency' => $config['concurrency'] ?? $this->config->getConcurrency(),
             ];
 
@@ -972,7 +969,7 @@ class S3TransferManager
      * @param array $source
      * @return string
      */
-    private function getSourcePath(array $source): string
+    private static function getSourcePath(array $source): string
     {
         $path = "/{$source['Bucket']}/";
         if (ArnParser::isArn($source['Bucket'])) {

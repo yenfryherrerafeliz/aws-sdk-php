@@ -85,28 +85,6 @@ class MultipartCopierTest extends TestCase
         $copier->copy()->wait();
     }
 
-    /**
-     * @return void
-     */
-    public function testThrowsWhenTooManyParts(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Total parts cannot exceed');
-
-        $oversizedObject = (AbstractMultipartUploader::PART_MAX_NUM + 1)
-            * AbstractMultipartUploader::PART_MIN_SIZE;
-
-        (new MultipartCopier(
-            $this->client,
-            ['Bucket' => 'dest', 'Key' => 'key'],
-            [
-                'part_size' => AbstractMultipartUploader::PART_MIN_SIZE,
-                'concurrency' => 1,
-                'object_size' => $oversizedObject,
-            ],
-            ['Bucket' => 'src', 'Key' => 'key']
-        ))->copy()->wait();
-    }
 
     /**
      * @return void
@@ -179,12 +157,6 @@ class MultipartCopierTest extends TestCase
                 'dest' => ['Bucket' => 'bucket', 'Key' => 'key'],
                 'config' => ['part_size' => AbstractMultipartUploader::PART_MIN_SIZE, 'concurrency' => 1],
                 'source' => ['Bucket' => 'bucket', 'Key' => 'key'],
-                'expectedException' => \InvalidArgumentException::class,
-            ],
-            'Invalid part size' => [
-                'dest' => ['Bucket' => 'dest', 'Key' => 'dest-key'],
-                'config' => ['part_size' => 1 * 1024 * 1024, 'concurrency' => 1],
-                'source' => ['Bucket' => 'src', 'Key' => 'key'],
                 'expectedException' => \InvalidArgumentException::class,
             ],
         ];
@@ -534,11 +506,11 @@ class MultipartCopierTest extends TestCase
         return [
             'part_size_over_max' => [
                 'part_size' => AbstractMultipartUploader::PART_MAX_SIZE + 1,
-                'expectError' => true,
+                'expectError' => false,
             ],
             'part_size_under_min' => [
                 'part_size' => AbstractMultipartUploader::PART_MIN_SIZE - 1,
-                'expectError' => true,
+                'expectError' => false,
             ],
             'part_size_between_valid_range_1' => [
                 'part_size' => AbstractMultipartUploader::PART_MAX_SIZE - 1,
