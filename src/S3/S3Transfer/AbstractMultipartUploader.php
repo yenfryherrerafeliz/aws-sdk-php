@@ -1,5 +1,4 @@
 <?php
-
 namespace Aws\S3\S3Transfer;
 
 use Aws\CommandInterface;
@@ -41,6 +40,9 @@ abstract class AbstractMultipartUploader implements PromisorInterface
     /** @var array @ */
     protected array $parts;
 
+    /** @var int */
+    protected int $calculatedObjectSize;
+
     /** @var array */
     protected array $onCompletionCallbacks = [];
 
@@ -56,14 +58,14 @@ abstract class AbstractMultipartUploader implements PromisorInterface
      *
      * @var string | null
      */
-    protected ?string $requestChecksum;
+    protected ?string $requestChecksum = null;
 
     /**
      * This will be used for custom or default checksum.
      *
      * @var string | null
      */
-    protected ?string $requestChecksumAlgorithm;
+    protected ?string $requestChecksumAlgorithm = null;
 
     /**
      * @param S3ClientInterface $s3Client
@@ -100,7 +102,7 @@ abstract class AbstractMultipartUploader implements PromisorInterface
     /**
      * @param array $config
      *
-     * @return void
+     * @throws \InvalidArgumentException when the part size is invalid
      */
     protected function validateConfig(array &$config): void
     {
@@ -156,11 +158,11 @@ abstract class AbstractMultipartUploader implements PromisorInterface
      */
     public function promise(): PromiseInterface
     {
-        return Coroutine::of(function () {
+        return Coroutine::of(function() {
             try {
-                yield $this->createMultipartUpload();
+                yield $this->createMultipartOperation();
                 yield $this->processMultipartOperation();
-                $result = yield $this->completeMultipartUpload();
+                $result = yield $this->completeMultipartOperation();
                 yield Create::promiseFor($this->createResponse($result));
             } catch (Throwable $e) {
                 $this->operationFailed($e);
@@ -174,7 +176,7 @@ abstract class AbstractMultipartUploader implements PromisorInterface
     /**
      * @return PromiseInterface
      */
-    protected function createMultipartUpload(): PromiseInterface
+    protected function createMultipartOperation(): PromiseInterface
     {
         $createMultipartUploadArgs = $this->requestArgs;
         if ($this->requestChecksum !== null) {
@@ -203,7 +205,7 @@ abstract class AbstractMultipartUploader implements PromisorInterface
     /**
      * @return PromiseInterface
      */
-    protected function completeMultipartUpload(): PromiseInterface
+    protected function completeMultipartOperation(): PromiseInterface
     {
         $this->sortParts();
         $completeMultipartUploadArgs = $this->requestArgs;
@@ -235,7 +237,7 @@ abstract class AbstractMultipartUploader implements PromisorInterface
     /**
      * @return PromiseInterface
      */
-    protected function abortMultipartUpload(): PromiseInterface
+    protected function abortMultipartOperation(): PromiseInterface
     {
         $abortMultipartUploadArgs = $this->requestArgs;
         $abortMultipartUploadArgs['UploadId'] = $this->uploadId;
@@ -262,8 +264,7 @@ abstract class AbstractMultipartUploader implements PromisorInterface
      * @param CommandInterface $command
      * @return void
      */
-    protected function collectPart
-    (
+    protected function collectPart(
         ResultInterface $result,
         CommandInterface $command
     ): void
@@ -293,8 +294,7 @@ abstract class AbstractMultipartUploader implements PromisorInterface
      * @param callable $rejectedCallback
      * @return PromiseInterface
      */
-    protected function createCommandPool
-    (
+    protected function createCommandPool(
         array $commands,
         callable $fulfilledCallback,
         callable $rejectedCallback
@@ -387,7 +387,7 @@ abstract class AbstractMultipartUploader implements PromisorInterface
                 "Multipart Upload with id: " . $this->uploadId . " failed",
                 E_USER_WARNING
             );
-            $this->abortMultipartUpload()->wait();
+            $this->abortMultipartOperation()->wait();
         }
 
         $this->listenerNotifier?->transferFail([

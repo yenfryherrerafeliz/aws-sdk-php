@@ -16,12 +16,14 @@ use Aws\S3\S3Transfer\Models\DownloadRequest;
 use Aws\S3\S3Transfer\Models\UploadDirectoryRequest;
 use Aws\S3\S3Transfer\Models\UploadDirectoryResponse;
 use Aws\S3\S3Transfer\Models\UploadRequest;
+use Aws\S3\S3Transfer\Models\CopyRequest;
 use Aws\S3\S3Transfer\MultipartDownloader;
 use Aws\S3\S3Transfer\MultipartUploader;
 use Aws\S3\S3Transfer\Progress\TransferListener;
 use Aws\S3\S3Transfer\Progress\TransferProgressSnapshot;
 use Aws\S3\S3Transfer\S3TransferManager;
 use Aws\Test\TestsUtility;
+use Aws\Test\UsesServiceTrait;
 use Closure;
 use Exception;
 use GuzzleHttp\Promise\Create;
@@ -31,6 +33,7 @@ use PHPUnit\Framework\TestCase;
 
 class S3TransferManagerTest extends TestCase
 {
+    use UsesServiceTrait;
     /**
      * @return void
      */
@@ -411,8 +414,8 @@ class S3TransferManagerTest extends TestCase
         $expectedPartCount = 2;
         $expectedPartSize = 6 * 1024 * 1024; // 6 MBs
         $transferListener = $this->getMockBuilder(TransferListener::class)
-        ->onlyMethods(['bytesTransferred'])
-        ->getMock();
+            ->onlyMethods(['bytesTransferred'])
+            ->getMock();
         $expectedIncrementalPartSize = $expectedPartSize;
         $transferListener->method('bytesTransferred')
             ->willReturnCallback(function ($context) use (
@@ -565,7 +568,7 @@ class S3TransferManagerTest extends TestCase
             $this->expectException(InvalidArgumentException::class);
             $this->expectExceptionMessage(
                 "Please provide a valid directory path. "
-            . "Provided = " . $directory);
+                . "Provided = " . $directory);
         } else {
             $this->assertTrue(true);
         }
@@ -674,9 +677,9 @@ class S3TransferManagerTest extends TestCase
         }
         try {
             $client = $this->getMockBuilder(S3Client::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['getCommand', 'executeAsync'])
-            ->getMock();
+                ->disableOriginalConstructor()
+                ->onlyMethods(['getCommand', 'executeAsync'])
+                ->getMock();
             $client->method('getCommand')
                 ->willReturnCallback(function ($commandName, $args) {
                     return new Command($commandName, $args);
@@ -2714,6 +2717,9 @@ class S3TransferManagerTest extends TestCase
     /**
      * @return array
      */
+    /**
+     * @return array
+     */
     public function downloadDirectoryCreateFilesProvider(): array
     {
         return [
@@ -3021,5 +3027,372 @@ class S3TransferManagerTest extends TestCase
         }
 
         return $client;
+    }
+
+    /**
+     * @return void
+     */
+    public function testCopyExpectsValidSource(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            "Both `Bucket` and `Key` must be provided in the source array."
+        );
+
+        $manager = new S3TransferManager();
+
+        $request = CopyRequest::fromLegacyArgs(
+            [],                                      // invalid source
+            ['Bucket' => 'dest-bucket', 'Key' => 'dest-key'],
+            [],                                      // any config overrides
+            [],                                      // listeners
+            null                                    // optional progressTracker
+        );
+
+        $manager->copy($request)->wait();
+    }
+
+    /**
+     * @dataProvider copyBucketAndKeyProvider
+     */
+    public function testCopyFailsWhenBucketAndKeyAreNotProvided(
+        array  $bucketKeyArgs,
+        string $missingProperty,
+        bool   $isSource
+    ): void {
+        $manager = new S3TransferManager();
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            $isSource
+                ? "Both `Bucket` and `Key` must be provided in the source array."
+                : "Both `Bucket` and `Key` must be provided in the copy request arguments."
+        );
+
+        $validSource = ['Bucket' => 'source-bucket', 'Key' => 'source-key'];
+        $validDest   = ['Bucket' => 'dest-bucket',   'Key' => 'dest-key'];
+
+        $sourceArgs = $isSource ? $bucketKeyArgs : $validSource;
+        $destArgs   = $isSource ? $validDest     : $bucketKeyArgs;
+
+        $request = CopyRequest::fromLegacyArgs(
+            $sourceArgs,
+            $destArgs
+        );
+
+        $manager->copy($request)->wait();
+    }
+
+
+
+    /**
+     * @return array[]
+     */
+    public function copyBucketAndKeyProvider(): array
+    {
+        return [
+            'source_bucket_missing' => [
+                'bucket_key_args' => [
+                    'Key' => 'Key',
+                ],
+                'missing_property' => 'Bucket',
+                'is_source' => true
+            ],
+            'source_key_missing' => [
+                'bucket_key_args' => [
+                    'Bucket' => 'Bucket',
+                ],
+                'missing_property' => 'Key',
+                'is_source' => true
+            ],
+            'dest_bucket_missing' => [
+                'bucket_key_args' => [
+                    'Key' => 'Key',
+                ],
+                'missing_property' => 'Bucket',
+                'is_source' => false
+            ],
+            'dest_key_missing' => [
+                'bucket_key_args' => [
+                    'Bucket' => 'Bucket',
+                ],
+                'missing_property' => 'Key',
+                'is_source' => false
+            ],
+        ];
+    }
+
+    /**
+     * @return void
+     */
+    public function testCopyFailsWhenMultipartThresholdIsLessThanMinSize(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            "The provided config `multipart_copy_threshold_bytes` must be greater than or equal to "
+            . AbstractMultipartUploader::PART_MIN_SIZE
+        );
+
+        $manager = new S3TransferManager();
+
+        $request = CopyRequest::fromLegacyArgs(
+            ['Bucket' => 'source-bucket', 'Key' => 'source-key'],
+            ['Bucket' => 'dest-bucket',   'Key' => 'dest-key'],
+            ['multipart_copy_threshold_bytes' => AbstractMultipartUploader::PART_MIN_SIZE - 1]
+        );
+
+        $manager->copy($request)->wait();
+    }
+
+    /**
+     * @return void
+     */
+    public function testDoesSingleCopyWhenApplicable(): void
+    {
+        $client = $this->getTestClient('s3');
+        $objectSize = AbstractMultipartUploader::PART_MIN_SIZE - 1;
+
+        $this->addMockResults($client, [
+            new Result(['ContentLength' => $objectSize]),
+            new Result(['ContentLength' => $objectSize]),
+            new Result(['ETag' => 'test-etag']),
+        ]);
+
+        $manager = new S3TransferManager($client);
+
+        $transferListener = $this->createMock(TransferListener::class);
+        $transferListener->expects($this->once())
+            ->method('bytesTransferred');
+
+        $request = CopyRequest::fromLegacyArgs(
+            ['Bucket' => 'source-bucket', 'Key' => 'source-key'],
+            ['Bucket' => 'dest-bucket',   'Key' => 'dest-key'],
+            ['multipart_copy_threshold_bytes' => AbstractMultipartUploader::PART_MIN_SIZE],
+            [ $transferListener ]
+        );
+
+        $manager->copy($request)->wait();
+    }
+
+    /**
+     * @return void
+     */
+    public function testDoesMultipartCopyWhenApplicable(): void
+    {
+        $client = $this->getTestClient('s3');
+
+        $objectSize   = AbstractMultipartUploader::PART_MIN_SIZE * 2;
+        $partSize     = AbstractMultipartUploader::PART_MIN_SIZE;
+        $expectedParts = (int) ceil($objectSize / $partSize);
+
+        $mockResults = [
+            new Result(['ContentLength' => $objectSize]),
+            new Result(['ContentLength' => $objectSize]),
+            new Result(['UploadId'      => 'test-upload-id']),
+            ];
+
+        for ($i = 1; $i <= $expectedParts; $i++) {
+            $mockResults[] = new Result(['CopyPartResult' => ['ETag' => "etag{$i}"]]);
+        }
+        $mockResults[] = new Result(['ETag' => 'final-etag']);
+
+        $this->addMockResults($client, $mockResults, function ($command, $result) {
+            echo "Command: " . $command->getName() . "\n";
+        });
+
+        $manager = new S3TransferManager($client);
+
+        $transferListener = $this->createMock(TransferListener::class);
+        $transferListener
+            ->expects($this->exactly($expectedParts))
+            ->method('bytesTransferred');
+
+        $request = CopyRequest::fromLegacyArgs(
+            ['Bucket' => 'source-bucket', 'Key' => 'source-key'],
+            ['Bucket' => 'dest-bucket',   'Key' => 'dest-key'],
+            [
+                'part_size'                      => $partSize,
+                'multipart_copy_threshold_bytes' => AbstractMultipartUploader::PART_MIN_SIZE,
+            ],
+            [$transferListener]
+        );
+
+        $manager->copy($request)->wait();
+    }
+
+    /**
+     * @return void
+     */
+    public function testCopyUsesTransferManagerConfigDefaultMupThreshold(): void
+    {
+        $client  = $this->getTestClient('s3');
+        $manager = new S3TransferManager($client);
+
+        $defaultThreshold = $manager->getConfig()->getMultipartUploadThresholdBytes();
+        $defaultPartSize  = $manager->getConfig()->getTargetPartSizeBytes();
+
+        $objectSize    = $defaultThreshold;
+        $expectedParts = (int)ceil($objectSize / $defaultPartSize);
+
+        $mockResults = [
+            new Result(['ContentLength' => $objectSize]),
+            new Result(['ContentLength' => $objectSize]),
+            new Result(['UploadId'      => 'test-upload-id']),
+        ];
+        for ($i = 1; $i <= $expectedParts; $i++) {
+            $mockResults[] = new Result(['CopyPartResult' => ['ETag' => "etag{$i}"]]);
+        }
+        $mockResults[] = new Result(['ETag' => 'final-etag']);
+
+        $this->addMockResults($client, $mockResults);
+
+        $transferListener = $this->createMock(TransferListener::class);
+        $transferListener
+            ->expects($this->exactly($expectedParts))
+            ->method('bytesTransferred');
+
+        $request = CopyRequest::fromLegacyArgs(
+            ['Bucket' => 'source-bucket', 'Key' => 'source-key'],
+            ['Bucket' => 'dest-bucket',   'Key' => 'dest-key'],
+            [
+                'multipart_copy_threshold_bytes' => $defaultThreshold,
+            ],
+            [$transferListener]
+        );
+
+        $manager->copy($request)->wait();
+    }
+
+    /**
+     * @dataProvider copyUsesCustomMupThresholdProvider
+     * @param int $mupThreshold The multipart threshold to test
+     * @param int $objectSize The size of the test object
+     * @param int $expectedPartCount Number of parts expected
+     * @param bool $isMultipartCopy Whether this should be a multipart copy
+     */
+    public function testCopyUsesCustomMupThreshold(
+        int $mupThreshold,
+        int $objectSize,
+        int $expectedPartCount,
+        bool $isMultipartCopy
+    ): void
+    {
+        $client  = $this->getTestClient('s3');
+        $manager = new S3TransferManager($client);
+
+        $mockResults = [];
+
+        if ($isMultipartCopy) {
+            $mockResults[] = new Result(['ContentLength' => $objectSize]);
+            $mockResults[] = new Result(['ContentLength' => $objectSize]);
+            $mockResults[] = new Result(['UploadId'      => 'test-upload-id']);
+
+            for ($i = 1; $i <= $expectedPartCount; $i++) {
+                $mockResults[] = new Result(['CopyPartResult' => ['ETag' => "etag{$i}"]]);
+            }
+
+            $mockResults[] = new Result(['ETag' => 'final-etag']);
+        } else {
+            $mockResults[] = new Result(['ContentLength' => $objectSize]);
+            $mockResults[] = new Result(['ContentLength' => $objectSize]);
+            $mockResults[] = new Result(['ETag'          => 'test-etag']);
+        }
+
+        $this->addMockResults($client, $mockResults);
+
+        $transferListener = $this->createMock(TransferListener::class);
+        $transferListener
+            ->expects($this->exactly($expectedPartCount))
+            ->method('bytesTransferred');
+
+        $request = CopyRequest::fromLegacyArgs(
+            ['Bucket' => 'source-bucket', 'Key' => 'source-key'],
+            ['Bucket' => 'dest-bucket',   'Key' => 'dest-key'],
+            [
+                'multipart_copy_threshold_bytes' => $mupThreshold,
+                'part_size'                     => AbstractMultipartUploader::PART_MIN_SIZE,
+            ],
+            [$transferListener]
+        );
+
+        $manager->copy($request)->wait();
+    }
+    /**
+     * @return array[]
+     */
+    public function copyUsesCustomMupThresholdProvider(): array
+    {
+        return [
+            'multipart_copy_above_threshold' => [
+                'mup_threshold' => AbstractMultipartUploader::PART_MIN_SIZE * 2,
+                'object_size' => AbstractMultipartUploader::PART_MIN_SIZE * 3,
+                'expected_part_count' => 3,
+                'is_multipart_copy' => true
+            ],
+            'single_copy_below_threshold' => [
+                'mup_threshold' => AbstractMultipartUploader::PART_MIN_SIZE * 2,
+                'object_size' => AbstractMultipartUploader::PART_MIN_SIZE,
+                'expected_part_count' => 1,
+                'is_multipart_copy' => false
+            ],
+            'multipart_copy_at_threshold' => [
+                'mup_threshold' => AbstractMultipartUploader::PART_MIN_SIZE * 2,
+                'object_size' => AbstractMultipartUploader::PART_MIN_SIZE * 2,
+                'expected_part_count' => 2,
+                'is_multipart_copy' => true
+            ]
+        ];
+    }
+
+    /**
+     * @return void
+     */
+    public function testCopyUsesTransferManagerConfigDefaultTargetPartSize(): void
+    {
+        $client  = $this->getTestClient('s3');
+        $manager = new S3TransferManager($client);
+        $defaultPartSize   = $manager->getConfig()->getTargetPartSizeBytes();
+        $expectedPartCount = 2;
+        $objectSize        = $defaultPartSize * $expectedPartCount;
+
+        $mockResults = [
+            new Result(['ContentLength' => $objectSize]),
+            new Result(['ContentLength' => $objectSize]),
+            new Result(['UploadId'      => 'test-upload-id']),
+        ];
+        for ($i = 1; $i <= $expectedPartCount; $i++) {
+            $mockResults[] = new Result([
+                'CopyPartResult' => ['ETag' => "etag{$i}"]
+            ]);
+        }
+        $mockResults[] = new Result(['ETag' => 'final-etag']);
+
+        $this->addMockResults($client, $mockResults);
+
+        $callCount = 0;
+        $transferListener = $this->createMock(TransferListener::class);
+        $transferListener
+            ->expects($this->exactly($expectedPartCount))
+            ->method('bytesTransferred')
+            ->willReturnCallback(function (array $ctx) use (&$callCount, $defaultPartSize) {
+                $snap = $ctx[TransferListener::PROGRESS_SNAPSHOT_KEY];
+                $this->assertEquals(
+                    ($callCount + 1) * $defaultPartSize,
+                    $snap->getTransferredBytes()
+                );
+                $callCount++;
+            });
+
+        $request = CopyRequest::fromLegacyArgs(
+            ['Bucket' => 'source-bucket', 'Key' => 'source-key'],
+            ['Bucket' => 'dest-bucket',   'Key' => 'dest-key'],
+            [
+                'multipart_copy_threshold_bytes' => $defaultPartSize,
+                'part_size'                      => $defaultPartSize,
+            ],
+            [$transferListener]
+        );
+
+        $manager->copy($request)->wait();
     }
 }
