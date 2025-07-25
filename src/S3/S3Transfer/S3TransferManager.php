@@ -25,6 +25,7 @@ use Aws\S3\S3Transfer\Progress\TransferListenerNotifier;
 use Aws\S3\S3Transfer\Progress\TransferProgressSnapshot;
 use Aws\S3\S3Transfer\Utils\DownloadHandler;
 use FilesystemIterator;
+use GuzzleHttp\Promise\Create;
 use GuzzleHttp\Promise\Each;
 use GuzzleHttp\Promise\PromiseInterface;
 use InvalidArgumentException;
@@ -51,8 +52,7 @@ class S3TransferManager
     public function __construct(
         ?S3ClientInterface $s3Client = null,
         array|S3TransferManagerConfig|null $config = null
-    )
-    {
+    ) {
         if ($config === null || is_array($config)) {
             $this->config = S3TransferManagerConfig::fromArray($config ?? []);
         } else {
@@ -549,9 +549,9 @@ class S3TransferManager
      * @return PromiseInterface
      */
     private function tryMultipartDownload(
-        array                     $getObjectRequestArgs,
-        array                     $config,
-        DownloadHandler           $downloadHandler,
+        array $getObjectRequestArgs,
+        array $config,
+        DownloadHandler $downloadHandler,
         ?TransferListenerNotifier $listenerNotifier = null,
     ): PromiseInterface
     {
@@ -577,8 +577,8 @@ class S3TransferManager
      * @return PromiseInterface
      */
     private function trySingleUpload(
-        string|StreamInterface    $source,
-        array                     $requestArgs,
+        string|StreamInterface $source,
+        array $requestArgs,
         ?TransferListenerNotifier $listenerNotifier = null
     ): PromiseInterface
     {
@@ -668,7 +668,7 @@ class S3TransferManager
      * @return PromiseInterface
      */
     private function tryMultipartUpload(
-        UploadRequest             $uploadRequest,
+        UploadRequest $uploadRequest,
         ?TransferListenerNotifier $listenerNotifier = null,
     ): PromiseInterface
     {
@@ -689,7 +689,7 @@ class S3TransferManager
      */
     private function requiresMultipartUpload(
         string|StreamInterface $source,
-        int                    $mupThreshold
+        int $mupThreshold
     ): bool
     {
         if (is_string($source) && is_readable($source)) {
@@ -808,15 +808,14 @@ class S3TransferManager
         return false;
     }
 
-    public function copy(CopyRequest $request): PromiseInterface
+    public function copy(CopyRequest $copyRequest): PromiseInterface
     {
-        $request->validateSourceAndDest();
-        $request->validateRequiredParameters();
-        $request->updateConfigWithDefaults($this->config->toArray());
-        $config = $request->getConfig();
+        $copyRequest->validateSourceAndDest();
+        $copyRequest->updateConfigWithDefaults($this->config->toArray());
+        $config = $copyRequest->getConfig();
 
-        $listeners = $request->getListeners();
-        $progressTracker = $request->getProgressTracker();
+        $listeners = $copyRequest->getListeners();
+        $progressTracker = $copyRequest->getProgressTracker();
         if (is_null($progressTracker)
             && ($config['track_progress'] ?? $this->config->isTrackProgress())
         ) {
@@ -827,8 +826,7 @@ class S3TransferManager
         }
 
         $notifier = new TransferListenerNotifier($listeners);
-        $threshold = $config['multipart_copy_threshold_bytes']
-            ?? $this->config->getMultipartUploadThresholdBytes();
+        $threshold = $config['multipart_copy_threshold_bytes'];
         if ($threshold < AbstractMultipartUploader::PART_MIN_SIZE) {
             throw new InvalidArgumentException(
                 "The provided config `multipart_copy_threshold_bytes`"
@@ -837,50 +835,40 @@ class S3TransferManager
             );
         }
 
-        if ($this->requiresMultipartCopy($request->getSource(), $threshold)) {
-            $mpConfig = [
-                'part_size' => $config['part_size'] ?? $this->config->getTargetPartSizeBytes(),
-                'concurrency' => $config['concurrency'] ?? $this->config->getConcurrency(),
-            ];
-
+        if ($this->requiresMultipartCopy($copyRequest->getSource(), $threshold)) {
             return $this->tryMultipartCopy(
-                $request->getSource(),
-                $request->getCopyRequestArgs(),
-                $mpConfig,
+                $copyRequest,
                 $notifier
             );
         }
 
         return $this->trySingleCopy(
-            $request->getSource(),
-            $request->getCopyRequestArgs(),
+            $copyRequest->getSource(),
+            $copyRequest->getCopyRequestArgs(),
             $notifier
         );
     }
 
     /**
-     * @param array $source
-     * @param array $copyRequestArgs
-     * @param array $config
+     * @param CopyRequest $copyRequest
      * @param TransferListenerNotifier|null $listenerNotifier
      * @return PromiseInterface
      */
     public function tryMultipartCopy(
-        array $source,
-        array $copyRequestArgs,
-        array $config = [],
-        ?TransferListenerNotifier $listenerNotifier = null
+        CopyRequest $copyRequest,
+        ?TransferListenerNotifier $listenerNotifier = null,
     ): PromiseInterface
     {
         $copier = new MultipartCopier(
             s3Client: $this->s3Client,
-            requestArgs: $copyRequestArgs,
-            config: $config,
-            source: $source,
+            requestArgs: $copyRequest->getCopyRequestArgs(),
+            config: $copyRequest->getConfig(),
+            source: $copyRequest->getSource(),
             listenerNotifier: $listenerNotifier
         );
 
-        return $copier->copy();
+        return $copier->promise();
+
     }
 
     /**
@@ -898,7 +886,7 @@ class S3TransferManager
     {
         $params = [
             'Bucket' => $copyRequestArgs['Bucket'],
-            'CopySource' => $this->getSourcePath(source: $source),
+            'CopySource' => $this->getSourcePath($source),
             'Key' => $copyRequestArgs['Key']
         ];
 
@@ -972,7 +960,7 @@ class S3TransferManager
      * @param array $source
      * @return string
      */
-    private function getSourcePath(array $source): string
+    private static function getSourcePath(array $source): string
     {
         $path = "/{$source['Bucket']}/";
         if (ArnParser::isArn($source['Bucket'])) {

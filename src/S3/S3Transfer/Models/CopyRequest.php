@@ -4,7 +4,7 @@ namespace Aws\S3\S3Transfer\Models;
 use Aws\S3\S3Transfer\Progress\TransferListener;
 use InvalidArgumentException;
 
-class CopyRequest extends TransferRequest
+final class CopyRequest extends TransferRequest
 {
     public static array $configKeys = [
         'multipart_copy_threshold_bytes',
@@ -32,8 +32,7 @@ class CopyRequest extends TransferRequest
         array $config = [],
         array $listeners = [],
         ?TransferListener $progressTracker = null
-    )
-    {
+    ) {
         parent::__construct($listeners, $progressTracker, $config);
         $this->source = $source;
         $this->copyRequestArgs = $copyRequestArgs;
@@ -49,13 +48,13 @@ class CopyRequest extends TransferRequest
      */
     public static function fromLegacyArgs(
         array $source,
-        array $copyRequestArgs = [],
+        array $copyRequestArgs,
         array $config = [],
         array $listeners = [],
         ?TransferListener $progressTracker = null
-    ): static
+    ): self
     {
-        return new static(
+        return new self(
             $source,
             $copyRequestArgs,
             $config,
@@ -109,22 +108,6 @@ class CopyRequest extends TransferRequest
             throw new InvalidArgumentException(
                 "Source and destination cannot be the same object."
             );
-        }
-    }
-
-    /**
-     * Helper method for validating required parameters.
-     *
-     * @throws InvalidArgumentException When copy request arguments are not provided
-     */
-    public function validateRequiredParameters(): void
-    {
-        foreach (['Bucket', 'Key'] as $param) {
-            if (empty($this->copyRequestArgs[$param] ?? null)) {
-                throw new InvalidArgumentException(
-                    "The '{$param}' parameter must be provided as part of the copy request arguments."
-                );
-            }
         }
     }
 }

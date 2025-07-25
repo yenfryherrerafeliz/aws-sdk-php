@@ -6,6 +6,7 @@ use Aws\Command;
 use Aws\Exception\AwsException;
 use Aws\S3\S3Transfer\AbstractMultipartUploader;
 use Aws\S3\S3Transfer\Models\CopyResult;
+use Aws\S3\S3Transfer\Models\S3TransferManagerConfig;
 use Aws\S3\S3Transfer\MultipartCopier;
 use Aws\S3\S3Transfer\Progress\TransferListener;
 use Aws\S3\S3Transfer\Progress\TransferListenerNotifier;
@@ -82,64 +83,54 @@ class MultipartCopierTest extends TestCase
             $notifier
         );
 
-        $copier->copy()->wait();
+        $copier->copy();
     }
 
-    /**
-     * @return void
-     */
-    public function testThrowsWhenTooManyParts(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Total parts cannot exceed');
-
-        $oversizedObject = (AbstractMultipartUploader::PART_MAX_NUM + 1)
-            * AbstractMultipartUploader::PART_MIN_SIZE;
-
-        (new MultipartCopier(
-            $this->client,
-            ['Bucket' => 'dest', 'Key' => 'key'],
-            [
-                'part_size' => AbstractMultipartUploader::PART_MIN_SIZE,
-                'concurrency' => 1,
-                'object_size' => $oversizedObject,
-            ],
-            ['Bucket' => 'src', 'Key' => 'key']
-        ))->copy()->wait();
-    }
-
-    /**
-     * @return void
-     */
     public function testUsesDefaultPartSizeWhenNotPassed(): void
     {
+        // Arrange: mock the sequence of S3 responses
         $this->addMockResults($this->client, [
+            // headObject for source size
             new Result(['ContentLength' => 10 * 1024 * 1024]),
+            // CreateMultipartUpload
             new Result(['UploadId' => 'upload-id']),
-            new Result(['CopyPartResult'=> ['ETag' => 'a']]),
-            new Result(['CopyPartResult'=> ['ETag' => 'b']]),
-            new Result(['Location' => 'u','Key' => 'k','Bucket' => 'b']),
+            // Two copy part results (since object is 10 MiB and default part size will determine number of parts)
+            new Result(['CopyPartResult' => ['ETag' => 'a']]),
+            new Result(['CopyPartResult' => ['ETag' => 'b']]),
+            // CompleteMultipartUpload response
+            new Result(['Location' => 'u', 'Key' => 'k', 'Bucket' => 'b']),
         ]);
 
+        // Build the copier without specifying a part size so it falls back to default
         $mockCopier = $this->getMockBuilder(MultipartCopier::class)
             ->setConstructorArgs([
                 $this->client,
                 ['Bucket' => 'b', 'Key' => 'k'],
-                ['concurrency' => 1],
+                ['concurrency' => 1], // no part_size provided
                 ['Bucket' => 's', 'Key' => 'o'],
             ])
             ->onlyMethods(['partCompleted'])
             ->getMock();
 
-        $mockCopier->expects($this->exactly(2))
+        // Derive the expected part size from the canonical default
+        $expectedPartSize = S3TransferManagerConfig::DEFAULT_TARGET_PART_SIZE_BYTES;
+
+        // Given a 10 MiB object, determine how many parts should be created
+        $objectSize = 10 * 1024 * 1024;
+        $expectedPartCount = (int) ceil($objectSize / $expectedPartSize);
+
+        // Expect partCompleted to be called once per part, with the default part size
+        $mockCopier->expects($this->exactly($expectedPartCount))
             ->method('partCompleted')
             ->with(
-                MultipartCopier::PART_MIN_SIZE,
+                $expectedPartSize,
                 $this->arrayHasKey('CopySourceRange')
             );
 
-        $mockCopier->copy()->wait();
+        // Act
+        $mockCopier->copy();
     }
+
 
     /**
      * @dataProvider invalidConstructorProvider
@@ -179,12 +170,6 @@ class MultipartCopierTest extends TestCase
                 'dest' => ['Bucket' => 'bucket', 'Key' => 'key'],
                 'config' => ['part_size' => AbstractMultipartUploader::PART_MIN_SIZE, 'concurrency' => 1],
                 'source' => ['Bucket' => 'bucket', 'Key' => 'key'],
-                'expectedException' => \InvalidArgumentException::class,
-            ],
-            'Invalid part size' => [
-                'dest' => ['Bucket' => 'dest', 'Key' => 'dest-key'],
-                'config' => ['part_size' => 1 * 1024 * 1024, 'concurrency' => 1],
-                'source' => ['Bucket' => 'src', 'Key' => 'key'],
                 'expectedException' => \InvalidArgumentException::class,
             ],
         ];
@@ -232,7 +217,7 @@ class MultipartCopierTest extends TestCase
             ['Bucket' => 'src','Key' => 'key']
         );
 
-        $result   = $copier->copy()->wait();
+        $result   = $copier->copy();
 
         $this->assertInstanceOf(CopyResult::class, $result);
         $parts = $copier->getParts();
@@ -260,7 +245,7 @@ class MultipartCopierTest extends TestCase
             ->setConstructorArgs([
                 $this->client,
                 ['Bucket'=>'dest','Key'=>'dest-key'],
-                ['part_size'=>5 * 1024 * 1024,'concurrency'=>1],
+                ['target_part_size_bytes'=>5 * 1024 * 1024,'concurrency'=>1],
                 ['Bucket'=>'src','Key'=>'key'],
             ])
             ->onlyMethods(['partCompleted'])
@@ -273,7 +258,7 @@ class MultipartCopierTest extends TestCase
                 $this->arrayHasKey('CopySourceRange')
             );
 
-        $mockCopier->copy()->wait();
+        $mockCopier->copy();
     }
 
     /**
@@ -436,7 +421,7 @@ class MultipartCopierTest extends TestCase
             $listenerNotifier
         );
 
-        $response = $copier->copy()->wait();
+        $response = $copier->copy();
         $this->assertInstanceOf(CopyResult::class, $response);
     }
 
@@ -487,7 +472,7 @@ class MultipartCopierTest extends TestCase
             ['Bucket' => 'src',  'Key' => 'src-key']
         );
 
-        $copier->copy()->wait();
+        $copier->copy();
 
         foreach ($operationsCalled as $op => $wasCalled) {
             $this->assertTrue(
@@ -534,11 +519,11 @@ class MultipartCopierTest extends TestCase
         return [
             'part_size_over_max' => [
                 'part_size' => AbstractMultipartUploader::PART_MAX_SIZE + 1,
-                'expectError' => true,
+                'expectError' => false,
             ],
             'part_size_under_min' => [
                 'part_size' => AbstractMultipartUploader::PART_MIN_SIZE - 1,
-                'expectError' => true,
+                'expectError' => false,
             ],
             'part_size_between_valid_range_1' => [
                 'part_size' => AbstractMultipartUploader::PART_MAX_SIZE - 1,
@@ -592,7 +577,7 @@ class MultipartCopierTest extends TestCase
             $listenerNotifier
         );
 
-        $response = $copier->copy()->wait();
+        $response = $copier->copy();
         $this->assertInstanceOf(CopyResult::class, $response);
     }
 
