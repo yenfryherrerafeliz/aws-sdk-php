@@ -6,6 +6,7 @@ final class S3TransferManagerConfig
 {
     public const DEFAULT_TARGET_PART_SIZE_BYTES = 8388608; // 8MB
     public const DEFAULT_MULTIPART_UPLOAD_THRESHOLD_BYTES = 16777216; // 16MB
+    public const DEFAULT_MULTIPART_COPY_THRESHOLD_BYTES = 16777216;
     public const DEFAULT_REQUEST_CHECKSUM_CALCULATION = 'when_supported';
     public const DEFAULT_RESPONSE_CHECKSUM_VALIDATION = 'when_supported';
     public const DEFAULT_MULTIPART_DOWNLOAD_TYPE = 'part';
@@ -18,6 +19,9 @@ final class S3TransferManagerConfig
 
     /** @var int  */
     private int $multipartUploadThresholdBytes;
+
+    /** @var int  */
+    private int $multipartCopyThresholdBytes;
 
     /** @var string */
     private string $requestChecksumCalculation;
@@ -40,6 +44,7 @@ final class S3TransferManagerConfig
     /**
      * @param int $targetPartSizeBytes
      * @param int $multipartUploadThresholdBytes
+     * @param int $multipartCopyThresholdBytes
      * @param string $requestChecksumCalculation
      * @param string $responseChecksumValidation
      * @param string $multipartDownloadType
@@ -50,6 +55,7 @@ final class S3TransferManagerConfig
     public function __construct(
         int $targetPartSizeBytes,
         int $multipartUploadThresholdBytes,
+        int $multipartCopyThresholdBytes,
         string $requestChecksumCalculation,
         string $responseChecksumValidation,
         string $multipartDownloadType,
@@ -59,6 +65,7 @@ final class S3TransferManagerConfig
     ) {
         $this->targetPartSizeBytes = $targetPartSizeBytes;
         $this->multipartUploadThresholdBytes = $multipartUploadThresholdBytes;
+        $this->multipartCopyThresholdBytes = $multipartCopyThresholdBytes;
         $this->requestChecksumCalculation = $requestChecksumCalculation;
         $this->responseChecksumValidation = $responseChecksumValidation;
         $this->multipartDownloadType = $multipartDownloadType;
@@ -91,6 +98,8 @@ final class S3TransferManagerConfig
             ?? self::DEFAULT_TARGET_PART_SIZE_BYTES,
             $config['multipart_upload_threshold_bytes']
             ?? self::DEFAULT_MULTIPART_UPLOAD_THRESHOLD_BYTES,
+                $config['multipart_copy_threshold_bytes']
+            ?? self::DEFAULT_MULTIPART_COPY_THRESHOLD_BYTES,
                 $config['request_checksum_calculation']
             ?? self::DEFAULT_REQUEST_CHECKSUM_CALCULATION,
             $config['response_checksum_validation']
@@ -118,6 +127,14 @@ final class S3TransferManagerConfig
     public function getMultipartUploadThresholdBytes(): int
     {
         return $this->multipartUploadThresholdBytes;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMultipartCopyThresholdBytes(): int
+    {
+        return $this->multipartCopyThresholdBytes;
     }
 
     /**
@@ -176,6 +193,7 @@ final class S3TransferManagerConfig
         return [
             'target_part_size_bytes' => $this->targetPartSizeBytes,
             'multipart_upload_threshold_bytes' => $this->multipartUploadThresholdBytes,
+            'multipart_copy_threshold_bytes' => $this->multipartCopyThresholdBytes,
             'request_checksum_calculation' => $this->requestChecksumCalculation,
             'response_checksum_validation' => $this->responseChecksumValidation,
             'multipart_download_type' => $this->multipartDownloadType,
