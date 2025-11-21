@@ -15,6 +15,9 @@ final class DownloadRequest extends AbstractTransferRequest
         'response_checksum_validation' => 'string',
         'multipart_download_type' => 'string',
         'track_progress' => 'bool',
+        'concurrency' => 'int',
+        'resume_enabled' => 'bool',
+        'resume_file_path' => 'string',
     ];
 
     /** @var string|array|null */
@@ -45,6 +48,11 @@ final class DownloadRequest extends AbstractTransferRequest
      *    in a range multipart download. If this parameter is not provided
      *    then it fallbacks to the transfer manager `target_part_size_bytes`
      *    config value.
+     *  - resume_enabled: (bool): To enable resuming a multipart download when a
+     *    failure occurs.
+     *  - resume_file_path (string, optional): To override the default resume file
+     *    location to be generated. If specified the file name must end in `.resume`
+     *     otherwise it will be added automatically.
      * @param AbstractDownloadHandler|null $downloadHandler
      * @param AbstractTransferListener[]|null $listeners
      * @param AbstractTransferListener|null $progressTracker

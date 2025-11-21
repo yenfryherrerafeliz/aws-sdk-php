@@ -10,6 +10,11 @@ use Aws\S3\S3Transfer\Models\DownloadDirectoryRequest;
 use Aws\S3\S3Transfer\Models\DownloadDirectoryResult;
 use Aws\S3\S3Transfer\Models\DownloadFileRequest;
 use Aws\S3\S3Transfer\Models\DownloadRequest;
+use Aws\S3\S3Transfer\Models\ResumableDownload;
+use Aws\S3\S3Transfer\Models\ResumableTransfer;
+use Aws\S3\S3Transfer\Models\ResumableUpload;
+use Aws\S3\S3Transfer\Models\ResumeDownloadRequest;
+use Aws\S3\S3Transfer\Models\ResumeUploadRequest;
 use Aws\S3\S3Transfer\Models\S3TransferManagerConfig;
 use Aws\S3\S3Transfer\Models\UploadDirectoryRequest;
 use Aws\S3\S3Transfer\Models\UploadDirectoryResult;
@@ -21,6 +26,7 @@ use Aws\S3\S3Transfer\Progress\AbstractTransferListener;
 use Aws\S3\S3Transfer\Progress\TransferListenerNotifier;
 use Aws\S3\S3Transfer\Progress\TransferProgressSnapshot;
 use Aws\S3\S3Transfer\Utils\AbstractDownloadHandler;
+use Aws\S3\S3Transfer\Utils\FileDownloadHandler;
 use FilesystemIterator;
 use GuzzleHttp\Promise\Each;
 use GuzzleHttp\Promise\PromiseInterface;
@@ -353,6 +359,175 @@ final class S3TransferManager
     }
 
     /**
+     * @param ResumeDownloadRequest $resumeDownloadRequest
+     *
+     * @return PromiseInterface
+     */
+    public function resumeDownload(
+        ResumeDownloadRequest $resumeDownloadRequest
+    ): PromiseInterface
+    {
+        $resumableDownload = $resumeDownloadRequest->getResumableDownload();
+        if (is_string($resumableDownload)) {
+            if (!ResumableTransfer::isResumeFile($resumableDownload)) {
+                throw new S3TransferException(
+                    "Resume file `$resumableDownload` is not a valid resumable file."
+                );
+            }
+
+            $resumableDownload = ResumableDownload::fromFile($resumableDownload);
+        }
+
+        // Verify that temporary file still exists
+        if (!file_exists($resumableDownload->getTemporaryFile())) {
+            throw new S3TransferException(
+                "Cannot resume download: temporary file does not exist: "
+                . $resumableDownload->getTemporaryFile()
+            );
+        }
+
+        // Verify object ETag hasn't changed
+        $headResult = $this->s3Client->headObject([
+            'Bucket' => $resumableDownload->getBucket(),
+            'Key' => $resumableDownload->getKey(),
+        ]);
+
+        $currentETag = $headResult['ETag'] ?? null;
+        $resumeETag = $resumableDownload->getETag();
+        if (empty($currentETag) || empty($resumeETag)) {
+            throw new S3TransferException(
+                "Cannot resume download: missing eTag in resumable download"
+            );
+        }
+
+        if ($currentETag !== $resumableDownload->getETag()) {
+            throw new S3TransferException(
+                "Cannot resume download: S3 object has changed (ETag mismatch). "
+                . "Expected: {$resumableDownload->getETag()}, "
+                . "Current: {$currentETag}"
+            );
+        }
+
+        // Make sure it uses a supported file download handler
+        $downloadHandlerClass = $resumeDownloadRequest->getDownloadHandlerClass();
+        if (!class_exists($downloadHandlerClass)) {
+            throw new S3TransferException(
+                "Download handler class `$downloadHandlerClass` does not exist"
+            );
+        }
+
+        if ($downloadHandlerClass !== FileDownloadHandler::class
+            && !is_subclass_of($downloadHandlerClass, FileDownloadHandler::class)) {
+            throw new S3TransferException(
+                "Download handler class `$downloadHandlerClass` must extend `FileDownloadHandler`"
+            );
+        }
+
+        $config = $resumableDownload->getConfig();
+        $downloadHandler = new $downloadHandlerClass(
+            $resumableDownload->getDestination(),
+            $config['fails_when_destination_exists'] ?? false,
+            $config['resume_enabled'] ?? false,
+            $resumableDownload->getTemporaryFile(),
+            $resumableDownload->getFixedPartSize()
+        );
+
+        $progressTracker = $resumeDownloadRequest->getProgressTracker();
+        $listeners = $resumeDownloadRequest->getListeners();
+
+        if ($progressTracker === null
+            && ($resumableDownload->getConfig()['track_progress']
+                ?? $this->config->isTrackProgress())) {
+            $progressTracker = new SingleProgressTracker();
+            $listeners[] = $progressTracker;
+        }
+
+        $listenerNotifier = new TransferListenerNotifier(
+            $listeners,
+        );
+
+        return $this->tryMultipartDownload(
+            $resumableDownload->getRequestArgs(),
+            $resumableDownload->getConfig(),
+            $downloadHandler,
+            $listenerNotifier,
+            $resumableDownload,
+        );
+    }
+
+    /**
+     * @param ResumeUploadRequest $resumeUploadRequest
+     *
+     * @return PromiseInterface
+     */
+    public function resumeUpload(
+        ResumeUploadRequest $resumeUploadRequest
+    ): PromiseInterface
+    {
+        $resumableUpload = $resumeUploadRequest->getResumableUpload();
+        if (is_string($resumableUpload)) {
+            if (!ResumableTransfer::isResumeFile($resumableUpload)) {
+                throw new S3TransferException(
+                    "Resume file `$resumableUpload` is not a valid resumable file."
+                );
+            }
+
+            $resumableUpload = ResumableUpload::fromFile($resumableUpload);
+        }
+
+        // Verify that source file still exists
+        if (!file_exists($resumableUpload->getSource())) {
+            throw new S3TransferException(
+                "Cannot resume upload: source file does not exist: "
+                . $resumableUpload->getSource()
+            );
+        }
+
+        // Verify upload still exists in S3 by checking uploadId
+        $uploads = $this->s3Client->listMultipartUploads([
+            'Bucket' => $resumableUpload->getBucket(),
+            'Prefix' => $resumableUpload->getKey(),
+        ]);
+
+        $uploadExists = false;
+        foreach ($uploads['Uploads'] ?? [] as $upload) {
+            if ($upload['UploadId'] === $resumableUpload->getUploadId()
+                && $upload['Key'] === $resumableUpload->getKey()) {
+                $uploadExists = true;
+                break;
+            }
+        }
+
+        if (!$uploadExists) {
+            throw new S3TransferException(
+                "Cannot resume upload: multipart upload no longer exists (UploadId: "
+                . $resumableUpload->getUploadId() . ")"
+            );
+        }
+
+        $config = $resumableUpload->getConfig();
+        $progressTracker = $resumeUploadRequest->getProgressTracker();
+        $listeners = $resumeUploadRequest->getListeners();
+
+        if ($progressTracker === null
+            && ($config['track_progress'] ?? $this->config->isTrackProgress())) {
+            $progressTracker = new SingleProgressTracker();
+            $listeners[] = $progressTracker;
+        }
+
+        $listenerNotifier = new TransferListenerNotifier($listeners);
+
+        return (new MultipartUploader(
+            $this->s3Client,
+            $resumableUpload->getRequestArgs(),
+            $resumableUpload->getSource(),
+            $config,
+            listenerNotifier: $listenerNotifier,
+            resumableUpload: $resumableUpload,
+        ))->promise();
+    }
+
+    /**
      * @param DownloadFileRequest $downloadFileRequest
      *
      * @return PromiseInterface
@@ -361,7 +536,7 @@ final class S3TransferManager
         DownloadFileRequest $downloadFileRequest
     ): PromiseInterface
     {
-       return $this->download($downloadFileRequest->getDownloadRequest());
+        return $this->download($downloadFileRequest->getDownloadRequest());
     }
 
     /**
@@ -528,7 +703,6 @@ final class S3TransferManager
                 return new DownloadDirectoryResult(
                     $objectsDownloaded,
                     $objectsFailed,
-                    $reason
                 );
             });
     }
@@ -540,7 +714,7 @@ final class S3TransferManager
      * @param array $config
      * @param AbstractDownloadHandler $downloadHandler
      * @param TransferListenerNotifier|null $listenerNotifier
-     *
+     * @param ResumableDownload|null $resumableDownload
      * @return PromiseInterface
      */
     private function tryMultipartDownload(
@@ -548,6 +722,7 @@ final class S3TransferManager
         array                     $config,
         AbstractDownloadHandler   $downloadHandler,
         ?TransferListenerNotifier $listenerNotifier = null,
+        ?ResumableDownload $resumableDownload = null,
     ): PromiseInterface
     {
         $downloaderClassName = AbstractMultipartDownloader::chooseDownloaderClass(
@@ -559,6 +734,7 @@ final class S3TransferManager
             $config,
             $downloadHandler,
             listenerNotifier: $listenerNotifier,
+            resumableDownload: $resumableDownload,
         );
 
         return $multipartDownloader->promise();
